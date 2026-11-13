@@ -7,8 +7,8 @@ STRIP = $(CROSS_COMPILE)strip
 # Configuration
 # uClibc & GCC + Static is broken... compiler 'TLS_DTPREL_VALUE' error.
 CONFIG_UCLIBC_BUILD ?= n
-CONFIG_GCC_BUILD ?= n
-CONFIG_MUSL_BUILD ?= y
+CONFIG_GCC_BUILD ?= y
+CONFIG_MUSL_BUILD ?= n
 CONFIG_STATIC_BUILD ?= n
 DEBUG ?= n
 PLATFORM ?= T31
@@ -19,6 +19,8 @@ INCLUDES += -I$(SDK_INC_DIR) \
            -I./src/iad/audio \
            -I./src/iac/client \
            -I./src/iad/utils \
+		   -I./build/3rdparty/install/include \
+		   -I./build/3rdparty/install/include/cjson \
            -I./build \
 	   -I$(SDK_INC_DIR)/libwebsockets
 

@@ -4,10 +4,10 @@
  * This daemon manages audio input and output for the Ingenic Tomahawk class devices.
  */
 
+#include <signal.h>                  // Signal handling functions
 #if !defined(__UCLIBC__) && !defined(__GLIBC__)
 #include <bits/signal.h>             // Signal definitions
 #endif
-#include <signal.h>                  // Signal handling functions
 #include <stdio.h>                   // Standard I/O functions
 #include <stdlib.h>
 #include <pthread.h>                 // Multithreading functions
