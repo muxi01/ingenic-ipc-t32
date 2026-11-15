@@ -6,8 +6,8 @@ STRIP = $(CROSS_COMPILE)strip
 
 # Configuration
 # uClibc & GCC + Static is broken... compiler 'TLS_DTPREL_VALUE' error.
-CONFIG_UCLIBC_BUILD ?= n
-CONFIG_GCC_BUILD ?= y
+CONFIG_UCLIBC_BUILD ?= y
+CONFIG_GCC_BUILD ?= n
 CONFIG_MUSL_BUILD ?= n
 CONFIG_STATIC_BUILD ?= n
 DEBUG ?= n
@@ -45,10 +45,10 @@ endif
 
 ifeq ($(CONFIG_UCLIBC_BUILD),y)
 CROSS_COMPILE?= mips-linux-uclibc-gnu-
+# gcc 5.4 (legacy NaN / fp32) matches the SDK libs and the device rootfs ABI.
 CFLAGS += -muclibc
-IMPLDLIBS = -limp -lalog
-# Set interpreter directory to ./libs
-LDFLAGS += -muclibc -Wl,-dynamic-linker,libs/ld-uClibc.so.0
+IMPLDLIBS = -Wl,-Bstatic -limp -lalog -Wl,-Bdynamic
+LDFLAGS += -muclibc
 LDLIBS = -lpthread -lm -lrt -ldl -lwebsockets -lcjson
 endif
 

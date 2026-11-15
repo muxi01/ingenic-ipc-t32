@@ -12,7 +12,7 @@ LIBVERSION = 1.5.9
 CJSON_SOVERSION = 1
 UTILS_SOVERSION = 1
 
-PREFIX ?= /home/xialixin/ipc/ingenic-lib/targetlib
+PREFIX ?= ${ROOT_DIR}/install
 INCLUDE_PATH ?= include/cjson
 LIBRARY_PATH ?= lib
 
@@ -22,14 +22,18 @@ INSTALL_LIBRARY_PATH = $(DESTDIR)$(PREFIX)/$(LIBRARY_PATH)
 INSTALL ?= cp -a
 
 # validate gcc version for use fstack-protector-strong
-MIN_GCC_VERSION = "4.9"
-GCC_VERSION := "`gcc -dumpversion`"
-IS_GCC_ABOVE_MIN_VERSION := $(shell expr "$(GCC_VERSION)" ">=" "$(MIN_GCC_VERSION)")
-ifeq "$(IS_GCC_ABOVE_MIN_VERSION)" "1"
-    CFLAGS += -fstack-protector-strong
-else
-    CFLAGS += -fstack-protector
-endif
+#MIN_GCC_VERSION = "4.9"
+#GCC_VERSION := "`gcc -dumpversion`"
+#IS_GCC_ABOVE_MIN_VERSION := $(shell expr "$(GCC_VERSION)" ">=" "$(MIN_GCC_VERSION)")
+#ifeq "$(IS_GCC_ABOVE_MIN_VERSION)" "1"
+#    CFLAGS += -fstack-protector-strong
+#else
+#    CFLAGS += -fstack-protector
+#endif
+
+# NOTE: -fstack-protector is rejected by the mips-linux-uclibc toolchain
+# (error: -fstack-protector cannot be used with -muclibc), so it is not added.
+
 
 R_CFLAGS = -fPIC -std=c89 -pedantic -Wall -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wc++-compat -Wundef -Wswitch-default -Wconversion $(CFLAGS)
 

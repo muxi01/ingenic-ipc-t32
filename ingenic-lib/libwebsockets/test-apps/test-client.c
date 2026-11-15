@@ -100,7 +100,7 @@ static void show_http_content(const char *p, size_t l)
 	if (lwsl_visible(LLL_INFO)) {
 		while (l--)
 			if (*p < 0x7f)
-				putchar(*p++);
+				putchar((unsigned char)*p++);
 			else
 				putchar('.');
 	}
