@@ -1,0 +1,3584 @@
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>web</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #FEFCFF;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 20px;
+      position: relative;
+    }
+
+    .language-select {
+      /* position: absolute;
+      top: 20px;
+      right: 20px; */
+      height: 40px;
+      width: 100%;
+      /* flex 靠右 */
+      display: flex;
+      justify-content: flex-end;
+      /* border: 1px solid #666; */
+    }
+
+    .language-select select {
+      border: none;
+      background-color: #ffffff;
+      color: #696170;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 5px 10px;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .login-container {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0px 4px 5px rgb(0 0 0 / 15%);
+      width: 700px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .login-header-wrap {
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .login-header-title {
+      /* width: 100%; */
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 28px;
+      color: #000000;
+      margin-bottom: 10px;
+    }
+
+    .login-header-line {
+      font-size: 16px;
+      font-weight: 350;
+      color: #19181B;
+      line-height: 24px;
+    }
+
+    .login-content-wrap {
+      margin-top: 20px;
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .login-input {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .login-input input {
+      width: 100%;
+      height: 48px;
+      padding: 12px 16px;
+      border: 2px solid #A7AEB4;
+      border-radius: 6px;
+      font-size: 14px;
+      background: #ffffff;
+    }
+
+
+    .login-input-tip {
+      font-size: 12px;
+      color: #666;
+      width: 100%;
+      margin-top: 5px;
+      margin-left: 35px;
+    }
+
+    .login-input-tip-error {
+      display: none;
+      font-size: 12px;
+      color: #ff0000;
+      width: 100%;
+      margin-top: 5px;
+      margin-left: 35px;
+    }
+
+    .warn-alert {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin: 20px auto;
+      padding: 10px 8px;
+      background-color: #FFF5F6;
+      border: 2px solid #ff000074;
+      border-radius: 20px;
+      /* display: none; */
+    }
+
+    .warn-alert-left {
+      color: #ff000074;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    .warn-alert-middle {
+      color: #8D8494;
+      margin-top: 5px;
+      width: 100%;
+    }
+
+    .warn-alert-title {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      color: #19181bdd;
+    }
+
+    .warn-alert-content {
+      font-size: 14px;
+      line-height: 18px;
+      color: #19181bb3;
+    }
+
+    .warn-alert-right {
+      color: #8D8494;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+    }
+
+    .success {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin: 20px auto;
+      padding: 10px 8px;
+      background-color: #E0FFED;
+      border: 2px solid #9becbb;
+      border-radius: 20px;
+      /* display: none; */
+    }
+
+    .success-left {
+      color: #ff000074;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    .success-middle {
+      color: #8D8494;
+      margin-top: 5px;
+      width: 100%;
+      margin-left: 10px;
+    }
+
+    .success-title {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      color: #19181bdd;
+    }
+
+    .success-content {
+      font-size: 14px;
+      line-height: 18px;
+      color: #19181bb3;
+    }
+
+    .success-right {
+      color: #8D8494;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+    }
+
+    .login-btn-wrap {
+      width: 350px;
+      display: flex;
+
+      align-items: center;
+      margin: 20px auto;
+    }
+
+    .login-btn-submit {
+      width: 100%;
+      height: 48px;
+      padding: 0 24px;
+      /* border: 1px solid #000000; */
+      border-radius: 24px;
+      font-size: 14px;
+      background: #925CC1;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .login-btn-submit:hover {
+      background: #925cc1c7;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .login-footer-wrap {
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .login-footer-link1 {
+      font-size: 16px;
+      line-height: 24px;
+      color: #925CC1;
+      /* width: 100%; */
+      margin-top: 5px;
+    }
+
+    .login-footer-link2 {
+      font-size: 12px;
+      line-height: 18px;
+      color: #8D8494;
+      margin-top: 5px;
+      text-align: center;
+      word-break: break-word;
+      width: 100%;
+    }
+
+
+    .update-container {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0px 4px 5px rgb(0 0 0 / 15%);
+      width: 700px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .update-header-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .update-header-title {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 40px;
+      color: #19181B;
+      margin-bottom: 10px;
+    }
+
+    .update-header-line {
+      font-size: 16px;
+      font-weight: 350;
+      color: #19181B;
+      line-height: 24px;
+    }
+
+    .update-content-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .update-content-title {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 40px;
+      color: #19181B;
+      margin-bottom: 10px;
+    }
+
+    .update-content-description {
+      font-size: 16px;
+      font-weight: 350;
+      color: #19181B;
+      line-height: 24px;
+      width: 310px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .update-content-form-group {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .update-content-form-group-error {
+      width: 100%;
+      flex-basis: 100%;
+      margin-top: 5px;
+      margin-left: 230px;
+      font-size: 14px;
+      color: #c00;
+      line-height: 18px;
+    }
+
+    .update-content-form-group label {
+      width: 220px;
+      height: 40px;
+      line-height: 40px;
+      text-align: right;
+      color: #19181B;
+      font-size: 16px;
+      font-weight: 400;
+      margin-right: 10px;
+    }
+
+    .path-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .file-checkmark {
+      margin-left: 8px;
+      font-size: 18px;
+      line-height: 40px;
+    }
+
+    .path-input-wrapper input {
+      padding-right: 30px;
+      width: 253px;
+      height: 40px;
+      line-height: 40px;
+      border: 1px solid #83798B;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #19181B;
+      background: #ffffff;
+      padding: 0 10px;
+    }
+
+    .path-search-icon {
+      position: absolute;
+      right: 8px;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      fill: #666;
+    }
+
+    .path-search-icon:hover {
+      fill: #333;
+    }
+
+    .hidden-file-input {
+      display: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .update-btn-wrap {
+      width: 350px;
+      display: flex;
+      align-items: center;
+      margin: 20px auto;
+    }
+
+    .update-btn-submit {
+      width: 100%;
+    }
+
+    .update-btn-submit {
+      width: 100%;
+      height: 48px;
+      padding: 0 24px;
+      /* border: 1px solid #000000; */
+      border-radius: 24px;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      background: #925CC1;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .update-btn-submit:hover {
+      background: #925cc1c7;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .update-btn-submit:disabled,
+    .update-btn-submit.btn-checking {
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+
+    @keyframes btn-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .btn-spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: btn-spin 0.8s linear infinite;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .update-content-float {
+      /*   .update-container 里面浮动居中*/
+      width: 410px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f2dede;
+      box-shadow: 0px 4px 5px rgb(0 0 0 / 15%);
+      border-radius: 10px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0px 24px 16px rgb(0 0 0 / 16%);
+      border: 1px solid #C24100;
+      padding: 16px 16px;
+      /* display: none; */
+    }
+
+    .update-content-float-title {
+      width: 100%;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 24px;
+      color: #19181B;
+      margin-bottom: 10px;
+      color: #C24100;
+    }
+
+    .update-content-float-description {
+      margin-top: 10px;
+      width: 100%;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 24px;
+      color: #19181B;
+      margin-bottom: 10px;
+    }
+
+    .update-content-float-description span:nth-child(1) {
+      font-size: 16px;
+      font-weight: 200;
+      line-height: 24px;
+    }
+
+    .update-content-float-btn-wrap {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .confirm-btn-submit {
+      width: 94px;
+      height: 40px;
+      border-radius: 20px;
+      background-color: #FF5500;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      border: none;
+    }
+
+    .confirm-btn-submit:hover {
+      background-color: #ff5500b8;
+      cursor: pointer;
+    }
+
+    .progress-container {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0px 4px 5px rgb(0 0 0 / 15%);
+      width: 700px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+
+    .progress-content-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+
+    }
+
+    .progress-content-title {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 40px;
+      color: #19181B;
+      margin-bottom: 30px;
+    }
+
+
+    .progress-jdt-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .progress-jdt-text-wrap {
+      width: 252px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: 350;
+      line-height: 24px;
+      color: #696170;
+    }
+
+    .progress-jdt-bar {
+      width: 252px;
+      height: 4px;
+      background-color: #d1d1d1;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-jdt-bar-inner {
+      width: 0%;
+      height: 100%;
+      background-color: #00AD48;
+      border-radius: 5px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-info {
+      margin-top: 30px;
+      width: 500px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 80px;
+      /* justify-content: space-between; */
+    }
+
+    .progress-info-left-old {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* justify-content: space-between; */
+    }
+
+    .progress-info-right-new {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* justify-content: space-between; */
+    }
+  </style>
+  <!-- <script>
+      // 动态设置进度条百分比
+      function setProgressBar(percent) {
+        var bar = document.querySelector('.progress-jdt-bar-inner');
+        if (bar) {
+          bar.style.width = Math.max(0, Math.min(100, percent)) + '%';
+        }
+      }
+      // 示例用法: setProgressBar(60); // 让进度条到 60%
+    </script> -->
+</head>
+
+<body>
+
+  <div class="login-container" id="login-container">
+    <div class="language-select">
+      <select name="language" onchange="changeLanguage(event)"></select>
+    </div>
+    <div class="login-header-wrap">
+      <div class="login-header-title" id="login-header-title">Philips Avent Baby Monitor</div>
+      <div class="login-header-line" id="login-header-line1">Welcome to the maintenance page.</div>
+      <div class="login-header-line" id="login-header-line2">Log in to update the firmware of your device.</div>
+    </div>
+
+    <div class="login-content-wrap">
+      <div class="form-group login-input">
+        <input type="text" id="username" name="username" required data-i18n-placeholder="username-placeholder">
+        <div class="login-input-tip" id="username-tip">Usually: admin</div>
+        <div class="login-input-tip-error" id="username-error">Incorrect user name. Default: admin</div>
+      </div>
+      <div class="form-group login-input">
+        <input type="password" id="password" name="password" required data-i18n-placeholder="password-placeholder">
+        <div class="login-input-tip" id="password-tip">Check your Parent Unit display for the required password.</div>
+        <div class="login-input-tip-error" id="password-error">Incorrect password. Please check your Parent Unit
+          display.</div>
+      </div>
+    </div>
+    <div class="warn-alert" id="login-warn-alert" style="display: none;">
+      <div class="warn-alert-left">❌</div>
+      <div class="warn-alert-middle">
+        <div class="warn-alert-title" id="warn-credentials-title">Credentials have changed</div>
+        <div class="warn-alert-content" id="warn-credentials-content">
+          Maximum login attempts reached. The previous password is no longer valid. Please refer to your Parent Unit for
+          the updated login details.
+        </div>
+      </div>
+      <div class="warn-alert-right">
+        <div class="warn-alert-close">x</div>
+      </div>
+    </div>
+    <div class="login-btn-wrap">
+      <button display="inline-block" type="submit" class="login-btn-submit" form="login-form"
+        id="enter-btn">Login</button>
+    </div>
+    <div class="login-footer-wrap">
+      <div class="login-footer-link1" id="support-link" style="cursor: pointer;" onclick="openSupportPage()">Support
+      </div>
+      <div class="login-footer-link2" id="support-footer">Support page can only be reached when connected to the
+        Internet and not to the baby monitor</div>
+    </div>
+
+
+
+  </div>
+  <div class="update-container" id="update-container" style="display: none;">
+    <!-- <h1 class="login-title">登录</h1> -->
+    <div class="language-select">
+      <select name="language" onchange="changeLanguage(event)"></select>
+    </div>
+    <div class="update-header-wrap">
+      <div class="update-header-title" id="update-header-title">Current software version</div>
+      <div class="update-header-line" id="pu-version-display">Parent Unit Firmware: --</div>
+      <div class="update-header-line" id="bu-version-display">Baby Unit Firmware: --</div>
+    </div>
+    <div class="update-content-wrap">
+      <div class="update-content-float" style="display: none;">
+        <div class="update-content-float-title">
+          <span id="float-title">Important Update Instructions</span>
+        </div>
+        <div class="update-content-float-description">
+          <span id="float-desc1">Interrupting the update can damage your devices. By clicking confirm, you agree
+            to:</span><br>
+          <span id="float-desc2-1">1.Keep all devices connected to power.</span><br>
+          <span id="float-desc2-2">2.Not refresh or close this browser window.</span><br>
+          <span id="float-desc2-3">3.Keep the devices in close proximity to each other.</span><br>
+        </div>
+        <div class="update-content-float-btn-wrap">
+          <button type="button" class="confirm-btn-submit" id="confirm-btn">Confirm</button>
+        </div>
+      </div>
+      <div class="update-content-title" id="update-content-title">
+        Update software
+      </div>
+      <div class="update-content-description" id="update-content-description">
+        Upload the new firmware to update your Baby Monitor to the latest version.
+      </div>
+
+      <div class="update-content-form-group">
+        <label for="parent-file-input" id="parent-unit-label">Parent Unit:</label>
+        <div class="path-input-wrapper">
+          <input type="text" id="parent-file-path" name="Parent Unit Image File Path" readonly>
+          <svg class="path-search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            onclick="selectParentFile()">
+            <path
+              d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+          </svg>
+          <input type="file" id="parent-file-input" class="hidden-file-input" accept=".bin,.img,.hex,.zip"
+            onchange="handleParentFileSelect(event)">
+        </div>
+        <span class="file-checkmark" id="parent-file-checkmark" style="display: none;">✅</span>
+        <div class="hidden update-content-form-group-error " id="parent-file-input-error">Firmware is already up to
+          date.
+        </div>
+      </div>
+      <div class="update-content-form-group">
+        <label for="baby-file-input" id="baby-unit-label">Baby Unit:</label>
+        <div class="path-input-wrapper">
+          <input type="text" id="baby-file-path" name="Baby Unit Image File Path" readonly>
+          <svg class="path-search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            onclick="selectBabyFile()">
+            <path
+              d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+          </svg>
+          <input type="file" id="baby-file-input" class="hidden-file-input" accept=".bin,.img,.hex,.zip"
+            onchange="handleBabyFileSelect(event)">
+        </div>
+        <span class="file-checkmark" id="baby-file-checkmark" style="display: none;">✅</span>
+
+        <div class="hidden update-content-form-group-error " id="baby-file-input-error">Please select a baby unit file.
+        </div>
+      </div>
+      <div class="update-content-form-group" id="md5-form-group">
+        <label for="md5-file-path" id="md5-file-label">MD5 text key:</label>
+        <div class="path-input-wrapper">
+          <input type="text" id="md5-file-path" name="MD5 File Path" readonly>
+          <svg class="path-search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            onclick="selectMd5File()">
+            <path
+              d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+          </svg>
+          <input type="file" id="md5-file-input" class="hidden-file-input" accept=".txt"
+            onchange="handleMd5FileSelect(event)">
+        </div>
+        <div class="hidden update-content-form-group-error " id="md5-file-input-error">Please select a MD5 txt file.
+        </div>
+      </div>
+    </div>
+    <div class="warn-alert" id="update-warn-alert" style="display: none;">
+      <div class="warn-alert-left">❌</div>
+      <div class="warn-alert-middle">
+        <div class="warn-alert-title" id="update-warn-credentials-title">Credentials have changed</div>
+        <div class="warn-alert-content" id="update-warn-credentials-content">
+          Maximum login attempts reached. The previous password is no longer valid. Please refer to your Parent Unit for
+          the updated login details.
+        </div>
+      </div>
+      <div class="warn-alert-right">
+        <div class="warn-alert-close">x</div>
+      </div>
+    </div>
+    <div class="update-btn-wrap">
+      <button display="inline-block" type="button" class="update-btn-submit" id="update-btn"
+        data-i18n-init="check-files-btn">Check files</button>
+    </div>
+  </div>
+
+  <div class="progress-container" id="progress-container" style="display: none;">
+    <div class="language-select">
+      <select name="language" onchange="changeLanguage(event)"></select>
+    </div>
+    <div class="progress-content-wrap">
+      <div class="progress-content-title">
+        <span id="progress-content-title">Update progress</span>
+      </div>
+      <div class="progress-jdt-wrap">
+        <div class="progress-jdt-text-wrap">
+          <div class="progress-jdt-text1">
+            <span id="progress-status">--</span>
+          </div>
+          <div class="progress-jdt-text2">
+            <span id="progress-percent">0%</span>
+          </div>
+        </div>
+        <div class="progress-jdt-bar">
+          <div class="progress-jdt-bar-inner" id="progress-bar-inner"></div>
+        </div>
+      </div>
+      <div class="warn-alert" id="progress-warn-alert" style="display: none;">
+        <div class="warn-alert-left">⚠️</div>
+        <div class="warn-alert-middle">
+          <div class="warn-alert-title" id="progress-warn-title" style="font-weight: 200;">To ensure a successful update
+            and prevent your devices from becoming unresponsive, please:</div>
+          <div class="warn-alert-content" style="font-weight: 600;">
+            <span id="progress-warn-1">1.Keep power connected: Both the Parent and Baby units must remain plugged into a
+              power outlet.</span><br />
+            <span id="progress-warn-2">2.Stay on this page: Do not refresh your browser or close this tab until the
+              process is 100% complete.</span><br />
+            <span id="progress-warn-3">3.Keep units close: Ensure all devices (Parent Unit, Baby Unit, and this
+              computer) are in close proximity.</span>
+          </div>
+        </div>
+        <div class="warn-alert-right">
+          <div class="warn-alert-close">x</div>
+        </div>
+      </div>
+
+      <div class="progress-info" style="display: none;">
+        <div class="progress-info-left-old">
+          <span class="progress-info-left-old-title" id="progress-old-version">Old version:</span><br />
+          <div class="progress-info-row progress-info-row-pu"><span class="progress-info-left-old-pu-content">Parent
+              Unit Firmware: 1.1.0</span></div>
+          <div class="progress-info-row progress-info-row-bu"><span class="progress-info-left-old-bu-content">Baby Unit
+              Firmware: 1.1.0</span></div>
+        </div>
+        <div class="progress-info-right-new">
+          <span class="progress-info-right-new-title" id="progress-new-version">New version:</span><br />
+          <div class="progress-info-row progress-info-row-pu"><span class="progress-info-right-new-pu-content">Parent
+              Unit Firmware: 1.1.0</span></div>
+          <div class="progress-info-row progress-info-row-bu"><span class="progress-info-right-new-bu-content">Baby Unit
+              Firmware: 1.1.0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="success" id="progress-success" style="display: none;">
+      <div class="success-left">✅</div>
+      <div class="success-middle">
+        <div class="success-title" style="font-weight: 200;"></div>
+        <div class="success-content" id="success-restart-msg" style="font-weight: 200;">
+          Updated successfully! Your unit will restart in 10 seconds...
+        </div>
+      </div>
+      <div class="success-right">
+        <div class="success-close">x</div>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    let babyFile = null;
+    let parentFile = null;
+    let md5File = null;
+    let buMd5Cache = null;   // 校验通过后缓存的 BU 固件 MD5，用于上传时携带
+    let puMd5Cache = null;   // 校验通过后缓存的 PU 固件 MD5，用于上传时携带
+    var md5FileContent = null;  // 选择时立即读取并缓存，避免校验时 File 引用失效
+    let isUpdating = false;
+    let currentBuVersion = null;
+    let currentPuVersion = null;
+    let lastPuVersionStr = null;  // 用于切换语言时更新版本显示
+    let lastBuVersionStr = null;
+    let currentLanguage = 'en-US';
+    let currentSha256 = '';
+    var currentProgressStatusKey = null;  // 当前进度条状态对应的翻译 key，用于语言切换时更新
+    var restartCountdownSec = null;
+    var restartCountdownInterval = null;
+
+    const SUPPORTED_LOCALES = ['en-US', 'zh-CN', 'nl-NL', 'fr-FR', 'de-DE', 'it-IT', 'es-ES', 'pt-PT', 'cs-CZ', 'uk-UA'];
+    const LANGUAGE_LABELS = { 'en-US': 'English', 'zh-CN': '中文', 'nl-NL': 'Nederlands', 'fr-FR': 'Français', 'de-DE': 'Deutsch', 'it-IT': 'Italiano', 'es-ES': 'Español', 'pt-PT': 'Português', 'cs-CZ': 'Čeština', 'uk-UA': 'Українська' };
+    // 语言配置（Excel Pixie UI + 中文）
+    const translations = {
+      'en-US': {
+        'username-label': 'Username:',
+        'password-label': 'Password:',
+        'language-label': 'Language:',
+        'enter-btn': 'Log in',
+        'login-header-title': 'Philips Avent Baby Monitor',
+        'login-header-line1': 'Welcome to the maintenance page.',
+        'login-header-line2': 'Log in to update your device firmware.',
+        'username-placeholder': 'Username',
+        'username-tip': 'Usually: admin',
+        'password-placeholder': 'Password',
+        'password-tip': 'Check your Parent Unit display for the required password.',
+        'warn-credentials-title': 'Credentials have changed',
+        'warn-credentials-content': 'Maximum login attempts reached. The previous password is no longer valid. Please refer to your Parent Unit for the updated login details.',
+        'update-warn-credentials-title': 'Credentials have changed',
+        'update-warn-credentials-content': 'Maximum login attempts reached. The previous password is no longer valid. Please refer to your Parent Unit for the updated login details.',
+        'support-link': 'Support',
+        'support-footer': 'Support page can only be reached when connected to the Internet and not to the baby monitor',
+        'upgrade-title': 'Welcome to the Philips Avent Baby Monitor Maintenance page',
+        'version-info': 'Current Baby Unit and Parent Unit Version: BU.0.0.15 & PU.0.0.41',
+        'update-header-title': 'Current software version',
+        'pu-firmware-label': 'Parent Unit Firmware:',
+        'bu-firmware-label': 'Baby Unit Firmware:',
+        'float-title': 'Important Update Instructions',
+        'float-desc1': 'Interrupting the update can damage your devices. By clicking confirm, you indicate that:',
+        'float-desc2-1': '1. All devices are continuously connected to power during the update.',
+        'float-desc2-2': '2. You will not refresh or close this browser window.',
+        'float-desc2-3': '3. You will keep the devices in close proximity to each other.',
+        'confirm-btn': 'Confirm',
+        'update-content-title': 'Update software',
+        'update-content-description': 'Upload the new firmware to update your Baby Monitor to the latest version.',
+        'parent-unit-label': 'Parent Unit:',
+        'baby-unit-label': 'Baby Unit:',
+        'check-files-btn': 'Check files',
+        'update-btn-text': 'Update',
+        'err-firmware-update': 'Firmware is already up to date.',
+        'baby-path-label': 'Baby Unit image file path:',
+        'parent-path-label': 'Parent Unit image file path:',
+        'sha256-label': 'SHA256:',
+        'md5-file-label': 'MD5 text key:',
+        'md5-file-input-title': 'Select MD5 checksum txt file',
+        'md5-file-input-error': 'Please select a MD5 txt file.',
+        'parent-file-input-error': 'Firmware is already up to date.',
+        'baby-file-input-error': 'Please select a Baby Unit file.',
+        'start-update-btn': 'Start update',
+        'progress-content-title': 'Update progress',
+        'progress-warn-title': 'To ensure a successful update and prevent your devices from becoming unresponsive, make sure to:',
+        'progress-warn-1': '1. Keep power connected: Both the Parent and Baby Units must remain plugged into a power outlet.',
+        'progress-warn-2': '2. Stay on this page: Do not refresh your browser or close this tab until the process is 100% complete.',
+        'progress-warn-3': '3. Keep units close: Ensure all devices (Parent Unit, Baby Unit, and this computer) are in close proximity.',
+        'progress-old-version': 'Old version:',
+        'progress-new-version': 'New version:',
+        'success-restart-msg': 'Updated successfully! Your unit will restart in {0} seconds...',
+        'progress-status-ready': 'Ready to start updating...',
+        'progress-status-updating-bu': 'Updating Baby Unit...',
+        'progress-status-updating-pu': 'Updating Parent Unit...',
+        'progress-status-pu-wait': 'Parent Unit updating, please wait.',
+        'progress-status-bu-wait': 'Baby Unit updating, please wait.',
+        'err-refresh-version': 'Please refresh to fetch device version first',
+        'progress-status-success': 'Updated successfully!',
+        'progress-status-failed': 'Failed',
+        'warning-text': 'Note: Keep your Parent and Baby Units connected to power throughout the update process. Disconnecting from a power source can permanently damage your device.',
+        'alert-fill-info': 'Please fill in complete login information',
+        'alert-login-failed': 'Login failed:',
+        'alert-login-request-failed': 'Login request failed. Please try again.',
+        'error-username': 'Incorrect username. Default: admin',
+        'error-password': 'Incorrect password. Please check your Parent Unit display.',
+        'error-empty': 'Username and password are required',
+        'alert-select-files': 'Please select at least one file before starting update.',
+        'calculating-sha256': 'Calculating SHA256...',
+        'check-files-ok': 'Files verified. Version:',
+        'err-select-bu': 'Please select a Baby Unit file.',
+        'err-select-pu': 'Please select a Parent Unit file.',
+        'err-select-md5': 'Please select a MD5 txt file.',
+        'err-version-format': 'Invalid firmware filename format.',
+        'err-version-mismatch': 'Baby Unit and Parent Unit version mismatch:',
+        'err-md5-mismatch-bu': 'MD5 checksum mismatch for Baby Unit file.',
+        'err-md5-mismatch-pu': 'MD5 checksum mismatch for Parent Unit file.',
+        'err-version-outdated': 'Firmware version is lower than current device version.',
+        'err-version-outdated-alert': 'The file you selected is the same as or older than the version currently installed (v{version}). No update is required.',
+        'err-different-model': 'The file you uploaded is for a different model. Please ensure you have downloaded the latest specific firmware for Philips Avent Baby Monitor and try again.',
+        'err-device-type-mismatch': 'Wrong firmware type. Baby Unit file must contain _BU_, Parent Unit file must contain _PU_ (e.g. {bu_model}_V0.2.3_RC1.bin).',
+        'err-prefix-mismatch': 'Invalid firmware prefix. Baby Unit file must start with {bu_model}, Parent Unit file must start with {pu_model}.',
+        'err-unsigned-firmware': 'Unsigned firmware is not allowed. Only signed firmware (filename without _unsigned) can be used.',
+        'err-md5-key-alert': 'Please double-check the 64-character md5 text key provided with your download. Copy and paste it directly to avoid typos.',
+        'err-read-md5-fail': 'Cannot read MD5 file, please select again',
+        'err-read-firmware-fail': 'Cannot read firmware file, please select again and retry',
+        'err-md5-format': 'MD5 file format error: each line should be "md5_hash   filename.bin"',
+        'err-md5-file-not-found': 'MD5 file does not contain entry for:',
+        'err-pu-upgrade-fail': 'Parent Unit update failed.',
+        'err-bu-upgrade-fail': 'Baby Unit update failed.',
+        'err-upgrade-internal': 'Update internal error.',
+        'err-upgrade-timeout': 'Update timeout.',
+        'err-upgrade-cancel': 'Update cancelled.',
+        'err-file-too-large-md5': 'File too large (>300MB) for MD5 calculation'
+      },
+      'zh-CN': {
+        'username-label': '用 户 名:',
+        'password-label': '密  码:',
+        'language-label': '语  言:',
+        'enter-btn': '登录',
+        'login-header-title': '飞利浦新安怡婴儿监护仪',
+        'login-header-line1': '欢迎使用维护页面。',
+        'login-header-line2': '登录以更新您设备的固件。',
+        'username-placeholder': '用户名',
+        'username-tip': '通常为: admin',
+        'password-placeholder': '密码',
+        'password-tip': '请查看父母单元显示获取所需密码。',
+        'warn-credentials-title': '凭据已更改',
+        'warn-credentials-content': '已达到最大登录尝试次数。之前的密码已失效。请参阅您的父母单元获取更新后的登录信息。',
+        'update-warn-credentials-title': '凭据已更改',
+        'update-warn-credentials-content': '已达到最大登录尝试次数。之前的密码已失效。请参阅您的父母单元获取更新后的登录信息。',
+        'support-link': '支持',
+        'support-footer': '支持页面仅在连接互联网且未连接婴儿监护仪时才能访问',
+        'upgrade-title': '欢迎使用飞利浦新安怡婴儿监护仪维护页面',
+        'version-info': '当前婴儿单元和父母单元版本:BU.0.0.15 & PU.0.0.41',
+        'update-header-title': '当前软件版本',
+        'pu-firmware-label': '父母单元固件: ',
+        'bu-firmware-label': '婴儿单元固件: ',
+        'float-title': '重要更新说明',
+        'float-desc1': '中断更新可能会损坏您的设备。点击确认即表示您同意：',
+        'float-desc2-1': '1.保持所有设备连接电源。',
+        'float-desc2-2': '2.不要刷新或关闭此浏览器窗口。',
+        'float-desc2-3': '3.保持设备彼此靠近。',
+        'confirm-btn': '确认',
+        'update-content-title': '更新软件',
+        'update-content-description': '上传新固件以将您的婴儿监护仪更新至最新版本。',
+        'parent-unit-label': '父母单元:',
+        'baby-unit-label': '婴儿单元:',
+        'check-files-btn': '检查文件',
+        'update-btn-text': '开始升级',
+        'err-firmware-update': '固件已是最新版本。',
+        'baby-path-label': '婴儿单元镜像文件路径:',
+        'parent-path-label': '父母单元镜像文件路径:',
+        'sha256-label': 'SHA256:',
+        'md5-file-label': 'MD5 校验 txt 文件:',
+        'md5-file-input-title': '选择 MD5 校验 txt 文件',
+        'md5-file-input-error': '请选择MD5校验txt文件。',
+        'parent-file-input-error': '固件已是最新版本。',
+        'baby-file-input-error': '请选择婴儿单元固件文件。',
+        'start-update-btn': '开始升级',
+        'progress-content-title': '更新进度',
+        'progress-warn-title': '为确保更新成功并防止设备无响应，请：',
+        'progress-warn-1': '1.保持电源连接：父母单元和婴儿单元必须始终插入电源插座。',
+        'progress-warn-2': '2.不要离开此页面：在流程100%完成之前，请勿刷新浏览器或关闭此标签页。',
+        'progress-warn-3': '3.保持设备靠近：确保所有设备（父母单元、婴儿单元和本电脑）彼此靠近。',
+        'progress-old-version': '旧版本:',
+        'progress-new-version': '新版本:',
+        'success-restart-msg': '更新成功！您的设备将在{0}秒后重启...',
+        'progress-status-ready': '准备开始升级...',
+        'progress-status-updating-bu': '正在升级婴儿单元...',
+        'progress-status-updating-pu': '正在升级父母单元...',
+        'progress-status-pu-wait': 'PU升级中，请等待',
+        'progress-status-bu-wait': 'BU升级中，请等待',
+        'err-refresh-version': '请先刷新页面获取设备版本信息',
+        'progress-status-success': '升级成功！',
+        'progress-status-failed': '失败',
+        'warning-text': '注意：在整个升级过程中，请保持您的父母单元和婴儿单元连接电源。如果没有电源，可能会永久损坏您的设备。',
+        'alert-fill-info': '请填写完整的登录信息',
+        'alert-login-failed': '登录失败: ',
+        'alert-login-request-failed': '登录请求失败，请重试。',
+        'error-username': '用户名错误，默认: admin',
+        'error-password': '密码错误，请查看父母单元显示',
+        'error-empty': '请输入用户名和密码',
+        'alert-select-files': '请在开始升级前至少选择一个文件。',
+        'calculating-sha256': '正在计算SHA256...',
+        'check-files-ok': '文件校验通过，版本: ',
+        'err-select-bu': '请选择婴儿单元固件文件。',
+        'err-select-pu': '请选择父母单元固件文件。',
+        'err-select-md5': '请选择MD5校验txt文件。',
+        'err-version-format': '固件文件名格式无效。',
+        'err-version-mismatch': '婴儿单元与父母单元版本不一致: ',
+        'err-md5-mismatch-bu': '婴儿单元文件MD5校验失败。',
+        'err-md5-mismatch-pu': '父母单元文件MD5校验失败。',
+        'err-version-outdated': '固件版本低于当前设备版本。',
+        'err-version-outdated-alert': '您选择的文件与当前安装的版本相同或更旧 (v{version})。无需更新。',
+        'err-different-model': '您上传的文件适用于不同型号。请确保已下载适用于飞利浦新安怡婴儿监护仪的最新专用固件后重试。',
+        'err-device-type-mismatch': '固件类型错误。婴儿单元文件需包含_BU_，父母单元文件需包含_PU_（如 {bu_model}_V0.2.3_RC1.bin）。',
+        'err-prefix-mismatch': '固件前缀无效。婴儿单元文件需以 {bu_model} 开头，父母单元文件需以 {pu_model} 开头。',
+        'err-unsigned-firmware': '未签名固件不允许使用。仅支持已签名固件（文件名不含 _unsigned）。',
+        'err-md5-key-alert': '请仔细核对下载时提供的64字符 MD5 文本密钥。建议直接复制粘贴以避免输入错误。',
+        'err-read-md5-fail': '无法读取 MD5 文件，请重新选择文件',
+        'err-read-firmware-fail': '无法读取固件文件，请重新选择文件后重试',
+        'err-md5-format': 'MD5文件格式错误：每行应为 "md5值   文件名.bin"',
+        'err-md5-file-not-found': 'MD5文件中未找到对应条目：',
+        'err-pu-upgrade-fail': '父母单元升级失败。',
+        'err-bu-upgrade-fail': '婴儿单元升级失败。',
+        'err-upgrade-internal': '升级内部错误。',
+        'err-upgrade-timeout': '升级超时。',
+        'err-upgrade-cancel': '升级已取消。',
+        'err-file-too-large-md5': '文件过大(>300MB)，无法计算MD5'
+      },
+      'nl-NL': {
+        'username-label': 'Gebruikersnaam:',
+        'password-label': 'Wachtwoord:',
+        'language-label': 'Taal:',
+        'enter-btn': 'Inloggen',
+        'login-header-title': 'Philips Avent Baby Monitor',
+        'login-header-line1': 'Welkom op de onderhoudspagina.',
+        'login-header-line2': 'Log in om de firmware van het apparaat bij te werken.',
+        'username-placeholder': 'Gebruikersnaam',
+        'username-tip': 'Meestal: admin',
+        'password-placeholder': 'Wachtwoord',
+        'password-tip': 'Controleer het scherm van de ouderunit op het vereiste wachtwoord.',
+        'warn-credentials-title': 'De inloggegevens zijn veranderd',
+        'warn-credentials-content': 'Maximaal aantal inlogpogingen bereikt. Het vorige wachtwoord is niet langer geldig. Raadpleeg de ouderunit voor de bijgewerkte inloggegevens.',
+        'update-warn-credentials-title': 'De inloggegevens zijn veranderd',
+        'update-warn-credentials-content': 'Maximaal aantal inlogpogingen bereikt. Het vorige wachtwoord is niet langer geldig. Raadpleeg de ouderunit voor de bijgewerkte inloggegevens.',
+        'support-link': 'Ondersteuning',
+        'support-footer': 'De ondersteuningspagina is alleen toegankelijk als u verbonden bent met internet en niet met de babyfoon',
+        'upgrade-title': 'Welkom op de onderhoudspagina van uw Philips Avent Baby Monitor',
+        'version-info': 'Huidige versie babyunit en ouderunit: BU.0.0.15 en PU.0.0.41',
+        'update-header-title': 'Huidige softwareversie',
+        'pu-firmware-label': 'Firmware van ouderunit:',
+        'bu-firmware-label': 'Firmware van babyunit:',
+        'float-title': 'Belangrijke update-instructies',
+        'float-desc1': 'Als u de update onderbreekt kunnen uw apparaten worden beschadigd. Door op bevestigen te klikken, geeft u aan dat u instemt met het volgende:',
+        'float-desc2-1': '1. Alle apparaten zijn continu aangesloten op stroom tijdens de update.',
+        'float-desc2-2': '2. U gaat dit browservenster niet verversen of sluiten.',
+        'float-desc2-3': '3. U zorgt ervoor dat de apparaten dicht bij elkaar zijn.',
+        'confirm-btn': 'Bevestigen',
+        'update-content-title': 'Software bijwerken',
+        'update-content-description': 'Upload de nieuwe firmware om de babyfoon bij te werken naar de nieuwste versie.',
+        'parent-unit-label': 'Ouderunit:',
+        'baby-unit-label': 'Babyunit:',
+        'check-files-btn': 'Bestanden controleren',
+        'update-btn-text': 'Update',
+        'err-firmware-update': 'De firmware is al bijgewerkt.',
+        'baby-path-label': 'Pad naar afbeeldingsbestand voor babyunit:',
+        'parent-path-label': 'Pad naar afbeeldingsbestand voor ouderunit:',
+        'sha256-label': 'SHA256:',
+        'md5-file-label': 'MD5-tekstbestand:',
+        'md5-file-input-title': 'Selecteer MD5-controlesom txt-bestand',
+        'md5-file-input-error': 'Selecteer een MD5 txt-bestand.',
+        'parent-file-input-error': 'De firmware is al bijgewerkt.',
+        'baby-file-input-error': 'Selecteer een babyunit-bestand.',
+        'start-update-btn': 'Update starten',
+        'progress-content-title': 'Voortgang van update',
+        'progress-warn-title': 'Om een succesvolle update te garanderen en te voorkomen dat uw apparaten niet meer reageren, zorgt u voor de volgende punten:',
+        'progress-warn-1': '1. Zorg dat de netspanning is aangesloten: Zowel de ouder- als de babyunit moeten aangesloten blijven op een stopcontact.',
+        'progress-warn-2': '2. Blijf op deze pagina: Vernieuw de browserpagina niet en sluit dit tabblad niet totdat het proces 100% voltooid is.',
+        'progress-warn-3': '3. Houd de units dicht bij elkaar: Zorg ervoor dat alle apparaten (ouderunit, babyunit en deze computer) dicht bij elkaar staan.',
+        'progress-old-version': 'Oude versie:',
+        'progress-new-version': 'Nieuwe versie:',
+        'success-restart-msg': 'Update geslaagd De unit wordt over {0} seconden opnieuw opgestart…',
+        'progress-status-ready': 'Klaar om de update uit te voeren...',
+        'progress-status-updating-bu': 'Babyunit updaten...',
+        'progress-status-updating-pu': 'Ouderunit updaten...',
+        'progress-status-pu-wait': 'Ouderunit wordt bijgewerkt, een ogenblik geduld.',
+        'progress-status-bu-wait': 'Babyunit wordt bijgewerkt, een ogenblik geduld.',
+        'err-refresh-version': 'Vernieuw de pagina om eerst de versie van het apparaat op te halen',
+        'progress-status-success': 'Update geslaagd',
+        'progress-status-failed': 'Mislukt',
+        'warning-text': 'Opmerking: Houd de ouder- en babyunits aangesloten op de voeding tijdens het hele updateproces. Als u de voedingsbron/stekker loskoppelt, kan het apparaat permanent worden beschadigd.',
+        'alert-fill-info': 'Vul de volledige inloggegevens in',
+        'alert-login-failed': 'Login mislukt:',
+        'alert-login-request-failed': 'Loginverzoek mislukt. Probeer het opnieuw.',
+        'error-username': 'Onjuiste gebruikersnaam. Standaard: admin',
+        'error-password': 'Wachtwoord onjuist. Controleer het scherm van de ouderunit.',
+        'error-empty': 'Gebruikersnaam en wachtwoord zijn vereist',
+        'alert-select-files': 'Selecteer ten minste één bestand voordat u de update start.',
+        'calculating-sha256': 'SHA256 wordt berekend...',
+        'check-files-ok': 'Bestanden geverifieerd. Versie:',
+        'err-select-bu': 'Selecteer een babyunit-bestand.',
+        'err-select-pu': 'Selecteer een ouderunit-bestand.',
+        'err-select-md5': 'Selecteer een MD5 txt-bestand.',
+        'err-version-format': 'Ongeldige indeling van firmwarebestandsnaam.',
+        'err-version-mismatch': 'Versie van babyunit en ouderunit komt niet overeen:',
+        'err-md5-mismatch-bu': 'Geen MD5 checksum-overeenkomst voor het bestand van de babyunit.',
+        'err-md5-mismatch-pu': 'Geen MD5 checksum-overeenkomst voor het bestand van de ouderunit.',
+        'err-version-outdated': 'De firmwareversie is lager dan de huidige apparaatversie.',
+        'err-version-outdated-alert': 'Het bestand dat u hebt geselecteerd is hetzelfde of ouder dan de versie die momenteel is geïnstalleerd (v{versie}). Geen update vereist.',
+        'err-different-model': 'Het bestand dat u hebt geüpload is voor een ander model. Zorg dat u de nieuwste specifieke firmware voor de Philips Avent Baby Monitor hebt gedownload en probeer het opnieuw.',
+        'err-device-type-mismatch': 'Verkeerd firmwaretype. Het bestand van de baby unit moet _BU_ bevatten, het bestand van de ouderunit moet _PU_ bevatten (bijv. {bu_model}_V0.2.3_RC1.bin).',
+        'err-prefix-mismatch': 'Ongeldig firmwarevoorvoegsel. Het bestand van de babyunit moet beginnen met {bu_model}, het bestand van de ouderunit moet beginnen met {pu_model}.',
+        'err-unsigned-firmware': 'Niet-ondertekende firmware is niet toegestaan. Alleen ondertekende firmware (bestandsnaam zonder _unsigned) kan worden gebruikt.',
+        'err-md5-key-alert': 'Controleer de md5-tekstsleutel van 64 tekens die bij uw download is geleverd. Kopieer en plak deze sleutel rechtstreeks om typfouten te voorkomen.',
+        'err-read-md5-fail': 'Kan het MD5-bestand niet lezen, selecteer het opnieuw',
+        'err-read-firmware-fail': 'Kan firmwarebestand niet lezen, selecteer het opnieuw en probeer het opnieuw',
+        'err-md5-format': 'Fout in MD5-bestandsindeling: elke regel moet "md5_hash filename.bin" zijn.',
+        'err-md5-file-not-found': 'MD5-bestand bevat geen vermelding voor:',
+        'err-pu-upgrade-fail': 'Update van de ouderunit is mislukt.',
+        'err-bu-upgrade-fail': 'Update van de babyunit is mislukt.',
+        'err-upgrade-internal': 'Interne fout bij update.',
+        'err-upgrade-timeout': 'Time-out tijdens update.',
+        'err-upgrade-cancel': 'Update geannuleerd.',
+        'err-file-too-large-md5': 'Bestand te groot (>300 MB) voor MD5-berekening'
+      },
+      'fr-FR': {
+        'username-label': 'Nom de l\'utilisateur :',
+        'password-label': 'Mot de passe :',
+        'language-label': 'Langues :',
+        'enter-btn': 'Connexion',
+        'login-header-title': 'Écoute-bébé Philips Avent',
+        'login-header-line1': 'Bienvenue dans la page d\'entretien.',
+        'login-header-line2': 'Connectez-vous pour mettre à jour le micrologiciel de votre appareil.',
+        'username-placeholder': 'Nom de l\'utilisateur',
+        'username-tip': 'Généralement : admin',
+        'password-placeholder': 'Mot de passe',
+        'password-tip': 'Consultez l\'afficheur de votre unité parents pour obtenir le mot de passe requis.',
+        'warn-credentials-title': 'Les identifiants ont changé',
+        'warn-credentials-content': 'Nombre max. de tentatives de connexion atteint. Le mot de passe précédent n\'est plus valable. Reportez-vous à votre unité parents pour obtenir les informations de connexion mises à jour.',
+        'update-warn-credentials-title': 'Les identifiants ont changé',
+        'update-warn-credentials-content': 'Nombre max. de tentatives de connexion atteint. Le mot de passe précédent n\'est plus valable. Reportez-vous à votre unité parents pour obtenir les informations de connexion mises à jour.',
+        'support-link': 'Assistance',
+        'support-footer': 'La page d\'assistance est accessible uniquement en cas de connexion à Internet et non à l\'écoute-bébé.',
+        'upgrade-title': 'Bienvenue sur la page de maintenance de l\'écoute-bébé Philips Avent',
+        'version-info': 'Version actuelle de l’unité bébé et de l\'unité parents : BU.0.0.15 et PU.0.0.41',
+        'update-header-title': 'Version actuelle du micrologiciel',
+        'pu-firmware-label': 'Micrologiciel de l\'unité parents :',
+        'bu-firmware-label': 'Micrologiciel de l\'unité bébé :',
+        'float-title': 'Consignes de mise à jour importantes',
+        'float-desc1': 'L\'interruption de la mise à jour peut endommager vos appareils. En cliquant sur Confirmer, vous indiquez que :',
+        'float-desc2-1': '1. Tous les appareils sont branchés sur le réseau pendant toute la mise à jour.',
+        'float-desc2-2': '2. Vous ne rafraîchirez pas et ne fermerez pas cette fenêtre de navigateur.',
+        'float-desc2-3': '3. Vous maintiendrez les appareils à proximité l\'un de l\'autre.',
+        'confirm-btn': 'Confirmer',
+        'update-content-title': 'Mise à jour du logiciel',
+        'update-content-description': 'Téléchargez le nouveau micrologiciel pour mettre à jour votre écoute-bébé et utiliser la dernière version.',
+        'parent-unit-label': 'Unité parents :',
+        'baby-unit-label': 'Unité bébé :',
+        'check-files-btn': 'Vérifier les fichiers',
+        'update-btn-text': 'Mise à jour',
+        'err-firmware-update': 'Votre micrologiciel est déjà à jour.',
+        'baby-path-label': 'Chemin du dossier de l’image de l’unité bébé :',
+        'parent-path-label': 'Chemin du dossier de l’image de l’unité parents :',
+        'sha256-label': 'SHA256 :',
+        'md5-file-label': 'Fichier texte MD5 :',
+        'md5-file-input-title': 'Sélectionner le fichier txt de somme de contrôle MD5',
+        'md5-file-input-error': 'Sélectionnez un fichier txt MD5.',
+        'parent-file-input-error': 'Votre micrologiciel est déjà à jour.',
+        'baby-file-input-error': 'Sélectionnez un fichier de l\'unité bébé.',
+        'start-update-btn': 'Démarrez la mise à jour',
+        'progress-content-title': 'Progression de la mise à jour',
+        'progress-warn-title': 'Pour que la mise à jour s\'effectue correctement et pour que vos appareils restent réactifs, veillez à :',
+        'progress-warn-1': '1. Laisser les appareils branchés : les unités parents et bébé doivent toutes deux rester branchées sur le secteur.',
+        'progress-warn-2': '2. Rester sur cette page : ne rafraîchissez pas votre navigateur et ne fermez pas cet onglet tant que le processus n\'est pas terminé à 100 %.',
+        'progress-warn-3': '3. Laisser les unités proches l\'une de l\'autre : veillez à rapprocher tous les appareils (unité parents, unité bébé et cet ordinateur).',
+        'progress-old-version': 'Ancienne version :',
+        'progress-new-version': 'Nouvelle version :',
+        'success-restart-msg': 'Mise à jour réussie ! Votre unité va redémarrer dans {0} secondes...',
+        'progress-status-ready': 'Prêt à lancer la mise à jour...',
+        'progress-status-updating-bu': 'Mise à jour de l\'unité bébé...',
+        'progress-status-updating-pu': 'Mise à jour de l\'unité parents...',
+        'progress-status-pu-wait': 'Mise à jour de l\'unité parents, veuillez patienter.',
+        'progress-status-bu-wait': 'Mise à jour de l\'unité bébé, veuillez patienter.',
+        'err-refresh-version': 'Actualisez l\'écran pour obtenir d\'abord la version du dispositif.',
+        'progress-status-success': 'Mise à jour réussie !',
+        'progress-status-failed': 'Échec',
+        'warning-text': 'Remarque : laissez l\'unité parents et l\'unité bébé branchées sur le secteur pendant tout le processus de mise à jour. Votre appareil risque d\'être définitivement endommagé si les unités sont débranchées.',
+        'alert-fill-info': 'Veuillez saisir tous les identifiants de connexion',
+        'alert-login-failed': 'Échec de la connexion :',
+        'alert-login-request-failed': 'La demande de connexion a échoué. Merci de réessayer.',
+        'error-username': 'Nom d\'utilisateur incorrect. Par défaut : admin',
+        'error-password': 'Mot de passe incorrect. Vérifiez l\'écran de l\'unité parents.',
+        'error-empty': 'Un nom d\'utilisateur et un mot de passe sont requis',
+        'alert-select-files': 'Sélectionnez au moins un fichier avant de commencer la mise à jour.',
+        'calculating-sha256': 'Calcul du SHA256...',
+        'check-files-ok': 'Fichiers vérifiés. Version :',
+        'err-select-bu': 'Sélectionnez un fichier de l\'unité bébé.',
+        'err-select-pu': 'Sélectionnez un fichier de l\'unité parents.',
+        'err-select-md5': 'Sélectionnez un fichier txt MD5.',
+        'err-version-format': 'Le format de fichier du micrologiciel n\'est pas valable.',
+        'err-version-mismatch': 'Les versions de l\'unité bébé et de l\'unité parents ne correspondent pas :',
+        'err-md5-mismatch-bu': 'la checksum MD5 ne correspond pas pour le fichier de l\'unité bébé.',
+        'err-md5-mismatch-pu': 'la checksum MD5 ne correspond pas pour le fichier de l\'unité parents.',
+        'err-version-outdated': 'La version du micrologiciel est antérieure à la version actuelle de l\'appareil.',
+        'err-version-outdated-alert': 'Le fichier que vous avez sélectionné est le même que la version en cours d\'installation (v{version} ou est plus ancien). Aucune mise à jour n\'est nécessaire.',
+        'err-different-model': 'Le fichier que vous avez téléchargé correspond à un autre modèle. Assurez-vous d\'avoir téléchargé le micrologiciel spécifique le plus récent pour l\'écoute-bébé Philips Avent et réessayez.',
+        'err-device-type-mismatch': 'Type incorrect de micrologiciel. Le fichier de l\'unité bébé doit contenir _BU_, le fichier de l\'unité parents doit contenir _PU_ (par ex., {bu_model}_V0.2.3_RC1.bin).',
+        'err-prefix-mismatch': 'Préfixe du micrologiciel non valable. Le fichier de l\'unité bébé doit commencer par {bu_model}, le fichier de l\'unité parents doit commencer par {pu_model}.',
+        'err-unsigned-firmware': 'Les micrologiciels non signés ne sont pas autorisés. Seul un micrologiciel signé (nom de fichier sans _unsigned) peut être utilisé.',
+        'err-md5-key-alert': 'Veuillez vérifier le code MD5 à 64 caractères fourni lors du téléchargement. Copiez et collez-le directement afin d\'éviter les erreurs.',
+        'err-read-md5-fail': 'Impossible de lire le fichier MD5, veuillez sélectionner à nouveau',
+        'err-read-firmware-fail': 'Impossible de lire le fichier du micrologiciel, sélectionnez à nouveau et réessayez',
+        'err-md5-format': 'Erreur de format de fichier MD5 : chaque ligne doit être « md5_hash filename.bin »',
+        'err-md5-file-not-found': 'Le fichier MD5 ne contient pas d\'entrée pour :',
+        'err-pu-upgrade-fail': 'La mise à jour de l\'unité parents a échoué.',
+        'err-bu-upgrade-fail': 'La mise à jour de l\'unité bébé a échoué.',
+        'err-upgrade-internal': 'Erreur interne de mise à jour.',
+        'err-upgrade-timeout': 'Délai de mise à jour dépassé.',
+        'err-upgrade-cancel': 'Mise à jour annulée.',
+        'err-file-too-large-md5': 'Fichier trop volumineux (>300 Mo) pour le calcul MD5'
+      },
+      'de-DE': {
+        'username-label': 'Benutzername:',
+        'password-label': 'Passwort:',
+        'language-label': 'Sprache:',
+        'enter-btn': 'Anmelden',
+        'login-header-title': 'Philips Avent Babyphone',
+        'login-header-line1': 'Willkommen auf der Wartungsseite.',
+        'login-header-line2': 'Melden Sie sich an, um die Firmware Ihres Geräts zu aktualisieren.',
+        'username-placeholder': 'Benutzername',
+        'username-tip': 'Normalerweise: admin',
+        'password-placeholder': 'Password (Kennwort)',
+        'password-tip': 'Überprüfen Sie das Display der Elterneinheit auf das erforderliche Passwort.',
+        'warn-credentials-title': 'Die Anmeldedaten haben sich geändert',
+        'warn-credentials-content': 'Höchstzahl an Anmeldeversuchen erreicht. Das vorherige Passwort ist nicht mehr gültig. Die aktualisierten Anmeldeinformationen erhalten Sie von der Elterneinheit.',
+        'update-warn-credentials-title': 'Die Anmeldedaten haben sich geändert',
+        'update-warn-credentials-content': 'Höchstzahl an Anmeldeversuchen erreicht. Das vorherige Passwort ist nicht mehr gültig. Die aktualisierten Anmeldeinformationen erhalten Sie von der Elterneinheit.',
+        'support-link': 'Service',
+        'support-footer': 'Die Supportseite kann nur erreicht werden, wenn eine Verbindung zum Internet und nicht zum Babyphone besteht',
+        'upgrade-title': 'Willkommen auf der Wartungsseite für das Philips Avent Babyphone',
+        'version-info': 'Aktuelle Version der Baby- und Elterneinheit: BU.0.0.15 und PU.0.0.41',
+        'update-header-title': 'Aktuelle Firmwareversion.',
+        'pu-firmware-label': 'Firmware der Elterneinheit:',
+        'bu-firmware-label': 'Firmware der Babyeinheit:',
+        'float-title': 'Wichtige Anweisungen zur Aktualisierung',
+        'float-desc1': 'Wenn Sie die Aktualisierung unterbrechen, können Ihre Geräte beschädigt werden. Indem Sie auf "Bestätigen" klicken, erklären Sie, dass:',
+        'float-desc2-1': '1. Alle Geräte während der Aktualisierung kontinuierlich mit der Stromversorgung verbunden sind',
+        'float-desc2-2': '2. Sie dieses Browserfenster weder neu laden noch schließen werden',
+        'float-desc2-3': '3. Sie dafür sorgen, dass sich die Geräte nah beieinander befinden',
+        'confirm-btn': 'Bestätigen',
+        'update-content-title': 'Aktualisieren der Software',
+        'update-content-description': 'Laden Sie die neue Firmware hoch, um Ihr Babyphone auf die neueste Version zu aktualisieren.',
+        'parent-unit-label': 'Elterneinheit:',
+        'baby-unit-label': 'Babyeinheit:',
+        'check-files-btn': 'Dateien überprüfen',
+        'update-btn-text': 'Aktualisieren',
+        'err-firmware-update': 'Die Firmware ist bereits auf dem neuesten Stand.',
+        'baby-path-label': 'Pfad des Bildordners der Babyeinheit:',
+        'parent-path-label': 'Pfad des Bildordners der Elterneinheit:',
+        'sha256-label': 'SHA256:',
+        'md5-file-label': 'MD5-Textschlüssel:',
+        'md5-file-input-title': 'MD5-Prüfsumme txt-Datei auswählen',
+        'md5-file-input-error': 'Bitte wählen Sie eine MD5-txt-Datei aus.',
+        'parent-file-input-error': 'Die Firmware ist bereits auf dem neuesten Stand.',
+        'baby-file-input-error': 'Bitte wählen Sie eine Datei für die Babyeinheit aus.',
+        'start-update-btn': 'Aktualisierung starten',
+        'progress-content-title': 'Aktualisierungsfortschritt',
+        'progress-warn-title': 'Um eine erfolgreiche Aktualisierung sicherzustellen und zu verhindern, dass Ihre Geräte nicht mehr reagieren, achten Sie darauf, dass:',
+        'progress-warn-1': '1. Die Stromversorgung angeschlossen bleibt: Sowohl die Eltern- als auch die Babyeinheit muss mit einer Steckdose verbunden bleiben.',
+        'progress-warn-2': '2. Sie auf dieser Seite bleiben: Aktualisieren Sie Ihren Browser nicht und schließen Sie diese Registerkarte nicht, bis der Vorgang vollständig abgeschlossen ist.',
+        'progress-warn-3': '3. Die Einheiten nah beieinander sind: Stellen Sie sicher, dass sich alle Geräte (Elterneinheit, Babyeinheit und dieser Computer) in unmittelbarer Nähe befinden.',
+        'progress-old-version': 'Alte Version:',
+        'progress-new-version': 'Neue Version:',
+        'success-restart-msg': 'Erfolgreich aktualisiert. Die Einheit wird in {0} Sekunden neu gestartet …',
+        'progress-status-ready': 'Bereit für den Start der Aktualisierung …',
+        'progress-status-updating-bu': 'Babyeinheit wird aktualisiert …',
+        'progress-status-updating-pu': 'Elterneinheit wird aktualisiert …',
+        'progress-status-pu-wait': 'Bitte warten Sie, während die Elterneinheit aktualisiert wird.',
+        'progress-status-bu-wait': 'Bitte warten Sie, während die Babyeinheit aktualisiert wird.',
+        'err-refresh-version': 'Bitte zunächst aktualisieren, um die Geräteversion anzufordern',
+        'progress-status-success': 'Erfolgreich aktualisiert.',
+        'progress-status-failed': 'Fehlgeschlagen',
+        'warning-text': 'Hinweis: Lassen Sie die Eltern- und Babyeinheit während dem gesamten Aktualisierungsvorgang an eine Steckdose angeschlossen. Wenn Sie das Gerät von der Stromquelle trennen, kann es dauerhaft beschädigt werden.',
+        'alert-fill-info': 'Bitte geben Sie die vollständigen Anmeldeinformationen ein.',
+        'alert-login-failed': 'Anmeldung fehlgeschlagen:',
+        'alert-login-request-failed': 'Anmeldeanforderung fehlgeschlagen. Bitte versuchen Sie es noch einmal.',
+        'error-username': 'Falscher Nutzername. Standardmäßig: admin',
+        'error-password': 'Falsches Passwort. Sehen Sie auf dem Display der Elterneinheit nach.',
+        'error-empty': 'Nutzername und Passwort sind erforderlich',
+        'alert-select-files': 'Bitte wählen Sie mindestens eine Datei aus, bevor Sie mit der Aktualisierung beginnen.',
+        'calculating-sha256': 'SHA256 wird berechnet …',
+        'check-files-ok': 'Dateien verifiziert. Version:',
+        'err-select-bu': 'Bitte wählen Sie eine Datei für die Babyeinheit aus.',
+        'err-select-pu': 'Bitte wählen Sie eine Datei für die Elterneinheit aus.',
+        'err-select-md5': 'Bitte wählen Sie eine MD5-txt-Datei aus.',
+        'err-version-format': 'Ungültiges Format des Firmwaredateinamens.',
+        'err-version-mismatch': 'Inkompatible Version der Baby- und Elterneinheit:',
+        'err-md5-mismatch-bu': 'Falsche MD5-Prüfsumme bei der Datei für die Babyeinheit.',
+        'err-md5-mismatch-pu': 'Falsche MD5-Prüfsumme bei der Datei für die Elterneinheit.',
+        'err-version-outdated': 'Die Firmwareversion ist niedriger als die aktuelle Geräteversion.',
+        'err-version-outdated-alert': 'Die ausgewählte Datei ist die gleiche oder älter als die zurzeit installierte Version (v{version}). Es ist keine Aktualisierung erforderlich.',
+        'err-different-model': 'Die hochgeladene Datei gehört zu einem anderen Modell. Stellen Sie sicher, dass Sie die neueste Firmware speziell für das Philips Avent Babyphone heruntergeladen haben, und versuchen Sie es erneut.',
+        'err-device-type-mismatch': 'Falscher Firmwaretyp. Die Datei für die Babyeinheit muss "_BU_" enthalten, die Datei für die Elterneinheit "_PU_" (z. B. {bu_model}_V0.2.3_RC1.bin).',
+        'err-prefix-mismatch': 'Ungültiges Firmwarepräfix. Die Datei für die Babyeinheit muss mit {bu_model} beginnen, die für die Elterneinheit mit {pu_model}.',
+        'err-unsigned-firmware': 'Unsignierte Firmware ist nicht erlaubt. Nur signierte Firmware (Dateiname ohne "_unsigned") kann verwendet werden.',
+        'err-md5-key-alert': 'Überprüfen Sie noch einmal den im Download enthaltenen MD5-Textschlüssel mit 64 Zeichen. Kopieren und fügen Sie ihn direkt ein, um Tippfehler zu vermeiden.',
+        'err-read-md5-fail': 'MD5-Datei kann nicht gelesen werden, bitte erneut auswählen',
+        'err-read-firmware-fail': 'Firmwaredatei kann nicht gelesen werden, bitte erneut auswählen und noch einmal versuchen',
+        'err-md5-format': 'MD5-Dateiformatfehler: Jede Zeile sollte "md5_hash filename.bin" lauten.',
+        'err-md5-file-not-found': 'Die MD5-Datei enthält keinen Eintrag für:',
+        'err-pu-upgrade-fail': 'Aktualisierung der Elterneinheit fehlgeschlagen',
+        'err-bu-upgrade-fail': 'Aktualisierung der Babyeinheit fehlgeschlagen',
+        'err-upgrade-internal': 'Interner Aktualisierungsfehler',
+        'err-upgrade-timeout': 'Zeitüberschreitung bei der Aktualisierung',
+        'err-upgrade-cancel': 'Aktualisierung abgebrochen',
+        'err-file-too-large-md5': 'Datei zu groß (>300 MB) für MD5-Berechnung'
+      },
+      'it-IT': {
+        'username-label': 'Nome utente:',
+        'password-label': 'Password:',
+        'language-label': 'Lingua:',
+        'enter-btn': 'Accedi',
+        'login-header-title': 'Philips Avent Baby Monitor',
+        'login-header-line1': 'Benvenuti nella pagina di manutenzione.',
+        'login-header-line2': 'Accedere per aggiornare il firmware del dispositivo.',
+        'username-placeholder': 'Nome utente',
+        'username-tip': 'In genere: admin',
+        'password-placeholder': 'Password',
+        'password-tip': 'Controllare la password richiesta sul display dell\'unità genitore.',
+        'warn-credentials-title': 'Le credenziali sono cambiate',
+        'warn-credentials-content': 'Numero massimo di tentativi di accesso raggiunto. La password precedente non è più valida. Per i dati di accesso aggiornati, fare riferimento all\'unità genitore.',
+        'update-warn-credentials-title': 'Le credenziali sono cambiate',
+        'update-warn-credentials-content': 'Numero massimo di tentativi di accesso raggiunto. La password precedente non è più valida. Per i dati di accesso aggiornati, fare riferimento all\'unità genitore.',
+        'support-link': 'Supporto',
+        'support-footer': 'La pagina di supporto è accessibile solo con una connessione a Internet e non tramite il baby monitor',
+        'upgrade-title': 'Benvenuti nella pagina di manutenzione di Philips Avent Baby Monitor',
+        'version-info': 'Versione corrente dell\'unità genitore e dell\'unità bambino: BU.0.0.15 e PU.0.0.41',
+        'update-header-title': 'Versione corrente del software',
+        'pu-firmware-label': 'Firmware unità genitore:',
+        'bu-firmware-label': 'Firmware unità bambino:',
+        'float-title': 'Istruzioni importanti per l\'aggiornamento',
+        'float-desc1': 'L\'interruzione dell\'aggiornamento può danneggiare i dispositivi. Facendo clic su Conferma, si dichiara che:',
+        'float-desc2-1': '1. Durante l\'aggiornamento, tutti i dispositivi saranno costantemente collegati all\'alimentazione.',
+        'float-desc2-2': '2. Questa finestra del browser non verrà aggiornata o chiusa.',
+        'float-desc2-3': '3. I dispositivi dovranno essere tenuti vicini tra loro.',
+        'confirm-btn': 'Conferma',
+        'update-content-title': 'Aggiornamento del software',
+        'update-content-description': 'Caricare il nuovo firmware per aggiornare il Baby Monitor all\'ultima versione.',
+        'parent-unit-label': 'Unità genitore:',
+        'baby-unit-label': 'Unità bambino:',
+        'check-files-btn': 'Controlla file',
+        'update-btn-text': 'Aggiornamento',
+        'err-firmware-update': 'Il firmware è già aggiornato.',
+        'baby-path-label': 'Percorso file immagine unità bambino:',
+        'parent-path-label': 'Percorso file immagine unità genitore:',
+        'sha256-label': 'SHA256:',
+        'md5-file-label': 'File chiave testo MD5:',
+        'md5-file-input-title': 'Seleziona file txt checksum MD5',
+        'md5-file-input-error': 'Selezionare un file txt MD5.',
+        'parent-file-input-error': 'Il firmware è già aggiornato.',
+        'baby-file-input-error': 'Selezionare un file dell\'unità bambino.',
+        'start-update-btn': 'Inizia aggiornamento',
+        'progress-content-title': 'Avanzamento dell\'aggiornamento',
+        'progress-warn-title': 'Per garantire il corretto aggiornamento ed evitare che i dispositivi smettano di rispondere, assicurarsi di:',
+        'progress-warn-1': '1. Mantenere l\'alimentazione: sia l\'unità genitore sia l\'unità bambino devono rimanere collegate a una presa di corrente.',
+        'progress-warn-2': '2. Restare su questa pagina: non aggiornare il browser e non chiudere questa scheda finché la procedura non sarà completata al 100%.',
+        'progress-warn-3': '3. Tenere vicine le unità: assicurarsi che tutti i dispositivi (unità genitore, unità bambino e questo computer) siano vicine.',
+        'progress-old-version': 'Vecchia versione:',
+        'progress-new-version': 'Nuova versione:',
+        'success-restart-msg': 'Aggiornamento effettuato correttamente. L\'unità si riavvierà tra {0} secondi...',
+        'progress-status-ready': 'Pronto per iniziare l\'aggiornamento...',
+        'progress-status-updating-bu': 'Aggiornamento dell\'unità bambino in corso...',
+        'progress-status-updating-pu': 'Aggiornamento dell\'unità genitore in corso...',
+        'progress-status-pu-wait': 'Aggiornamento dell\'unità genitore in corso, attendere.',
+        'progress-status-bu-wait': 'Aggiornamento dell\'unità bambino in corso, attendere.',
+        'err-refresh-version': 'Aggiornare la pagina per visualizzare prima la versione del dispositivo',
+        'progress-status-success': 'Aggiornamento effettuato correttamente.',
+        'progress-status-failed': 'Non riuscito',
+        'warning-text': 'Nota: mantenere l\'unità genitore e l\'unità bambino collegate all\'alimentazione durante l\'intera procedura di aggiornamento. Se viene scollegato dall\'alimentazione, il dispositivo potrebbe danneggiarsi irreparabilmente.',
+        'alert-fill-info': 'Inserire tutte le informazioni di accesso',
+        'alert-login-failed': 'Accesso non riuscito:',
+        'alert-login-request-failed': 'Richiesta di accesso non riuscita. Riprovare più tardi.',
+        'error-username': 'Nome utente errato. Predefinito: admin',
+        'error-password': 'Password errata. Controllare sul display dell\'unità genitore.',
+        'error-empty': 'È necessario inserire nome utente e password',
+        'alert-select-files': 'Selezionare almeno un file prima di avviare l\'aggiornamento.',
+        'calculating-sha256': 'Calcolo SHA256 in corso...',
+        'check-files-ok': 'File verificati. Versione:',
+        'err-select-bu': 'Selezionare un file dell\'unità bambino.',
+        'err-select-pu': 'Selezionare un file dell\'unità genitore.',
+        'err-select-md5': 'Selezionare un file txt MD5.',
+        'err-version-format': 'Formato del nome del file del firmware non valido.',
+        'err-version-mismatch': 'Versione dell\'unità genitore e dell\'unità bambino non corrispondenti:',
+        'err-md5-mismatch-bu': 'Checksum MD5 non corrispondente per il file dell\'unità bambino.',
+        'err-md5-mismatch-pu': 'Checksum MD5 non corrispondente per il file dell\'unità genitore.',
+        'err-version-outdated': 'La versione del firmware è inferiore alla versione corrente del dispositivo.',
+        'err-version-outdated-alert': 'La versione del file selezionato è uguale o precedente alla versione attualmente installata (v{version}). Non è richiesto alcun aggiornamento.',
+        'err-different-model': 'Il file caricato è per un modello diverso. Assicurarsi di aver scaricato la versione più recente del firmware specifico per Philips Avent Baby Monitor e riprovare.',
+        'err-device-type-mismatch': 'Tipo di firmware errato. Il file dell\'unità bambino deve contenere _BU_, il file dell\'unità genitore deve contenere _PU: (ad esempio {bu_model}_V0.2.3_RC1.bin).',
+        'err-prefix-mismatch': 'Prefisso del firmware non valido. Il file dell\'unità bambino deve iniziare con {bu_model}, il file dell\'unità genitore deve iniziare con {pu_model}.',
+        'err-unsigned-firmware': 'Non è consentito l\'utilizzo di firmware non firmato. È possibile utilizzare solo firmware firmato (nome file senza _unsigned).',
+        'err-md5-key-alert': 'Ricontrollare la chiave di testo MD5 a 64 caratteri fornita con il download. Copiarla e incollarla direttamente per evitare errori di battitura.',
+        'err-read-md5-fail': 'Impossibile leggere il file MD5, selezionarlo nuovamente',
+        'err-read-firmware-fail': 'Impossibile leggere il file del firmware, selezionarlo nuovamente e riprovare',
+        'err-md5-format': 'Errore nel formato del file MD5: ogni riga dovrebbe essere "md5_hash   filename.bin"',
+        'err-md5-file-not-found': 'Il file MD5 non contiene alcuna voce per:',
+        'err-pu-upgrade-fail': 'Aggiornamento dell\'unità genitore non riuscito.',
+        'err-bu-upgrade-fail': 'Aggiornamento dell\'unità bambino non riuscito.',
+        'err-upgrade-internal': 'Errore di aggiornamento interno.',
+        'err-upgrade-timeout': 'Timeout dell\'aggiornamento.',
+        'err-upgrade-cancel': 'Aggiornamento annullato.',
+        'err-file-too-large-md5': 'File troppo grande (>300 MB) per il calcolo MD5'
+      },
+      'es-ES': {
+        'username-label': 'Nombre de usuario:',
+        'password-label': 'Contraseña:',
+        'language-label': 'Idioma:',
+        'enter-btn': 'Iniciar sesión',
+        'login-header-title': 'Philips Avent Baby Monitor',
+        'login-header-line1': 'Te damos la bienvenida a la página de mantenimiento.',
+        'login-header-line2': 'Inicia sesión para actualizar el firmware del dispositivo.',
+        'username-placeholder': 'Nombre de usuario',
+        'username-tip': 'Normalmente: admin',
+        'password-placeholder': 'Contraseña',
+        'password-tip': 'Comprueba la contraseña necesaria en la pantalla de la unidad de padres.',
+        'warn-credentials-title': 'Las credenciales han cambiado',
+        'warn-credentials-content': 'Se ha alcanzado el número máximo de intentos de inicio de sesión. La contraseña anterior ya no es válida. Consulta los datos de inicio de sesión actualizados en la unidad de padres.',
+        'update-warn-credentials-title': 'Las credenciales han cambiado',
+        'update-warn-credentials-content': 'Se ha alcanzado el número máximo de intentos de inicio de sesión. La contraseña anterior ya no es válida. Consulta los datos de inicio de sesión actualizados en la unidad de padres.',
+        'support-link': 'Soporte',
+        'support-footer': 'Solo se puede acceder a la página de asistencia cuando hay conexión con Internet y no con el vigilabebés.',
+        'upgrade-title': 'Te damos la bienvenida a la página de mantenimiento del Philips Avent Baby Monitor',
+        'version-info': 'Versión actual de la unidad de padres y de la unidad del bebé: BU.0.0.15 y PU.0.0.41',
+        'update-header-title': 'Versión de firmware actual',
+        'pu-firmware-label': 'Firmware de la unidad de padres:',
+        'bu-firmware-label': 'Firmware de la unidad del bebé:',
+        'float-title': 'Instrucciones importantes de actualización',
+        'float-desc1': 'Interrumpir la actualización puede dañar los dispositivos. Al hacer clic en confirmar, indicas que:',
+        'float-desc2-1': '1. Todos los dispositivos están conectados sin interrupción a la alimentación durante la actualización.',
+        'float-desc2-2': '2. No actualizarás ni cerrarás esta ventana del explorador.',
+        'float-desc2-3': '3. Los dispositivos se mantendrán cerca uno del otro.',
+        'confirm-btn': 'Confirmar',
+        'update-content-title': 'Actualización de software',
+        'update-content-description': 'Carga el nuevo firmware para actualizar el Baby Monitor a la versión más reciente.',
+        'parent-unit-label': 'Unidad de padres:',
+        'baby-unit-label': 'Unidad del bebé:',
+        'check-files-btn': 'Comprobar los archivos',
+        'update-btn-text': 'Actualización',
+        'err-firmware-update': 'El firmware ya está actualizado.',
+        'baby-path-label': 'Ruta de carpetas de imágenes de la unidad del bebé:',
+        'parent-path-label': 'Ruta de carpetas de imágenes de la unidad de padres:',
+        'sha256-label': 'SHA256:',
+        'md5-file-label': 'Archivo de texto MD5:',
+        'md5-file-input-title': 'Seleccionar archivo txt de suma de comprobación MD5',
+        'md5-file-input-error': 'Selecciona un archivo de texto MD5.',
+        'parent-file-input-error': 'El firmware ya está actualizado.',
+        'baby-file-input-error': 'Selecciona un archivo de la unidad del bebé.',
+        'start-update-btn': 'Iniciar actualización',
+        'progress-content-title': 'Progreso de la actualización',
+        'progress-warn-title': 'Para garantizar una actualización correcta y evitar que los dispositivos dejen de responder, asegúrate de lo siguiente:',
+        'progress-warn-1': '1. Mantén la alimentación conectada: Tanto la unidad de padres como la del bebé deben estar enchufadas a una toma de corriente.',
+        'progress-warn-2': '2. Quédate en esta página: No actualices el explorador ni cierres esta pestaña hasta que el proceso llegue al 100 %.',
+        'progress-warn-3': '3. Mantén las unidades cerca: Asegúrate de que todos los dispositivos (unidad de padres, unidad del bebé y este ordenador) estén cerca.',
+        'progress-old-version': 'Versión anterior:',
+        'progress-new-version': 'Nueva versión:',
+        'success-restart-msg': 'Actualización correcta. La unidad se reiniciará en {0} segundos...',
+        'progress-status-ready': 'Listo para empezar la actualización...',
+        'progress-status-updating-bu': 'Actualizando la unidad del bebé...',
+        'progress-status-updating-pu': 'Actualizando la unidad de padres...',
+        'progress-status-pu-wait': 'Actualizando la unidad de padres, espere.',
+        'progress-status-bu-wait': 'Actualizando la unidad del bebé, espere.',
+        'err-refresh-version': 'Actualiza para obtener primero la versión del dispositivo',
+        'progress-status-success': 'Actualización correcta.',
+        'progress-status-failed': 'Error',
+        'warning-text': 'Nota: Mantenga las unidades de padres y del bebé conectadas a la fuente de alimentación durante todo el proceso. Desconectar de una fuente de alimentación puede dañar permanentemente el dispositivo.',
+        'alert-fill-info': 'Rellena toda la información de inicio de sesión',
+        'alert-login-failed': 'Error en el inicio de sesión:',
+        'alert-login-request-failed': 'La solicitud de inicio de sesión ha fallado. Vuelva a intentarlo.',
+        'error-username': 'Nombre de usuario incorrecto. Predeterminado: admin',
+        'error-password': 'Contraseña incorrecta. Comprueba la pantalla de la unidad de padres.',
+        'error-empty': 'Se requiere el nombre de usuario y la contraseña',
+        'alert-select-files': 'Selecciona al menos un archivo antes de iniciar la actualización.',
+        'calculating-sha256': 'Calculando SHA256...',
+        'check-files-ok': 'Archivos verificados. Versión:',
+        'err-select-bu': 'Selecciona un archivo de la unidad del bebé.',
+        'err-select-pu': 'Selecciona un archivo de la unidad de padres.',
+        'err-select-md5': 'Selecciona un archivo de texto MD5.',
+        'err-version-format': 'Formato de nombre de archivo del firmware no válido.',
+        'err-version-mismatch': 'La versión de la unidad de padres y la de la unidad del bebé no coinciden:',
+        'err-md5-mismatch-bu': 'No coincide el MD5 Checksum para el archivo de la unidad del bebé.',
+        'err-md5-mismatch-pu': 'No coincide el MD5 Checksum para el archivo de la unidad de padres.',
+        'err-version-outdated': 'La versión del firmware es anterior a la versión actual del dispositivo.',
+        'err-version-outdated-alert': 'El archivo que has seleccionado es el mismo o anterior a la versión instalada actualmente (v{version}). No es necesario actualizar.',
+        'err-different-model': 'El archivo que has cargado es para un modelo diferente. Asegúrate de que has descargado el firmware específico más reciente para el Philips Avent Baby Monitor e inténtalo de nuevo.',
+        'err-device-type-mismatch': 'Tipo de firmware incorrecto. El archivo de la unidad del bebé debe contener _BU_, el archivo de la unidad de padres debe contener _PU_ (por ejemplo, {bu_model}_V0.2.3_RC1.bin).',
+        'err-prefix-mismatch': 'Prefijo de firmware no válido. El archivo de la unidad del bebé debe comenzar con {bu_model}, el archivo de la unidad de padres debe comenzar {pu_model}.',
+        'err-unsigned-firmware': 'No se permite el uso de firmware sin firma. Solo se puede utilizar firmware con firma (nombre de archivo sin _unsigned).',
+        'err-md5-key-alert': 'Comprueba dos vez la clave de texto de 64 caracteres md5 proporcionada con la descarga. Cópiala y pégala directamente para evitar errores.',
+        'err-read-md5-fail': 'No es posible leer el archivo MD5, vuelve a seleccionarlo',
+        'err-read-firmware-fail': 'No es posible leer el archivo de firmware, vuelve a seleccionarlo e inténtalo de nuevo',
+        'err-md5-format': 'Error de formato de archivo MD5: cada línea debe ser "md5_hash   filename.bin"',
+        'err-md5-file-not-found': 'El archivo MD5 no contiene entrada para:',
+        'err-pu-upgrade-fail': 'La actualización de la unidad de padres ha fallado.',
+        'err-bu-upgrade-fail': 'La actualización de la unidad del bebé ha fallado.',
+        'err-upgrade-internal': 'Error interno de actualización.',
+        'err-upgrade-timeout': 'Se ha agotado el tiempo de espera de la actualización.',
+        'err-upgrade-cancel': 'Se ha cancelado la actualización.',
+        'err-file-too-large-md5': 'Archivo demasiado grande (>300 MB) para calcular MD5'
+      },
+      'pt-PT': {
+        'username-label': 'Nome de utilizador:',
+        'password-label': 'Palavra-passe:',
+        'language-label': 'Idioma:',
+        'enter-btn': 'Iniciar sessão',
+        'login-header-title': 'Philips Avent Baby Monitor',
+        'login-header-line1': 'Bem-vindo à página de manutenção.',
+        'login-header-line2': 'Inicie sessão para atualizar o firmware do seu dispositivo.',
+        'username-placeholder': 'Nome de utilizador',
+        'username-tip': 'Geralmente: admin',
+        'password-placeholder': 'Palavra-passe',
+        'password-tip': 'Verifique o ecrã da Unidade dos pais para obter a palavra-passe pedida.',
+        'warn-credentials-title': 'As credenciais foram alteradas',
+        'warn-credentials-content': 'Máximo de tentativas de início de sessão alcançadas. A palavra-passe anterior já não é válida. Consulte a Unidade dos pais para obter os dados de início de sessão atualizados.',
+        'update-warn-credentials-title': 'As credenciais foram alteradas',
+        'update-warn-credentials-content': 'Máximo de tentativas de início de sessão alcançadas. A palavra-passe anterior já não é válida. Consulte a Unidade dos pais para obter os dados de início de sessão atualizados.',
+        'support-link': 'Suporte',
+        'support-footer': 'A página de suporte só pode ser acedida quando está ligado à Internet e não ao Baby Monitor',
+        'upgrade-title': 'Bem-vindo à página de manutenção do Philips Avent Baby Monitor',
+        'version-info': 'Versão atual da Unidade do bebé e da Unidade dos pais: BU.0.0.15 & PU.0.0.41',
+        'update-header-title': 'Versão atual do software',
+        'pu-firmware-label': 'Versão de firmware da Unidade dos pais:',
+        'bu-firmware-label': 'Versão de firmware da Unidade do bebé:',
+        'float-title': 'Instruções importantes sobre a atualização',
+        'float-desc1': 'Interromper a atualização pode danificar os seus dispositivos. Ao clicar em confirmar, está a indicar que:',
+        'float-desc2-1': '1. Todos os dispositivos estão continuamente ligados à fonte de alimentação durante a atualização.',
+        'float-desc2-2': '2. Não irá atualizar ou fechar esta janela do navegador.',
+        'float-desc2-3': '3. Irá manter os dispositivos próximos entre si.',
+        'confirm-btn': 'Confirmar',
+        'update-content-title': 'Actualização de software',
+        'update-content-description': 'Carregue o novo firmware para atualizar o seu Baby Monitor para a versão mais recente.',
+        'parent-unit-label': 'Unidade dos pais:',
+        'baby-unit-label': 'Unidade do bebé:',
+        'check-files-btn': 'Verificar ficheiros',
+        'update-btn-text': 'Actualização',
+        'err-firmware-update': 'O firmware já está atualizado.',
+        'baby-path-label': 'Caminho para o ficheiro de imagem da Unidade do bebé:',
+        'parent-path-label': 'Caminho para o ficheiro de imagem da Unidade dos pais:',
+        'sha256-label': 'SHA256:',
+        'md5-file-label': 'Ficheiro de chave de texto MD5:',
+        'md5-file-input-title': 'Selecionar ficheiro txt da soma de verificação MD5',
+        'md5-file-input-error': 'Selecione um ficheiro MD5 txt.',
+        'parent-file-input-error': 'O firmware já está atualizado.',
+        'baby-file-input-error': 'Selecione um ficheiro de Unidade do bebé.',
+        'start-update-btn': 'Iniciar atualização',
+        'progress-content-title': 'Progresso da atualização',
+        'progress-warn-title': 'Para garantir uma atualização bem-sucedida e evitar que os seus dispositivos parem de funcionar, certifique-se de:',
+        'progress-warn-1': '1. que se mantém ligado à fonte de alimentação: que tanto a Unidade dos pais como a Unidade do bebé permanecem ligadas a uma tomada.',
+        'progress-warn-2': '2. Mantenha-se nesta página: Não atualize o seu navegador nem feche este separador até que o processo esteja 100% concluído.',
+        'progress-warn-3': '3. Mantenha as unidades próximas: Certifique-se de que todos os dispositivos (Unidade dos pais, Unidade do bebé e este computador) estão próximos entre si.',
+        'progress-old-version': 'Versão anterior:',
+        'progress-new-version': 'Nova versão:',
+        'success-restart-msg': 'Atualizado com sucesso! A unidade irá reiniciar em {0} segundos...',
+        'progress-status-ready': 'Pronto para iniciar a atualização...',
+        'progress-status-updating-bu': 'A atualizar a Unidade do bebé...',
+        'progress-status-updating-pu': 'A atualizar a Unidade dos pais...',
+        'progress-status-pu-wait': 'A atualizar a Unidade dos pais, por favor aguarde.',
+        'progress-status-bu-wait': 'A atualizar a Unidade do bebé, por favor aguarde.',
+        'err-refresh-version': 'Em primeiro, proceda a uma atualização para obter a versão do dispositivo',
+        'progress-status-success': 'Atualizado com sucesso!',
+        'progress-status-failed': 'Falhou',
+        'warning-text': 'Nota: Mantenha as unidades dos pais e do bebé ligadas à fonte de alimentação durante todo o processo de atualização. Desligar o dispositivo da fonte de alimentação pode danificá-lo permanentemente.',
+        'alert-fill-info': 'Preencha com todas as informações de início de sessão',
+        'alert-login-failed': 'Falha no Início de sessão:',
+        'alert-login-request-failed': 'Falha no pedido de início de sessão. Tente novamente.',
+        'error-username': 'Nome de utilizador incorreto. Predefinição: admin',
+        'error-password': 'Palavra-passe incorreta. Verifique o ecrã da sua Unidade dos pais.',
+        'error-empty': 'É necessário o nome de utilizador e a palavra-passe',
+        'alert-select-files': 'Selecione, no mínimo, um ficheiro antes de iniciar a atualização.',
+        'calculating-sha256': 'A calcular SHA256...',
+        'check-files-ok': 'Ficheiros verificados. Versão:',
+        'err-select-bu': 'Selecione um ficheiro de Unidade do bebé.',
+        'err-select-pu': 'Selecione um ficheiro de Unidade dos pais.',
+        'err-select-md5': 'Selecione um ficheiro MD5 txt.',
+        'err-version-format': 'Formato de nome de ficheiro de firmware inválido.',
+        'err-version-mismatch': 'A versão da Unidade do bebé e da Unidade dos pais não corresponde:',
+        'err-md5-mismatch-bu': 'Discrepância na soma de verificação MD5 do ficheiro da Unidade do bebé.',
+        'err-md5-mismatch-pu': 'Discrepância na soma de verificação MD5 do ficheiro da Unidade dos pais.',
+        'err-version-outdated': 'A versão do firmware é inferior à versão atual do dispositivo.',
+        'err-version-outdated-alert': 'O ficheiro que selecionou é igual ou anterior à versão atualmente instalada (v{versão}). Não é necessária qualquer atualização.',
+        'err-different-model': 'O ficheiro que carregou é de um modelo diferente. Certifique-se de que descarregou o firmware específico mais recente do Philips Avent Baby Monitor e tente novamente.',
+        'err-device-type-mismatch': 'Tipo de firmware incorreto. O ficheiro da Unidade do bebé deve conter _BU_, o ficheiro da Unidade dos pais deve conter _PU_ (por exemplo, {bu_model}_V0.2.3_RC1.bin).',
+        'err-prefix-mismatch': 'Prefixo de firmware inválido. O ficheiro da Unidade do bebé deve começar por {bu_model}, o ficheiro da Unidade dos pais deve começar com {pu_model}.',
+        'err-unsigned-firmware': 'O firmware não assinado não é permitido. Apenas pode ser utilizado firmware assinado (nome de ficheiro sem _unsigned).',
+        'err-md5-key-alert': 'Verifique novamente a chave de texto md5 de 64 carateres fornecida com o seu download. Copie e cole diretamente para evitar erros tipográficos.',
+        'err-read-md5-fail': 'Não é possível ler o ficheiro MD5, selecione novamente',
+        'err-read-firmware-fail': 'Não é possível ler o ficheiro de firmware, selecione novamente e tente de novo',
+        'err-md5-format': 'Erro no formato de ficheiro MD5: cada linha deverá ser "md5_hash filename.bin"',
+        'err-md5-file-not-found': 'O ficheiro MD5 não contém entrada para:',
+        'err-pu-upgrade-fail': 'Falha na atualização da Unidade dos pais.',
+        'err-bu-upgrade-fail': 'Falha na atualização da Unidade do bebé.',
+        'err-upgrade-internal': 'Erro interno de atualização.',
+        'err-upgrade-timeout': 'Tempo de espera para atualização.',
+        'err-upgrade-cancel': 'Atualização cancelada.',
+        'err-file-too-large-md5': 'Ficheiro demasiado grande (>300 MB) para cálculo MD5'
+      },
+      'cs-CZ': {
+        'username-label': 'Uživatelské jméno:',
+        'password-label': 'Heslo:',
+        'language-label': 'Jazyk.',
+        'enter-btn': 'Přihlásit',
+        'login-header-title': 'Philips Avent Baby Monitor',
+        'login-header-line1': 'Vítejte na stránce údržby.',
+        'login-header-line2': 'Přihlaste se a aktualizujte firmware svého zařízení.',
+        'username-placeholder': 'Uživatelské jméno',
+        'username-tip': 'Obvykle: admin',
+        'password-placeholder': 'Heslo',
+        'password-tip': 'Zkontrolujte na displeji rodičovské jednotky požadované heslo.',
+        'warn-credentials-title': 'Přihlašování údaje se změnily',
+        'warn-credentials-content': 'Dosaženo maximálního počtu pokusů o přihlášení. Předchozí heslo už není platné. Aktualizované přihlašovací údaje najdete ve své rodičovské jednotce.',
+        'update-warn-credentials-title': 'Přihlašování údaje se změnily',
+        'update-warn-credentials-content': 'Dosaženo maximálního počtu pokusů o přihlášení. Předchozí heslo už není platné. Aktualizované přihlašovací údaje najdete ve své rodičovské jednotce.',
+        'support-link': 'Podpora',
+        'support-footer': 'Stránku podpory lze otevřít pouze jste-li připojeni k internetu, nikoli k dětské chůvičce',
+        'upgrade-title': 'Vítejte na stránce údržby dětské chůvičky Philips Avent Baby Monitor',
+        'version-info': 'Současná verze dětské jednotky a rodičovské jednotky: BU.0.0.15 a PU.0.0.41',
+        'update-header-title': 'Aktuální verze softwaru',
+        'pu-firmware-label': 'Firmware rodičovské jednotky:',
+        'bu-firmware-label': 'Firmware dětské jednotky:',
+        'float-title': 'Důležité pokyny k aktualizaci',
+        'float-desc1': 'Přerušení aktualizace může poškodit vaše zařízení. Kliknutím na tlačítko potvrzení potvrzujete, že:',
+        'float-desc2-1': '1. Všechna zařízení jsou během aktualizace neustále připojena k napájení.',
+        'float-desc2-2': '2. Toto okno prohlížeče neobnovíte ani nezavřete.',
+        'float-desc2-3': '3. Zařízení ponecháte u sebe v těsné blízkosti.',
+        'confirm-btn': 'Potvrdit',
+        'update-content-title': 'Aktualizace softwaru',
+        'update-content-description': 'Nahrajte nový firmware, abyste aktualizovali dětskou chůvičku na nejnovější verzi.',
+        'parent-unit-label': 'Rodičovská jednotka:',
+        'baby-unit-label': 'Dětská jednotka:',
+        'check-files-btn': 'Kontrola souborů',
+        'update-btn-text': 'Aktualizace',
+        'err-firmware-update': 'Firmware je aktuální.',
+        'baby-path-label': 'Cesta k image souboru dětské jednotky:',
+        'parent-path-label': 'Cesta k image souboru rodičovské jednotky:',
+        'sha256-label': 'SHA256:',
+        'md5-file-label': 'Textový klíč MD5:',
+        'md5-file-input-title': 'Vyberte txt soubor kontrolního součtu MD5',
+        'md5-file-input-error': 'Vyberte soubor MD5 txt.',
+        'parent-file-input-error': 'Firmware je aktuální.',
+        'baby-file-input-error': 'Vyberte soubor pro dětskou jednotku.',
+        'start-update-btn': 'Spustit aktualizaci',
+        'progress-content-title': 'Průběh aktualizace',
+        'progress-warn-title': 'Abyste zajistili, že aktualizace se zdaří a vaše zařízení nepřestanou reagovat, zajistěte splnění těchto podmínek:',
+        'progress-warn-1': '1. Ponechte připojené napájení: Dětská i rodičovská jednotka musí zůstat zapojené do elektrické zásuvky.',
+        'progress-warn-2': '2. Zůstaňte na této stránce: Neobnovujte prohlížeč ani nezavírejte tuto záložku, dokud proces nebude dokončen ze 100 %.',
+        'progress-warn-3': '3. Ponechte jednotky blízko u sebe: Ujistěte se, že všechna zařízení (rodičovská jednotka, dětská jednotka i tento počítač) zůstanou v těsné blízkosti.',
+        'progress-old-version': 'Stará verze:',
+        'progress-new-version': 'Nová verze:',
+        'success-restart-msg': 'Aktualizace se zdařila! Vaše jednotka se restartuje za {0} s...',
+        'progress-status-ready': 'Připraveno k aktualizaci...',
+        'progress-status-updating-bu': 'Aktualizace dětské jednotky...',
+        'progress-status-updating-pu': 'Aktualizace rodičovské jednotky...',
+        'progress-status-pu-wait': 'Aktualizace rodičovské jednotky, čekejte.',
+        'progress-status-bu-wait': 'Aktualizace dětské jednotky, čekejte.',
+        'err-refresh-version': 'Nejprve proveďte obnovení pro načtení verze jednotky',
+        'progress-status-success': 'Aktualizace se zdařila!',
+        'progress-status-failed': 'Nezdařená',
+        'warning-text': 'Poznámka: Ponechte rodičovskou i dětskou jednotky připojené k napájení po celou dobu aktualizace. Odpojení od zdroje napájení může trvale poškodit vaše zařízení.',
+        'alert-fill-info': 'Vyplňte kompletní přihlašovací údaje',
+        'alert-login-failed': 'Přihlášení se nezdařilo:',
+        'alert-login-request-failed': 'Žádost o přihlášení selhala. Prosíme zkuste to znovu.',
+        'error-username': 'Nesprávné uživatelské jméno. Výchozí: admin',
+        'error-password': 'Nesprávné heslo. Podívejte se na displej rodičovské jednotky.',
+        'error-empty': 'Je vyžadováno uživatelské jméno a heslo',
+        'alert-select-files': 'Před zahájením aktualizace vyberte alespoň jeden soubor.',
+        'calculating-sha256': 'Počítám SHA256...',
+        'check-files-ok': 'Soubory ověřeny. Verze:',
+        'err-select-bu': 'Vyberte soubor pro dětskou jednotku.',
+        'err-select-pu': 'Vyberte soubor pro rodičovskou jednotku.',
+        'err-select-md5': 'Vyberte soubor MD5 txt.',
+        'err-version-format': 'Neplatný formát názvu souboru firmwaru.',
+        'err-version-mismatch': 'Verze dětské jednotky a rodičovské jednotky nesouhlasí:',
+        'err-md5-mismatch-bu': 'Nesouhlasí kontrolní součet MD5 pro soubor dětské jednotky.',
+        'err-md5-mismatch-pu': 'Nesouhlasí kontrolní součet MD5 pro soubor rodičovské jednotky.',
+        'err-version-outdated': 'Verze firmwaru je nižší než aktuální verze zařízení.',
+        'err-version-outdated-alert': 'Soubor, který jste vybrali, je stejný nebo starší než aktuálně nainstalovaná verze (v{version}). Aktualizace není potřeba.',
+        'err-different-model': 'Soubor, který jste nahráli, je určen pro jiný model. Ujistěte se, že máte stažený nejnovější firmware pro dětskou chůvičku Philips Avent Baby Monitor a zkuste to znovu.',
+        'err-device-type-mismatch': 'Nesprávný typ firmwaru. Soubor dětské jednotky musí v názvu obsahovat _BU_ a soubor rodičovské jednotky musí v názvu obsahovat _PU_ (např. {bu_model}_V0.2.3_RC1.bin).',
+        'err-prefix-mismatch': 'Neplatná předpona firmwaru. Název souboru dětské jednotky musí začínat na {bu_model} a název rodičovské jednotky musí začínat na {pu_model}.',
+        'err-unsigned-firmware': 'Nepodepsaný firmware není povolen. Lze použít pouze podepsaný firmware (název souboru bez _unsigned).',
+        'err-md5-key-alert': 'Zkontrolujte 64znakový textový klíč MD5, který je součástí vašeho stahování. Zkopírujte ho přímo, abyste se vyhnuli překlepům.',
+        'err-read-md5-fail': 'Nelze přečíst soubor MD5, vyberte ho znovu',
+        'err-read-firmware-fail': 'Nelze přečíst soubor firmwaru, vyberte ho znovu',
+        'err-md5-format': 'Chyba formátu souboru MD5: každý řádek musí mít formát „md5_hash filename.bin“',
+        'err-md5-file-not-found': 'Soubor MD5 neobsahuje záznam pro:',
+        'err-pu-upgrade-fail': 'Aktualizace rodičovské jednotky selhala.',
+        'err-bu-upgrade-fail': 'Aktualizace dětské jednotky selhala.',
+        'err-upgrade-internal': 'Vnitřní chyba aktualizace.',
+        'err-upgrade-timeout': 'Vypršel časový limit pro aktualizaci.',
+        'err-upgrade-cancel': 'Aktualizace zrušena.',
+        'err-file-too-large-md5': 'Soubor je příliš velký (>300 MB) pro výpočet MD5'
+      },
+      'uk-UA': {
+        'username-label': 'Ім’я користувача:',
+        'password-label': 'Пароль:',
+        'language-label': 'Мова:',
+        'enter-btn': 'Увійти',
+        'login-header-title': 'Philips Avent Baby Monitor',
+        'login-header-line1': 'Вітаємо на сторінці технічної підтримки.',
+        'login-header-line2': 'Увійдіть, щоб оновити мікропрограму пристрою.',
+        'username-placeholder': 'Ім’я користувача',
+        'username-tip': 'Зазвичай: адміністратор',
+        'password-placeholder': 'Пароль',
+        'password-tip': 'Дізнайтеся пароль на дисплеї батьківського блока.',
+        'warn-credentials-title': 'Облікові дані змінилися',
+        'warn-credentials-content': 'Виконано максимальну кількість спроб входу. Попередній пароль більше не діє. Отримайте оновлені дані для входу на батьківському блоці.',
+        'update-warn-credentials-title': 'Облікові дані змінилися',
+        'update-warn-credentials-content': 'Виконано максимальну кількість спроб входу. Попередній пароль більше не діє. Отримайте оновлені дані для входу на батьківському блоці.',
+        'support-link': 'Підтримка',
+        'support-footer': 'Сторінка підтримки доступна лише за наявності з\'єднання з Інтернетом (не із системою контролю за дитиною)',
+        'upgrade-title': 'Вітаємо на сторінці технічної підтримки системи контролю за дитиною Philips Avent Baby Monitor',
+        'version-info': 'Поточні версії батьківського й дитячого блоків: BU.0.0.15 і PU.0.0.41',
+        'update-header-title': 'Поточна версія програмного забезпечення',
+        'pu-firmware-label': 'Мікропрограма батьківського блока:',
+        'bu-firmware-label': 'Мікропрограма дитячого блока:',
+        'float-title': 'Важлива інформація щодо оновлення',
+        'float-desc1': 'Переривання оновлення може завдати шкоди пристроям. Натискаючи кнопку підтвердження, ви зазначаєте наведене нижче.',
+        'float-desc2-1': '1. Усі пристрої залишаються підключеними до живлення під час оновлення.',
+        'float-desc2-2': '2. Ви не оновлюватимете й не закриватимете це вікно браузера.',
+        'float-desc2-3': '3. Ви триматимете пристрої близько один до одного.',
+        'confirm-btn': 'Підтвердити',
+        'update-content-title': 'Оновлення програмного забезпечення',
+        'update-content-description': 'Завантажте нову мікропрограму, щоб оновити систему контролю за дитиною до останньої версії.',
+        'parent-unit-label': 'Батьківський блок:',
+        'baby-unit-label': 'Дитячий блок:',
+        'check-files-btn': 'Перевірка файлів',
+        'update-btn-text': 'Оновлення',
+        'err-firmware-update': 'Мікропрограму вже оновлено.',
+        'baby-path-label': 'Шлях до файлу із зображенням дитячого блока:',
+        'parent-path-label': 'Шлях до файлу із зображенням батьківського блока:',
+        'sha256-label': 'SHA256:',
+        'md5-file-label': 'Текстовий ключ MD5:',
+        'md5-file-input-title': 'Виберіть txt-файл контрольної суми MD5',
+        'md5-file-input-error': 'Виберіть TXT-файл MD5.',
+        'parent-file-input-error': 'Мікропрограму вже оновлено.',
+        'baby-file-input-error': 'Виберіть файл для дитячого блока.',
+        'start-update-btn': 'Почати оновлення',
+        'progress-content-title': 'Перебіг оновлення',
+        'progress-warn-title': 'Щоб забезпечити успішне оновлення й уникнути відсутності реакції на ваших пристроях, обов\'язково дотримуйтеся наведених далі правил.',
+        'progress-warn-1': '1. Залишайте живлення ввімкненим. Залишайте батьківський і дитячий блоки підключеними до розетки.',
+        'progress-warn-2': '2. Залишайтеся на цій сторінці: не оновлюйте сторінку браузера й не закривайте цю вкладку, доки процес не буде повністю завершено.',
+        'progress-warn-3': '3. Тримайте блоки близько один до одного: усі пристрої (батьківський блок, дитячий блок і цей комп\'ютер) мають знаходитися поруч один з одним.',
+        'progress-old-version': 'Стара версія:',
+        'progress-new-version': 'Нова версія:',
+        'success-restart-msg': 'Оновлення завершено! Блок перезапуститься за {0} с...',
+        'progress-status-ready': 'Усе готово до оновлення...',
+        'progress-status-updating-bu': 'Оновлення дитячого блока...',
+        'progress-status-updating-pu': 'Оновлення батьківського блока...',
+        'progress-status-pu-wait': 'Батьківський блок оновлюється, зачекайте.',
+        'progress-status-bu-wait': 'Дитячий блок оновлюється, зачекайте.',
+        'err-refresh-version': 'Спочатку оновіть сторінку, щоб отримати необхідну версію для пристрою',
+        'progress-status-success': 'Оновлення завершено!',
+        'progress-status-failed': 'Збій',
+        'warning-text': 'Примітка. Не відключайте батьківський і дитячий блоки від живлення, доки не завершиться оновлення. Відключення від живлення може завдати пристрою незворотної шкоди.',
+        'alert-fill-info': 'Укажіть усі дані для входу',
+        'alert-login-failed': 'Не вдалося виконати вхід:',
+        'alert-login-request-failed': 'Не вдалося надіслати запит на вхід. Спробуйте ще раз.',
+        'error-username': 'Неправильне ім\'я користувача. За замовчуванням: адміністратор',
+        'error-password': 'Неправильний пароль. Перевірте дані на дисплеї батьківського блока.',
+        'error-empty': 'Потрібно вказати ім\'я користувача й пароль',
+        'alert-select-files': 'Виберіть принаймні один файл перед початком оновлення.',
+        'calculating-sha256': 'Обчислення SHA256...',
+        'check-files-ok': 'Файли підтверджено. Версія:',
+        'err-select-bu': 'Виберіть файл для дитячого блока.',
+        'err-select-pu': 'Виберіть файл для батьківського блока.',
+        'err-select-md5': 'Виберіть TXT-файл MD5.',
+        'err-version-format': 'Неправильний формат назви файлу мікропрограми.',
+        'err-version-mismatch': 'Невідповідність версій батьківського й дитячого блоків:',
+        'err-md5-mismatch-bu': 'Невідповідність контрольної суми MD5 для файлу дитячого блока.',
+        'err-md5-mismatch-pu': 'Невідповідність контрольної суми MD5 для файлу батьківського блока.',
+        'err-version-outdated': 'Версія мікропрограми нижча за поточну версію пристрою.',
+        'err-version-outdated-alert': 'Вибраний вами файл збігається з установленою наразі версію (v{version}) або є старшим за неї. Оновлення не потрібне.',
+        'err-different-model': 'Файл, який ви завантажили, призначено для іншої моделі. Переконайтеся, що ви завантажили найновішу відповідну мікропрограму для Philips Avent Baby Monitor, і спробуйте знову.',
+        'err-device-type-mismatch': 'Неправильний тип мікропрограми. Назва файлу дитячого блока має містити _BU_, а назва файлу батьківського блока — _PU_ (наприклад, {bu_model}_V0.2.3_RC1.bin).',
+        'err-prefix-mismatch': 'Неприпустимий префікс мікропрограми. Назва файлу дитячого блока має починатися з {bu_model}, а назва файлу батьківського блока — з {pu_model}.',
+        'err-unsigned-firmware': 'Непідписана мікропрограма не допускається. Можна використовувати лише підписану мікропрограму (у назві файлу не має бути _unsigned).',
+        'err-md5-key-alert': 'Перевірте 64-символьний текстовий ключ MD5, наданий під час завантаження. Скопіюйте й одразу вставте його, щоб уникнути помилок.',
+        'err-read-md5-fail': 'Неможливо прочитати файл MD5. Виберіть ще раз.',
+        'err-read-firmware-fail': 'Неможливо прочитати файл мікропрограми. Виберіть ще раз і повторіть спробу',
+        'err-md5-format': 'Помилка формату файлу MD5: кожен рядок має бути "md5_hash filename.bin"',
+        'err-md5-file-not-found': 'Файл MD5 не містить запису для:',
+        'err-pu-upgrade-fail': 'Не вдалось оновити батьківський блок.',
+        'err-bu-upgrade-fail': 'Не вдалось оновити дитячий блок.',
+        'err-upgrade-internal': 'Внутрішня помилка оновлення.',
+        'err-upgrade-timeout': 'Час очікування оновлення минув.',
+        'err-upgrade-cancel': 'Оновлення скасовано.',
+        'err-file-too-large-md5': 'Файл завеликий (>300 МБ) для обчислення MD5'
+      },
+    };
+
+    function md5(string) {
+      function rotateLeft(value, amount) {
+        var lbits = (value << amount) | (value >>> (32 - amount));
+        return lbits;
+      }
+
+      function addUnsigned(x, y) {
+        var x4, y4, x8, y8, result;
+        x8 = (x & 0x80000000);
+        y8 = (y & 0x80000000);
+        x4 = (x & 0x40000000);
+        y4 = (y & 0x40000000);
+        result = (x & 0x3FFFFFFF) + (y & 0x3FFFFFFF);
+        if (x4 & y4) {
+          return (result ^ 0x80000000 ^ x8 ^ y8);
+        }
+        if (x4 | y4) {
+          if (result & 0x40000000) {
+            return (result ^ 0xC0000000 ^ x8 ^ y8);
+          } else {
+            return (result ^ 0x40000000 ^ x8 ^ y8);
+          }
+        } else {
+          return (result ^ x8 ^ y8);
+        }
+      }
+
+      function F(x, y, z) { return (x & y) | ((~x) & z); }
+      function G(x, y, z) { return (x & z) | (y & (~z)); }
+      function H(x, y, z) { return (x ^ y ^ z); }
+      function I(x, y, z) { return (y ^ (x | (~z))); }
+
+      function FF(a, b, c, d, x, s, ac) {
+        a = addUnsigned(a, addUnsigned(addUnsigned(F(b, c, d), x), ac));
+        return addUnsigned(rotateLeft(a, s), b);
+      }
+
+      function GG(a, b, c, d, x, s, ac) {
+        a = addUnsigned(a, addUnsigned(addUnsigned(G(b, c, d), x), ac));
+        return addUnsigned(rotateLeft(a, s), b);
+      }
+
+      function HH(a, b, c, d, x, s, ac) {
+        a = addUnsigned(a, addUnsigned(addUnsigned(H(b, c, d), x), ac));
+        return addUnsigned(rotateLeft(a, s), b);
+      }
+
+      function II(a, b, c, d, x, s, ac) {
+        a = addUnsigned(a, addUnsigned(addUnsigned(I(b, c, d), x), ac));
+        return addUnsigned(rotateLeft(a, s), b);
+      }
+
+      function convertToWordArray(string) {
+        var lWordCount;
+        var lMessageLength = string.length;
+        var lNumberOfWords_temp1 = lMessageLength + 8;
+        var lNumberOfWords_temp2 = (lNumberOfWords_temp1 - (lNumberOfWords_temp1 % 64)) / 64;
+        var lNumberOfWords = (lNumberOfWords_temp2 + 1) * 16;
+        var lWordArray = Array(lNumberOfWords - 1);
+        var lBytePosition = 0;
+        var lByteCount = 0;
+        while (lByteCount < lMessageLength) {
+          lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+          lBytePosition = (lByteCount % 4) * 8;
+          lWordArray[lWordCount] = (lWordArray[lWordCount] | (string.charCodeAt(lByteCount) << lBytePosition));
+          lByteCount++;
+        }
+        lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+        lBytePosition = (lByteCount % 4) * 8;
+        lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80 << lBytePosition);
+        lWordArray[lNumberOfWords - 2] = lMessageLength << 3;
+        lWordArray[lNumberOfWords - 1] = lMessageLength >>> 29;
+        return lWordArray;
+      }
+
+      function wordToHex(lValue) {
+        var WordToHexValue = "", WordToHexValue_temp = "", lByte, lCount;
+        for (lCount = 0; lCount <= 3; lCount++) {
+          lByte = (lValue >>> (lCount * 8)) & 255;
+          WordToHexValue_temp = "0" + lByte.toString(16);
+          WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length - 2, 2);
+        }
+        return WordToHexValue;
+      }
+
+      var x = Array();
+      var k, AA, BB, CC, DD, a, b, c, d;
+      var S11 = 7, S12 = 12, S13 = 17, S14 = 22;
+      var S21 = 5, S22 = 9, S23 = 14, S24 = 20;
+      var S31 = 4, S32 = 11, S33 = 16, S34 = 23;
+      var S41 = 6, S42 = 10, S43 = 15, S44 = 21;
+
+      string = string.replace(/\r\n/g, "\n");
+      var utftext = "";
+      for (var n = 0; n < string.length; n++) {
+        var c = string.charCodeAt(n);
+        if (c < 128) {
+          utftext += String.fromCharCode(c);
+        } else if ((c > 127) && (c < 2048)) {
+          utftext += String.fromCharCode((c >> 6) | 192);
+          utftext += String.fromCharCode((c & 63) | 128);
+        } else {
+          utftext += String.fromCharCode((c >> 12) | 224);
+          utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+          utftext += String.fromCharCode((c & 63) | 128);
+        }
+      }
+
+      x = convertToWordArray(utftext);
+      a = 0x67452301; b = 0xEFCDAB89; c = 0x98BADCFE; d = 0x10325476;
+
+      for (k = 0; k < x.length; k += 16) {
+        AA = a; BB = b; CC = c; DD = d;
+        a = FF(a, b, c, d, x[k + 0], S11, 0xD76AA478);
+        d = FF(d, a, b, c, x[k + 1], S12, 0xE8C7B756);
+        c = FF(c, d, a, b, x[k + 2], S13, 0x242070DB);
+        b = FF(b, c, d, a, x[k + 3], S14, 0xC1BDCEEE);
+        a = FF(a, b, c, d, x[k + 4], S11, 0xF57C0FAF);
+        d = FF(d, a, b, c, x[k + 5], S12, 0x4787C62A);
+        c = FF(c, d, a, b, x[k + 6], S13, 0xA8304613);
+        b = FF(b, c, d, a, x[k + 7], S14, 0xFD469501);
+        a = FF(a, b, c, d, x[k + 8], S11, 0x698098D8);
+        d = FF(d, a, b, c, x[k + 9], S12, 0x8B44F7AF);
+        c = FF(c, d, a, b, x[k + 10], S13, 0xFFFF5BB1);
+        b = FF(b, c, d, a, x[k + 11], S14, 0x895CD7BE);
+        a = FF(a, b, c, d, x[k + 12], S11, 0x6B901122);
+        d = FF(d, a, b, c, x[k + 13], S12, 0xFD987193);
+        c = FF(c, d, a, b, x[k + 14], S13, 0xA679438E);
+        b = FF(b, c, d, a, x[k + 15], S14, 0x49B40821);
+        a = GG(a, b, c, d, x[k + 1], S21, 0xF61E2562);
+        d = GG(d, a, b, c, x[k + 6], S22, 0xC040B340);
+        c = GG(c, d, a, b, x[k + 11], S23, 0x265E5A51);
+        b = GG(b, c, d, a, x[k + 0], S24, 0xE9B6C7AA);
+        a = GG(a, b, c, d, x[k + 5], S21, 0xD62F105D);
+        d = GG(d, a, b, c, x[k + 10], S22, 0x2441453);
+        c = GG(c, d, a, b, x[k + 15], S23, 0xD8A1E681);
+        b = GG(b, c, d, a, x[k + 4], S24, 0xE7D3FBC8);
+        a = GG(a, b, c, d, x[k + 9], S21, 0x21E1CDE6);
+        d = GG(d, a, b, c, x[k + 14], S22, 0xC33707D6);
+        c = GG(c, d, a, b, x[k + 3], S23, 0xF4D50D87);
+        b = GG(b, c, d, a, x[k + 8], S24, 0x455A14ED);
+        a = GG(a, b, c, d, x[k + 13], S21, 0xA9E3E905);
+        d = GG(d, a, b, c, x[k + 2], S22, 0xFCEFA3F8);
+        c = GG(c, d, a, b, x[k + 7], S23, 0x676F02D9);
+        b = GG(b, c, d, a, x[k + 12], S24, 0x8D2A4C8A);
+        a = HH(a, b, c, d, x[k + 5], S31, 0xFFFA3942);
+        d = HH(d, a, b, c, x[k + 8], S32, 0x8771F681);
+        c = HH(c, d, a, b, x[k + 11], S33, 0x6D9D6122);
+        b = HH(b, c, d, a, x[k + 14], S34, 0xFDE5380C);
+        a = HH(a, b, c, d, x[k + 1], S31, 0xA4BEEA44);
+        d = HH(d, a, b, c, x[k + 4], S32, 0x4BDECFA9);
+        c = HH(c, d, a, b, x[k + 7], S33, 0xF6BB4B60);
+        b = HH(b, c, d, a, x[k + 10], S34, 0xBEBFBC70);
+        a = HH(a, b, c, d, x[k + 13], S31, 0x289B7EC6);
+        d = HH(d, a, b, c, x[k + 0], S32, 0xEAA127FA);
+        c = HH(c, d, a, b, x[k + 3], S33, 0xD4EF3085);
+        b = HH(b, c, d, a, x[k + 6], S34, 0x4881D05);
+        a = HH(a, b, c, d, x[k + 9], S31, 0xD9D4D039);
+        d = HH(d, a, b, c, x[k + 12], S32, 0xE6DB99E5);
+        c = HH(c, d, a, b, x[k + 15], S33, 0x1FA27CF8);
+        b = HH(b, c, d, a, x[k + 2], S34, 0xC4AC5665);
+        a = II(a, b, c, d, x[k + 0], S41, 0xF4292244);
+        d = II(d, a, b, c, x[k + 7], S42, 0x432AFF97);
+        c = II(c, d, a, b, x[k + 14], S43, 0xAB9423A7);
+        b = II(b, c, d, a, x[k + 5], S44, 0xFC93A039);
+        a = II(a, b, c, d, x[k + 12], S41, 0x655B59C3);
+        d = II(d, a, b, c, x[k + 3], S42, 0x8F0CCC92);
+        c = II(c, d, a, b, x[k + 10], S43, 0xFFEFF47D);
+        b = II(b, c, d, a, x[k + 1], S44, 0x85845DD1);
+        a = II(a, b, c, d, x[k + 8], S41, 0x6FA87E4F);
+        d = II(d, a, b, c, x[k + 15], S42, 0xFE2CE6E0);
+        c = II(c, d, a, b, x[k + 6], S43, 0xA3014314);
+        b = II(b, c, d, a, x[k + 13], S44, 0x4E0811A1);
+        a = II(a, b, c, d, x[k + 4], S41, 0xF7537E82);
+        d = II(d, a, b, c, x[k + 11], S42, 0xBD3AF235);
+        c = II(c, d, a, b, x[k + 2], S43, 0x2AD7D2BB);
+        b = II(b, c, d, a, x[k + 9], S44, 0xEB86D391);
+        a = addUnsigned(a, AA);
+        b = addUnsigned(b, BB);
+        c = addUnsigned(c, CC);
+        d = addUnsigned(d, DD);
+      }
+
+      return (wordToHex(a) + wordToHex(b) + wordToHex(c) + wordToHex(d)).toLowerCase();
+    }
+
+    // 增量式 MD5，用于大文件分块计算，不将整个文件加载到内存
+    function MD5Stream() {
+      var self = this;
+      var S11 = 7, S12 = 12, S13 = 17, S14 = 22, S21 = 5, S22 = 9, S23 = 14, S24 = 20;
+      var S31 = 4, S32 = 11, S33 = 16, S34 = 23, S41 = 6, S42 = 10, S43 = 15, S44 = 21;
+      function rotateLeft(v, n) { return (v << n) | (v >>> (32 - n)); }
+      function addU32(x, y) {
+        var lsw = (x & 0xFFFF) + (y & 0xFFFF), msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+        return ((msw << 16) | (lsw & 0xFFFF)) >>> 0;
+      }
+      function F(x, y, z) { return (x & y) | ((~x) & z); }
+      function G(x, y, z) { return (x & z) | (y & (~z)); }
+      function H(x, y, z) { return x ^ y ^ z; }
+      function I(x, y, z) { return y ^ (x | (~z)); }
+      function FF(a, b, c, d, x, s, ac) { var sum = addU32(addU32(a, addU32(addU32(F(b, c, d), x), ac))); return addU32(b, rotateLeft(sum, s)); }
+      function GG(a, b, c, d, x, s, ac) { var sum = addU32(addU32(a, addU32(addU32(G(b, c, d), x), ac))); return addU32(b, rotateLeft(sum, s)); }
+      function HH(a, b, c, d, x, s, ac) { var sum = addU32(addU32(a, addU32(addU32(H(b, c, d), x), ac))); return addU32(b, rotateLeft(sum, s)); }
+      function II(a, b, c, d, x, s, ac) { var sum = addU32(addU32(a, addU32(addU32(I(b, c, d), x), ac))); return addU32(b, rotateLeft(sum, s)); }
+      function bytesToWords(buf) {
+        var out = [], i;
+        for (i = 0; i < buf.length; i += 4) {
+          out.push((buf[i] | (buf[i + 1] << 8) | (buf[i + 2] << 16) | (buf[i + 3] << 24)) >>> 0);
+        }
+        return out;
+      }
+      function wordToHex(v) {
+        var s = '', b, i;
+        for (i = 0; i < 4; i++) {
+          b = (v >>> (i * 8)) & 255;
+          s += ('0' + b.toString(16)).slice(-2);
+        }
+        return s;
+      }
+      function transform(block) {
+        var x = bytesToWords(block), k, AA, BB, CC, DD;
+        AA = self.a; BB = self.b; CC = self.c; DD = self.d;
+        self.a = FF(self.a, self.b, self.c, self.d, x[0], S11, 0xD76AA478);
+        self.d = FF(self.d, self.a, self.b, self.c, x[1], S12, 0xE8C7B756);
+        self.c = FF(self.c, self.d, self.a, self.b, x[2], S13, 0x242070DB);
+        self.b = FF(self.b, self.c, self.d, self.a, x[3], S14, 0xC1BDCEEE);
+        self.a = FF(self.a, self.b, self.c, self.d, x[4], S11, 0xF57C0FAF);
+        self.d = FF(self.d, self.a, self.b, self.c, x[5], S12, 0x4787C62A);
+        self.c = FF(self.c, self.d, self.a, self.b, x[6], S13, 0xA8304613);
+        self.b = FF(self.b, self.c, self.d, self.a, x[7], S14, 0xFD469501);
+        self.a = FF(self.a, self.b, self.c, self.d, x[8], S11, 0x698098D8);
+        self.d = FF(self.d, self.a, self.b, self.c, x[9], S12, 0x8B44F7AF);
+        self.c = FF(self.c, self.d, self.a, self.b, x[10], S13, 0xFFFF5BB1);
+        self.b = FF(self.b, self.c, self.d, self.a, x[11], S14, 0x895CD7BE);
+        self.a = FF(self.a, self.b, self.c, self.d, x[12], S11, 0x6B901122);
+        self.d = FF(self.d, self.a, self.b, self.c, x[13], S12, 0xFD987193);
+        self.c = FF(self.c, self.d, self.a, self.b, x[14], S13, 0xA679438E);
+        self.b = FF(self.b, self.c, self.d, self.a, x[15], S14, 0x49B40821);
+        self.a = GG(self.a, self.b, self.c, self.d, x[1], S21, 0xF61E2562);
+        self.d = GG(self.d, self.a, self.b, self.c, x[6], S22, 0xC040B340);
+        self.c = GG(self.c, self.d, self.a, self.b, x[11], S23, 0x265E5A51);
+        self.b = GG(self.b, self.c, self.d, self.a, x[0], S24, 0xE9B6C7AA);
+        self.a = GG(self.a, self.b, self.c, self.d, x[5], S21, 0xD62F105D);
+        self.d = GG(self.d, self.a, self.b, self.c, x[10], S22, 0x2441453);
+        self.c = GG(self.c, self.d, self.a, self.b, x[15], S23, 0xD8A1E681);
+        self.b = GG(self.b, self.c, self.d, self.a, x[4], S24, 0xE7D3FBC8);
+        self.a = GG(self.a, self.b, self.c, self.d, x[9], S21, 0x21E1CDE6);
+        self.d = GG(self.d, self.a, self.b, self.c, x[14], S22, 0xC33707D6);
+        self.c = GG(self.c, self.d, self.a, self.b, x[3], S23, 0xF4D50D87);
+        self.b = GG(self.b, self.c, self.d, self.a, x[8], S24, 0x455A14ED);
+        self.a = GG(self.a, self.b, self.c, self.d, x[13], S21, 0xA9E3E905);
+        self.d = GG(self.d, self.a, self.b, self.c, x[2], S22, 0xFCEFA3F8);
+        self.c = GG(self.c, self.d, self.a, self.b, x[7], S23, 0x676F02D9);
+        self.b = GG(self.b, self.c, self.d, self.a, x[12], S24, 0x8D2A4C8A);
+        self.a = HH(self.a, self.b, self.c, self.d, x[5], S31, 0xFFFA3942);
+        self.d = HH(self.d, self.a, self.b, self.c, x[8], S32, 0x8771F681);
+        self.c = HH(self.c, self.d, self.a, self.b, x[11], S33, 0x6D9D6122);
+        self.b = HH(self.b, self.c, self.d, self.a, x[14], S34, 0xFDE5380C);
+        self.a = HH(self.a, self.b, self.c, self.d, x[1], S31, 0xA4BEEA44);
+        self.d = HH(self.d, self.a, self.b, self.c, x[4], S32, 0x4BDECFA9);
+        self.c = HH(self.c, self.d, self.a, self.b, x[7], S33, 0xF6BB4B60);
+        self.b = HH(self.b, self.c, self.d, self.a, x[10], S34, 0xBEBFBC70);
+        self.a = HH(self.a, self.b, self.c, self.d, x[13], S31, 0x289B7EC6);
+        self.d = HH(self.d, self.a, self.b, self.c, x[0], S32, 0xEAA127FA);
+        self.c = HH(self.c, self.d, self.a, self.b, x[3], S33, 0xD4EF3085);
+        self.b = HH(self.b, self.c, self.d, self.a, x[6], S34, 0x4881D05);
+        self.a = HH(self.a, self.b, self.c, self.d, x[9], S31, 0xD9D4D039);
+        self.d = HH(self.d, self.a, self.b, self.c, x[12], S32, 0xE6DB99E5);
+        self.c = HH(self.c, self.d, self.a, self.b, x[15], S33, 0x1FA27CF8);
+        self.b = HH(self.b, self.c, self.d, self.a, x[2], S34, 0xC4AC5665);
+        self.a = II(self.a, self.b, self.c, self.d, x[0], S41, 0xF4292244);
+        self.d = II(self.d, self.a, self.b, self.c, x[7], S42, 0x432AFF97);
+        self.c = II(self.c, self.d, self.a, self.b, x[14], S43, 0xAB9423A7);
+        self.b = II(self.b, self.c, self.d, self.a, x[5], S44, 0xFC93A039);
+        self.a = II(self.a, self.b, self.c, self.d, x[12], S41, 0x655B59C3);
+        self.d = II(self.d, self.a, self.b, self.c, x[3], S42, 0x8F0CCC92);
+        self.c = II(self.c, self.d, self.a, self.b, x[10], S43, 0xFFEFF47D);
+        self.b = II(self.b, self.c, self.d, self.a, x[1], S44, 0x85845DD1);
+        self.a = II(self.a, self.b, self.c, self.d, x[8], S41, 0x6FA87E4F);
+        self.d = II(self.d, self.a, self.b, self.c, x[15], S42, 0xFE2CE6E0);
+        self.c = II(self.c, self.d, self.a, self.b, x[6], S43, 0xA3014314);
+        self.b = II(self.b, self.c, self.d, self.a, x[13], S44, 0x4E0811A1);
+        self.a = II(self.a, self.b, self.c, self.d, x[4], S41, 0xF7537E82);
+        self.d = II(self.d, self.a, self.b, self.c, x[11], S42, 0xBD3AF235);
+        self.c = II(self.c, self.d, self.a, self.b, x[2], S43, 0x2AD7D2BB);
+        self.b = II(self.b, self.c, self.d, self.a, x[9], S44, 0xEB86D391);
+        self.a = addU32(self.a, AA); self.b = addU32(self.b, BB);
+        self.c = addU32(self.c, CC); self.d = addU32(self.d, DD);
+      }
+      this.init = function () {
+        this.a = 0x67452301; this.b = 0xEFCDAB89; this.c = 0x98BADCFE; this.d = 0x10325476;
+        this.buf = []; this.byteCount = 0;
+      };
+      this.update = function (arr) {
+        var i = 0, len = arr.length, k, block;
+        this.byteCount += len;
+        while (this.buf.length + (len - i) >= 64) {
+          block = new Uint8Array(64);
+          k = 0;
+          while (k < 64 && this.buf.length > 0) block[k++] = this.buf.shift();
+          while (k < 64 && i < len) block[k++] = arr[i++];
+          transform(block);
+        }
+        while (i < len) this.buf.push(arr[i++]);
+      };
+      this.final = function () {
+        var bitLen = this.byteCount * 8;
+        var zeroPad = (56 - ((this.byteCount + 1) % 64) + 64) % 64;
+        this.buf.push(0x80);
+        for (var i = 0; i < zeroPad; i++) this.buf.push(0);
+        var lo = (bitLen >>> 0) & 0xFFFFFFFF, hi = (Math.floor(bitLen / 0x100000000) >>> 0) & 0xFFFFFFFF;
+        for (var j = 0; j < 4; j++) this.buf.push((lo >>> (j * 8)) & 255);
+        for (var j = 0; j < 4; j++) this.buf.push((hi >>> (j * 8)) & 255);
+        while (this.buf.length >= 64) {
+          var block = new Uint8Array(64);
+          for (var k = 0; k < 64; k++) block[k] = this.buf.shift();
+          transform(block);
+        }
+        return (wordToHex(this.a) + wordToHex(this.b) + wordToHex(this.c) + wordToHex(this.d)).toLowerCase();
+      };
+      this.init();
+    }
+
+    // 获取所有语言选择框
+    function getLangSelects() {
+      return document.querySelectorAll('select[name="language"]');
+    }
+
+    function populateLanguageSelects() {
+      getLangSelects().forEach(function (sel) {
+        var prev = sel.value;
+        sel.innerHTML = '';
+        SUPPORTED_LOCALES.forEach(function (loc) {
+          var opt = document.createElement('option');
+          opt.value = loc;
+          opt.textContent = LANGUAGE_LABELS[loc];
+          sel.appendChild(opt);
+        });
+        if (SUPPORTED_LOCALES.indexOf(prev) >= 0) sel.value = prev;
+      });
+    }
+
+    // 初始化语言设置
+    function initializeLanguage() {
+      populateLanguageSelects();
+      var savedLanguage = localStorage.getItem('selectedLanguage');
+      if (savedLanguage && SUPPORTED_LOCALES.indexOf(savedLanguage) >= 0) {
+        currentLanguage = savedLanguage;
+        getLangSelects().forEach(function (s) { s.value = savedLanguage; });
+      } else {
+        currentLanguage = 'en-US';
+        getLangSelects().forEach(function (s) { s.value = 'en-US'; });
+      }
+      document.documentElement.lang = (currentLanguage || 'en-US').split('-')[0];
+      updateTexts();
+      updateVersionDisplay();
+    }
+
+    // 更改语言（从任意一个选择框触发，同步所有并刷新文案）
+    function changeLanguage(evt) {
+      var sel = evt && evt.target ? evt.target : document.querySelector('select[name="language"]');
+      if (!sel) return;
+      var val = sel.value;
+      if (SUPPORTED_LOCALES.indexOf(val) < 0) val = 'en-US';
+      currentLanguage = val;
+      localStorage.setItem('selectedLanguage', val);
+      document.documentElement.lang = val.split('-')[0];
+      getLangSelects().forEach(function (s) { if (s !== sel) s.value = val; });
+      updateTexts();
+      refreshUpdateWarnIfCheckError();
+      updateVersionDisplay();
+      if (lastUpgradeErrorStatus != null) {
+        var progressSuccess = document.getElementById('progress-success');
+        if (progressSuccess && progressSuccess.style.display !== 'none') {
+          progressSuccess.querySelector('.success-content').textContent = getErrorMsgByStatus(lastUpgradeErrorStatus);
+        }
+        var ps = document.getElementById('progress-status');
+        if (ps) ps.textContent = translations[currentLanguage]['progress-status-failed'];
+      }
+      // 进度条状态随语言切换更新
+      var progressContainer = document.getElementById('progress-container');
+      if (progressContainer && progressContainer.style.display !== 'none' && currentProgressStatusKey) {
+        var ps = document.getElementById('progress-status');
+        if (ps && translations[currentLanguage][currentProgressStatusKey]) {
+          ps.textContent = translations[currentLanguage][currentProgressStatusKey];
+        }
+      }
+      refreshProgressInfo();
+    }
+
+    /** 固件标签与版本号拼接（Excel 英文标签无尾空格时补一个空格） */
+    function joinFirmwareLabel(label, value) {
+      var v = (value !== null && value !== undefined && value !== '') ? String(value) : '--';
+      return label.replace(/\s+$/, '') + ' ' + v;
+    }
+
+    function refreshProgressInfo() {
+      var progressInfo = document.querySelector('#progress-container .progress-info');
+      if (!progressInfo || progressInfo.style.display === 'none') return;
+      var puOld = document.querySelector('.progress-info-left-old-pu-content');
+      var buOld = document.querySelector('.progress-info-left-old-bu-content');
+      var puNew = document.querySelector('.progress-info-right-new-pu-content');
+      var buNew = document.querySelector('.progress-info-right-new-bu-content');
+      var t = translations[currentLanguage];
+      var puLabel = t['pu-firmware-label'] || 'Parent Unit Firmware: ';
+      var buLabel = t['bu-firmware-label'] || 'Baby Unit Firmware: ';
+      if (puOld) puOld.textContent = joinFirmwareLabel(puLabel, lastPuVersionStr);
+      if (buOld) buOld.textContent = joinFirmwareLabel(buLabel, lastBuVersionStr);
+      var puVer = parentFile ? parseFirmwareVersion(parentFile.name) : null;
+      var buVer = babyFile ? parseFirmwareVersion(babyFile.name) : null;
+      if (puNew) puNew.textContent = joinFirmwareLabel(puLabel, puVer ? puVer.version : null);
+      if (buNew) buNew.textContent = joinFirmwareLabel(buLabel, buVer ? buVer.version : null);
+    }
+
+    // 升级页面文本
+    function updateTexts() {
+      const texts = translations[currentLanguage] || translations['en-US'];
+
+      // 升级所有带有ID的文本元素
+      Object.keys(texts).forEach(key => {
+        if (key === 'baby-file-input-error' || key === 'parent-file-input-error' || key === 'md5-file-input-error') {
+          return;
+        }
+        const element = document.getElementById(key);
+        if (element) {
+          if (key === 'success-restart-msg') {
+            var sec = (restartCountdownSec !== null && restartCountdownSec >= 0) ? restartCountdownSec : 10;
+            element.textContent = (texts[key] || '').replace(/\{0\}/g, sec);
+            return;
+          }
+          if (element.tagName === 'INPUT' && (element.type === 'button' || element.type === 'submit')) {
+            element.value = texts[key];
+          } else {
+            var updateWarn = document.getElementById('update-warn-alert');
+            if (updateWarn && updateWarn.getAttribute('data-check-error') === '1' &&
+              (key === 'update-warn-credentials-title' || key === 'update-warn-credentials-content')) {
+              return;
+            }
+            element.textContent = texts[key];
+          }
+        }
+      });
+
+      // 处理 placeholder
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n-placeholder');
+        if (key && texts[key]) el.placeholder = texts[key];
+      });
+
+      var md5FileInput = document.getElementById('md5-file-input');
+      if (md5FileInput && texts['md5-file-input-title']) md5FileInput.title = texts['md5-file-input-title'];
+
+      getLangSelects().forEach(function (s) {
+        var lbl = texts['language-label'] || 'Language:';
+        s.setAttribute('aria-label', String(lbl).replace(/:\s*$/, '').trim());
+      });
+
+      // 处理 update-btn：根据是否已确认显示 Check files 或 Update（至少一个固件校验通过即显示 Update）
+      var updateBtn = document.getElementById('update-btn');
+      if (updateBtn) {
+        var parentCheck = document.getElementById('parent-file-checkmark');
+        var babyCheck = document.getElementById('baby-file-checkmark');
+        var checkmarksVisible = (parentCheck && parentCheck.style.display !== 'none') || (babyCheck && babyCheck.style.display !== 'none');
+        updateBtn.textContent = checkmarksVisible ? texts['update-btn-text'] : texts['check-files-btn'];
+      }
+
+      applyFileErrorTexts(texts);
+    }
+
+    /** 文件校验错误区：隐藏时用占位文案；显示时按 data-i18n-err-key 随语言刷新 */
+    function applyFileErrorTexts(texts) {
+      ['baby-file-input-error', 'parent-file-input-error', 'md5-file-input-error'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        if (el.classList.contains('hidden')) {
+          if (texts[id]) el.textContent = texts[id];
+          return;
+        }
+        var k = el.getAttribute('data-i18n-err-key');
+        if (!k || !texts[k]) return;
+        var msg = texts[k];
+        if (k === 'err-device-type-mismatch' || k === 'err-prefix-mismatch') {
+          msg = msg.replace(/\{bu_model\}/g, FW_PREFIX_BU).replace(/\{pu_model\}/g, FW_PREFIX_PU);
+        }
+        var extra = el.getAttribute('data-i18n-err-extra');
+        el.textContent = extra ? (msg + extra) : msg;
+      });
+    }
+
+    // 计算文件SHA256
+    /**
+     * 计算大文件的SHA256哈希值（分块处理）
+     * @param {File} file 用户选择的文件对象
+     * @param {Function} onProgress 可选的回调函数，用于接收进度信息
+     * @param {number} chunkSize 分块大小，默认1MB
+     * @returns {Promise<string>} 十六进制格式的哈希值
+     */
+    async function calculateMD5(file, onProgress = null, chunkSize = 256 * 1024) {
+      var maxSize = 300 * 1024 * 1024;
+      if (file.size > maxSize) {
+        throw new Error((translations[currentLanguage] && translations[currentLanguage]['err-file-too-large-md5']) || translations['en-US']['err-file-too-large-md5']);
+      }
+      var t0 = performance.now();
+      var stream = new MD5Stream();
+      var offset = 0;
+      while (offset < file.size) {
+        var end = Math.min(offset + chunkSize, file.size);
+        var chunk = file.slice(offset, end);
+        var buf = new Uint8Array(await chunk.arrayBuffer());
+        stream.update(buf);
+        offset = end;
+        if (onProgress) onProgress((offset / file.size) * 100);
+        if (offset < file.size) await new Promise(function (r) { setTimeout(r, 0); });
+      }
+      var result = stream.final();
+      var ms = (performance.now() - t0).toFixed(0);
+      var sizeMB = (file.size / 1024 / 1024).toFixed(2);
+      console.log('[MD5] ' + (file.name || 'file') + ' (' + sizeMB + ' MB) done in ' + ms + ' ms');
+      return result;
+    }
+    // 升级SHA256显示（若sha256元素不存在则跳过）
+    async function updateSHA256Display() {
+      var sha256Input = document.getElementById('sha256');
+      if (!sha256Input) return;
+      try {
+        sha256Input.value = '';
+        sha256Input.placeholder = translations[currentLanguage]['calculating-sha256'];
+
+        // 如果两个文件都选择了，显示Parent Unit的SHA256
+        if (parentFile && babyFile) {
+          currentSha256 = await calculateMD5(parentFile, (progress) => {
+            console.log(`Parent Unit SHA256 calculation progress: ${progress.toFixed(2)}%`);
+          });
+        } else if (parentFile) {
+          currentSha256 = await calculateMD5(parentFile, (progress) => {
+            console.log(`Parent Unit SHA256 calculation progress: ${progress.toFixed(2)}%`);
+          });
+        } else if (babyFile) {
+          currentSha256 = await calculateMD5(babyFile, (progress) => {
+            console.log(`Baby Unit SHA256 calculation progress: ${progress.toFixed(2)}%`);
+          });
+        } else {
+          currentSha256 = '';
+        }
+
+        // 清除placeholder并设置计算结果
+        sha256Input.placeholder = '';
+        sha256Input.value = currentSha256;
+      } catch (error) {
+        console.error('Error calculating SHA256:', error);
+        if (sha256Input) {
+          sha256Input.placeholder = '';
+          sha256Input.value = '';
+        }
+      }
+    }
+
+    // 根据当前语言更新版本显示（用于 fetchVersionInfo 成功和切换语言时）
+    function updateVersionDisplay() {
+      const puEl = document.getElementById('pu-version-display');
+      const buEl = document.getElementById('bu-version-display');
+      const t = translations[currentLanguage];
+      const puLabel = t['pu-firmware-label'] || 'Parent Unit Firmware: ';
+      const buLabel = t['bu-firmware-label'] || 'Baby Unit Firmware: ';
+      if (lastPuVersionStr != null && lastBuVersionStr != null) {
+        if (puEl) puEl.textContent = joinFirmwareLabel(puLabel, lastPuVersionStr);
+        if (buEl) buEl.textContent = joinFirmwareLabel(buLabel, lastBuVersionStr);
+      } else {
+        if (puEl) puEl.textContent = joinFirmwareLabel(puLabel, null);
+        if (buEl) buEl.textContent = joinFirmwareLabel(buLabel, null);
+      }
+
+
+    }
+
+    // 获取版本信息（更新 update-header-line 显示的 PU/BU 版本）
+    function fetchVersionInfo() {
+      fetch('/api/version', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success && data.bu_version != null && data.pu_version != null) {
+            currentBuVersion = parseVersionFromString(data.bu_version);
+            currentPuVersion = parseVersionFromString(data.pu_version);
+            lastPuVersionStr = data.pu_version;
+            lastBuVersionStr = data.bu_version;
+            updateVersionDisplay();
+            SUPPORTED_LOCALES.forEach(function (loc) {
+              var vi = translations[loc]['version-info'];
+              translations[loc]['version-info'] = vi.replace(
+                /BU[\w.]+\s*&\s*PU[\w.]+/,
+                data.bu_version + ' & ' + data.pu_version
+              );
+            });
+          } else {
+            currentBuVersion = null;
+            currentPuVersion = null;
+            lastPuVersionStr = null;
+            lastBuVersionStr = null;
+            updateVersionDisplay();
+          }
+        })
+        .catch(() => {
+          currentBuVersion = null;
+          currentPuVersion = null;
+          lastPuVersionStr = null;
+          lastBuVersionStr = null;
+          updateVersionDisplay();
+        });
+    }
+
+    // 页面加载时检查认证状态
+    function checkAuthStatus() {
+      const authkey = localStorage.getItem('authkey');
+      const expirationTime = localStorage.getItem('authkey_expiration');
+
+      if (authkey && expirationTime) {
+        const currentTime = Date.now();
+        const expTime = parseInt(expirationTime);
+        console.log('currentTime', currentTime)
+        console.log('expTime', expTime)
+        if (currentTime < expTime) {
+          console.log('authkey有效,验证authkey')
+          fetch('/api/verify', {
+            method: 'POST',
+            body: JSON.stringify({
+              authkey: authkey
+            })
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                // authkey有效，直接显示升级界面
+                console.log('authkey有效,显示升级界面')
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('update-container').style.display = 'flex';
+                fetchModelInfo();
+                fetchVersionInfo();
+                // 初始化进度状态文本
+                currentProgressStatusKey = 'progress-status-ready';
+                document.getElementById('progress-status').textContent = translations[currentLanguage]['progress-status-ready'];
+              } else {
+                // authkey无效，清除本地存储，显示登录界面
+                console.error('authkey无效,清除本地存储，显示登录界面')
+                localStorage.removeItem('authkey');
+                localStorage.removeItem('authkey_expiration');
+                document.getElementById('login-container').style.display = 'flex';
+                document.getElementById('update-container').style.display = 'none';
+              }
+            })
+            .catch(error => {
+              console.error('Auth verification error:', error);
+              // 验证失败，清除本地存储，显示登录界面
+              localStorage.removeItem('authkey');
+              localStorage.removeItem('authkey_expiration');
+              document.getElementById('login-container').style.display = 'flex';
+              document.getElementById('update-container').style.display = 'none';
+            });
+        } else {
+          // authkey已过期，清除本地存储，显示登录界面
+          console.error('authkey已过期,清除本地存储，显示登录界面')
+          localStorage.removeItem('authkey');
+          localStorage.removeItem('authkey_expiration');
+          document.getElementById('login-container').style.display = 'flex';
+          document.getElementById('update-container').style.display = 'none';
+        }
+      } else {
+        // 没有authkey，显示登录界面
+        console.error('没有authkey')
+        document.getElementById('login-container').style.display = 'flex';
+        document.getElementById('update-container').style.display = 'none';
+      }
+    }
+
+    // 重置登录提示：显示正常tips，隐藏错误tips
+    function resetLoginTips() {
+      var usernameBlock = document.getElementById('username') && document.getElementById('username').closest('.login-input');
+      var passwordBlock = document.getElementById('password') && document.getElementById('password').closest('.login-input');
+      if (usernameBlock) {
+        var tip = usernameBlock.querySelector('.login-input-tip');
+        var err = usernameBlock.querySelector('.login-input-tip-error');
+        if (tip) tip.style.display = '';
+        if (err) err.style.display = 'none';
+      }
+      if (passwordBlock) {
+        var tip = passwordBlock.querySelector('.login-input-tip');
+        var err = passwordBlock.querySelector('.login-input-tip-error');
+        if (tip) tip.style.display = '';
+        if (err) err.style.display = 'none';
+      }
+      var resetAlert = document.querySelector('#login-container .warn-alert');
+      if (resetAlert) resetAlert.style.display = 'none';
+    }
+
+    // 根据 code 显示对应错误提示，隐藏对应正常提示
+    function showLoginError(code) {
+      var t = translations[currentLanguage];
+      var usernameBlock = document.getElementById('username') && document.getElementById('username').closest('.login-input');
+      var passwordBlock = document.getElementById('password') && document.getElementById('password').closest('.login-input');
+      var usernameTip = usernameBlock && usernameBlock.querySelector('.login-input-tip');
+      var usernameErr = document.getElementById('username-error');
+      var passwordTip = passwordBlock && passwordBlock.querySelector('.login-input-tip');
+      var passwordErr = document.getElementById('password-error');
+      if (code === 1) {
+        if (usernameTip) usernameTip.style.display = 'none';
+        if (usernameErr) { usernameErr.textContent = t['error-empty']; usernameErr.style.display = 'block'; }
+        if (passwordTip) passwordTip.style.display = 'none';
+        if (passwordErr) { passwordErr.textContent = t['error-empty']; passwordErr.style.display = 'block'; }
+      } else if (code === 2) {
+        if (usernameTip) usernameTip.style.display = 'none';
+        if (usernameErr) { usernameErr.textContent = t['error-username']; usernameErr.style.display = 'block'; }
+        if (passwordTip) passwordTip.style.display = '';
+        if (passwordErr) passwordErr.style.display = 'none';
+      } else if (code === 3) {
+        if (usernameTip) usernameTip.style.display = '';
+        if (usernameErr) usernameErr.style.display = 'none';
+        if (passwordTip) passwordTip.style.display = 'none';
+        if (passwordErr) { passwordErr.textContent = t['error-password']; passwordErr.style.display = 'block'; }
+      } else if (code === 4) {
+        resetLoginTips();
+        var resetAlert = document.querySelector('#login-container .warn-alert');
+        if (resetAlert) resetAlert.style.display = 'flex';
+      } else {
+        // 未知错误，显示通用提示
+        if (usernameTip) usernameTip.style.display = 'none';
+        if (usernameErr) { usernameErr.textContent = t['error-username']; usernameErr.style.display = 'block'; }
+        if (passwordTip) passwordTip.style.display = 'none';
+        if (passwordErr) { passwordErr.textContent = t['error-password']; passwordErr.style.display = 'block'; }
+      }
+    }
+
+    // 页面加载完成后检查认证状态
+    document.getElementById('enter-btn').addEventListener('click', function (e) {
+      e.preventDefault();
+      resetLoginTips();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username && password) {
+        const formData = new FormData();
+        // 使用原生JS实现MD5加密
+        // formData.append('username', username);
+        // formData.append('password', md5(password));
+        const passwordMd5 = md5(password);
+        fetch('/api/login', {
+          method: 'POST',
+          body: JSON.stringify({
+            username: username,
+            password: passwordMd5
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // 登录成功，保存authkey
+              // 保存authkey和过期时间（15分钟后过期）
+              localStorage.setItem('authkey', data.authkey);
+              localStorage.setItem('authkey_expiration', data.expires_in * 1000 + Date.now());
+              // console.log('保存authkey_expiration', data.expires_in + Date.now())
+              // 隐藏登录界面，显示升级界面
+              const loginContainer = document.getElementById('login-container');
+              const upgradeContainer = document.getElementById('update-container');
+              if (loginContainer) loginContainer.style.display = 'none';
+              if (upgradeContainer) upgradeContainer.style.display = 'flex';
+              fetchModelInfo();
+              fetchVersionInfo();
+            } else {
+              showLoginError(data.code || 0);
+            }
+          })
+          .catch(error => {
+            console.error('Login error:', error);
+            alert(translations[currentLanguage]['alert-login-request-failed']);
+          });
+      } else {
+        showLoginError(1);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initializeLanguage();
+      checkAuthStatus();
+      // 点击 warn-alert 的 x 关闭按钮时隐藏告警
+      document.addEventListener('click', function (e) {
+        if (e.target && e.target.classList && e.target.classList.contains('warn-alert-close')) {
+          var alertEl = e.target.closest('.warn-alert');
+          if (alertEl) alertEl.style.display = 'none';
+        }
+      });
+      // 按钮点击：Check files 时校验，Update 时开始升级
+      var updateBtn = document.getElementById('update-btn');
+      if (updateBtn) {
+        updateBtn.addEventListener('click', async function (e) {
+          e.preventDefault();
+          var txt = this.textContent;
+          if (txt === translations[currentLanguage]['update-btn-text']) {
+            startUpdate();
+          } else {
+            await checkFiles();
+          }
+        });
+      }
+      // 弹窗退出按钮（若有）
+      var floatCloseBtn = document.getElementById('float-close-btn');
+      if (floatCloseBtn) {
+        floatCloseBtn.addEventListener('click', function () {
+          var floatEl = document.querySelector('#update-container .update-content-float');
+          if (floatEl) floatEl.style.display = 'none';
+          var btn = document.getElementById('update-btn');
+          if (btn) { btn.style.backgroundColor = '#925CC1'; btn.style.cursor = 'pointer'; }
+        });
+      }
+      // Confirm 按钮：关掉弹窗、按钮改为 Update 并恢复可点击，PU/BU 选择框后显示✅
+      var confirmBtn = document.getElementById('confirm-btn');
+      if (confirmBtn) {
+        confirmBtn.addEventListener('click', function () {
+          var floatEl = document.querySelector('#update-container .update-content-float');
+          if (floatEl) floatEl.style.display = 'none';
+          var btn = document.getElementById('update-btn');
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = translations[currentLanguage]['update-btn-text'];
+            btn.style.backgroundColor = '#925CC1';
+            btn.style.cursor = 'pointer';
+          }
+          var parentCheck = document.getElementById('parent-file-checkmark');
+          var babyCheck = document.getElementById('baby-file-checkmark');
+          if (parentCheck) parentCheck.style.display = parentFile ? 'inline' : 'none';
+          if (babyCheck) babyCheck.style.display = babyFile ? 'inline' : 'none';
+        });
+      }
+      // 页面关闭时下发升级取消状态
+      window.addEventListener('beforeunload', function () {
+        if (!isUpdating) return;
+        var authKey = localStorage.getItem('authkey');
+        if (!authKey) return;
+        var OTA_DOWN_STATUS_CANCEL = 7;
+        fetch('/api/down_status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authKey },
+          body: JSON.stringify({ status: OTA_DOWN_STATUS_CANCEL }),
+          keepalive: true
+        });
+      });
+    });
+
+    // 选择Baby Unit文件
+    function selectBabyFile() {
+      if (isUpdating) return;
+      document.getElementById('baby-file-input').click();
+    }
+
+    // 选择MD5 txt文件
+    function selectMd5File() {
+      if (isUpdating) return;
+      document.getElementById('md5-file-input').click();
+    }
+
+    // 处理MD5 txt文件选择（立即读取内容缓存，避免校验时 NotReadableError）
+    function handleMd5FileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        md5File = file;
+        md5FileContent = null;
+        hideFileCheckmarks();
+        hideUpdateWarnAlert();
+        resetFileSelectionState();
+        const filePath = file.webkitRelativePath || file.name;
+        document.getElementById('md5-file-path').value = filePath;
+        file.text().then(function (txt) {
+          md5FileContent = txt;
+        }).catch(function (e) {
+          console.warn('[MD5] 预读失败:', e);
+        });
+      }
+    }
+
+    // 选择Parent Unit文件
+    function selectParentFile() {
+      if (isUpdating) return;
+      document.getElementById('parent-file-input').click();
+    }
+
+    function hideFileCheckmarks() {
+      ['parent-file-checkmark', 'baby-file-checkmark'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+    }
+
+    // 重新选择文件时重置状态：清除 MD5 缓存、恢复按钮、隐藏确认浮层和错误提示
+    function resetFileSelectionState() {
+      buMd5Cache = null;
+      puMd5Cache = null;
+      hideFileErrors();
+      var btn = document.getElementById('update-btn');
+      if (btn) {
+        btn.disabled = false;
+        btn.style.backgroundColor = '';
+        btn.style.cursor = '';
+        btn.textContent = translations[currentLanguage]['check-files-btn'];
+      }
+      var floatEl = document.querySelector('#update-container .update-content-float');
+      if (floatEl) floatEl.style.display = 'none';
+    }
+
+    // 处理Baby Unit文件选择
+    function handleBabyFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        babyFile = file;
+        hideFileCheckmarks();
+        hideUpdateWarnAlert();
+        resetFileSelectionState();
+        // 显示文件的完整路径（如果浏览器支持）或文件名
+        const filePath = file.webkitRelativePath || file.name;
+        document.getElementById('baby-file-path').value = filePath;
+        // 异步升级SHA256显示，不阻塞函数执行
+        setTimeout(() => {
+          updateSHA256Display();
+        }, 0);
+      }
+    }
+
+    // 处理Parent Unit文件选择
+    function handleParentFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        parentFile = file;
+        hideFileCheckmarks();
+        hideUpdateWarnAlert();
+        resetFileSelectionState();
+        const filePath = file.webkitRelativePath || file.name;
+        document.getElementById('parent-file-path').value = filePath;
+        setTimeout(() => { updateSHA256Display(); }, 0);
+      }
+    }
+
+    // 从字符串解析版本号，如 "BU_1.2.3" 或 "1.2.3" -> {major,minor,patch}
+    function parseVersionFromString(s) {
+      if (!s) return null;
+      var m = String(s).match(/(\d+)\.(\d+)\.(\d+)/);
+      return m ? { major: parseInt(m[1], 10), minor: parseInt(m[2], 10), patch: parseInt(m[3], 10) } : null;
+    }
+
+    // 比较版本，返回 -1(a<b), 0(a==b), 1(a>b)
+    function compareVersion(a, b) {
+      if (!a || !b) return 0;
+      if (a.major !== b.major) return a.major > b.major ? 1 : -1;
+      if (a.minor !== b.minor) return a.minor > b.minor ? 1 : -1;
+      if (a.patch !== b.patch) return a.patch > b.patch ? 1 : -1;
+      return 0;
+    }
+
+    var FW_PREFIX_BU = 'SCD861_863_871_BU';
+    var FW_PREFIX_PU = 'SCD861_863_871_PU';
+
+    function fetchModelInfo() {
+      fetch('/api/model', { method: 'GET', headers: { 'Content-Type': 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.success && data.bu_model && data.pu_model) {
+            FW_PREFIX_BU = data.bu_model;
+            FW_PREFIX_PU = data.pu_model;
+          }
+        })
+        .catch(function () { });
+    }
+
+    // 从固件文件名解析版本号
+    // 格式规范：1.前缀和版本号必选 2.测试版含_RC{n}和日期，日期后可带字母(如260303a) 3.正式版不含RC和日期 4.均可带_unsigned
+    // 示例: SCD861_863_871_BU_V0.2.3_RC1_260303a_unsigned.bin, SCD861_863_871_BU_V0.2.3.bin
+    // 返回 { version, isRC, deviceType, isSigned }
+    function parseFirmwareVersion(filename) {
+      if (!filename) return null;
+      var m = filename.match(/[Vv](\d+\.\d+\.\d+)(?:_RC\d+)?/i);
+      if (!m) return null;
+      var isRC = /_RC\d+/i.test(filename);
+      var deviceType = /_BU[_\.\s]/i.test(filename) ? 'bu' : (/_PU[_\.\s]/i.test(filename) ? 'pu' : null);
+      var isSigned = !/_unsigned/i.test(filename);
+      return { version: m[1], isRC: isRC, deviceType: deviceType, isSigned: isSigned };
+    }
+
+    // 下发检查状态到后端（Check files 时调用）
+    function postDownStatus(status) {
+      var authKey = localStorage.getItem('authkey');
+      if (!authKey) return;
+      fetch('/api/down_status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authKey },
+        body: JSON.stringify({ status: status })
+      }).catch(function () { });
+    }
+
+    var checkFilesInProgress = false;
+    // 检查三个文件并验证版本号、MD5
+    async function checkFiles() {
+      if (checkFilesInProgress) return;
+      var t = translations[currentLanguage];
+      var btn = document.getElementById('update-btn');
+      var baseText = t['check-files-btn'];
+      // 从 input 元素获取最新文件引用，避免 File 引用失效导致 NotReadableError
+      var parentInput = document.getElementById('parent-file-input');
+      var babyInput = document.getElementById('baby-file-input');
+      var md5Input = document.getElementById('md5-file-input');
+      var parentFileRef = parentInput && parentInput.files && parentInput.files[0] ? parentInput.files[0] : parentFile;
+      var babyFileRef = babyInput && babyInput.files && babyInput.files[0] ? babyInput.files[0] : babyFile;
+      var md5FileRef = md5Input && md5Input.files && md5Input.files[0] ? md5Input.files[0] : md5File;
+      function showBtnSpinner() {
+        if (btn) {
+          btn.classList.add('btn-checking');
+          btn.disabled = true;
+          var span = document.createElement('span');
+          span.className = 'btn-spinner';
+          span.setAttribute('data-btn-spinner', '1');
+          btn.textContent = '';
+          btn.appendChild(document.createTextNode(baseText));
+          btn.appendChild(span);
+        }
+      }
+      function hideBtnSpinner(keepDisabled) {
+        if (btn) {
+          btn.classList.remove('btn-checking');
+          var spinner = btn.querySelector('[data-btn-spinner]');
+          if (spinner) spinner.remove();
+          btn.textContent = baseText;
+          if (!keepDisabled) {
+            btn.disabled = false;
+          }
+        }
+      }
+      hideFileErrors();
+      hideUpdateWarnAlert();
+      var hasBu = !!babyFileRef;
+      var hasPu = !!parentFileRef;
+      if (!hasBu && !hasPu) {
+        showFileError('baby-file-input-error', t['err-select-bu'], 'err-select-bu');
+        showFileError('parent-file-input-error', t['err-select-pu'], 'err-select-pu');
+        postDownStatus(3);
+        return false;
+      }
+      if (!md5FileRef) {
+        showFileError('md5-file-input-error', t['err-select-md5'], 'err-select-md5');
+        postDownStatus(3);
+        return false;
+      }
+      checkFilesInProgress = true;
+      var buVer = babyFileRef ? parseFirmwareVersion(babyFileRef.name) : null;
+      var puVer = parentFileRef ? parseFirmwareVersion(parentFileRef.name) : null;
+      if ((hasBu && !buVer) || (hasPu && !puVer)) {
+        if (hasBu) showFileError('baby-file-input-error', t['err-version-format'], 'err-version-format');
+        if (hasPu) showFileError('parent-file-input-error', t['err-version-format'], 'err-version-format');
+        showUpdateWarnAlert('err-version-format', 'err-different-model');
+        postDownStatus(3);
+        checkFilesInProgress = false;
+        return false;
+      }
+      if (hasBu && buVer && buVer.deviceType !== 'bu') {
+        var devTypeMsg = (t['err-device-type-mismatch'] || '').replace('{bu_model}', FW_PREFIX_BU).replace('{pu_model}', FW_PREFIX_PU);
+        showFileError('baby-file-input-error', devTypeMsg, 'err-device-type-mismatch');
+        showUpdateWarnAlert('err-device-type-mismatch', 'err-device-type-mismatch', null, { bu_model: FW_PREFIX_BU, pu_model: FW_PREFIX_PU });
+        postDownStatus(3);
+        checkFilesInProgress = false;
+        return false;
+      }
+      if (hasPu && puVer && puVer.deviceType !== 'pu') {
+        var devTypeMsg = (t['err-device-type-mismatch'] || '').replace('{bu_model}', FW_PREFIX_BU).replace('{pu_model}', FW_PREFIX_PU);
+        showFileError('parent-file-input-error', devTypeMsg, 'err-device-type-mismatch');
+        showUpdateWarnAlert('err-device-type-mismatch', 'err-device-type-mismatch', null, { bu_model: FW_PREFIX_BU, pu_model: FW_PREFIX_PU });
+        postDownStatus(3);
+        checkFilesInProgress = false;
+        return false;
+      }
+      if (hasBu && babyFileRef && babyFileRef.name.indexOf(FW_PREFIX_BU) !== 0) {
+        var prefixMsg = (t['err-prefix-mismatch'] || '').replace('{bu_model}', FW_PREFIX_BU).replace('{pu_model}', FW_PREFIX_PU);
+        showFileError('baby-file-input-error', prefixMsg, 'err-prefix-mismatch');
+        showUpdateWarnAlert('err-prefix-mismatch', 'err-prefix-mismatch', null, { bu_model: FW_PREFIX_BU, pu_model: FW_PREFIX_PU });
+        postDownStatus(3);
+        checkFilesInProgress = false;
+        return false;
+      }
+      if (hasPu && parentFileRef && parentFileRef.name.indexOf(FW_PREFIX_PU) !== 0) {
+        var prefixMsg = (t['err-prefix-mismatch'] || '').replace('{bu_model}', FW_PREFIX_BU).replace('{pu_model}', FW_PREFIX_PU);
+        showFileError('parent-file-input-error', prefixMsg, 'err-prefix-mismatch');
+        showUpdateWarnAlert('err-prefix-mismatch', 'err-prefix-mismatch', null, { bu_model: FW_PREFIX_BU, pu_model: FW_PREFIX_PU });
+        postDownStatus(3);
+        checkFilesInProgress = false;
+        return false;
+      }
+      var newBuVer = hasBu ? parseVersionFromString(buVer.version) : null;
+      var newPuVer = hasPu ? parseVersionFromString(puVer.version) : null;
+      if (hasBu && (!currentBuVersion || !currentPuVersion)) {
+        var errMsg = translations[currentLanguage]['err-refresh-version'];
+        showFileError('baby-file-input-error', errMsg, 'err-refresh-version');
+        postDownStatus(3);
+        checkFilesInProgress = false;
+        return false;
+      }
+      if (hasPu && (!currentBuVersion || !currentPuVersion)) {
+        var errMsg = translations[currentLanguage]['err-refresh-version'];
+        showFileError('parent-file-input-error', errMsg, 'err-refresh-version');
+        postDownStatus(6);
+        checkFilesInProgress = false;
+        return false;
+      }
+      if (hasBu && buVer && !buVer.isRC && newBuVer && compareVersion(newBuVer, currentBuVersion) < 0) {
+        showFileError('baby-file-input-error', t['err-version-outdated'], 'err-version-outdated');
+        showUpdateWarnAlert('err-version-outdated', 'err-version-outdated-alert', lastBuVersionStr || '--');
+        postDownStatus(3);
+        checkFilesInProgress = false;
+        return false;
+      }
+      if (hasPu && puVer && !puVer.isRC && newPuVer && compareVersion(newPuVer, currentPuVersion) < 0) {
+        showFileError('parent-file-input-error', t['err-version-outdated'], 'err-version-outdated');
+        showUpdateWarnAlert('err-version-outdated', 'err-version-outdated-alert', lastPuVersionStr || '--');
+        postDownStatus(6);
+        checkFilesInProgress = false;
+        return false;
+      }
+      showBtnSpinner();
+      try {
+        console.log('[MD5校验] 开始解析 MD5 文件...');
+        var md5Text;
+        if (md5FileContent != null) {
+          md5Text = md5FileContent;
+        } else {
+          try {
+            md5Text = await md5FileRef.text();
+          } catch (e) {
+            console.error('[MD5校验] 读取 MD5 文件失败:', e);
+            showFileError('md5-file-input-error', t['err-read-md5-fail'], 'err-read-md5-fail');
+            showUpdateWarnAlert('err-read-md5-fail', 'err-md5-key-alert');
+            hideBtnSpinner();
+            checkFilesInProgress = false;
+            return false;
+          }
+        }
+        // 解析 MD5 文件格式：每行 "md5_hash   filename.bin"，按文件名匹配
+        // 文件名须遵循固件格式：前缀+版本必选；测试版含_RC{n}_日期[字母]；正式版无RC和日期；均可带_unsigned
+        var lines = md5Text.split(/\r?\n/).map(function (l) { return l.trim(); }).filter(function (l) { return l.length > 0; });
+        var md5ByFilename = {};
+        for (var i = 0; i < lines.length; i++) {
+          var match = lines[i].match(/^([a-fA-F0-9]{32})\s+(.+)$/);
+          if (match) {
+            var fn = match[2].replace(/^\*\s*/, '').trim();  // 兼容 md5sum 的 * 前缀
+            var ver = parseFirmwareVersion(fn);
+            if (ver && (fn.indexOf(FW_PREFIX_BU) === 0 || fn.indexOf(FW_PREFIX_PU) === 0)) {
+              md5ByFilename[fn] = match[1].toLowerCase();
+            }
+          }
+        }
+        console.log('[MD5校验] MD5 文件行数:', lines.length, '解析条目:', Object.keys(md5ByFilename), 'hasBu:', hasBu, 'hasPu:', hasPu);
+        var buExpected = hasBu ? md5ByFilename[babyFileRef.name] : null;
+        var puExpected = hasPu ? md5ByFilename[parentFileRef.name] : null;
+        if (hasBu && !buExpected) {
+          showFileError('md5-file-input-error', t['err-md5-file-not-found'] + ' ' + (babyFileRef.name || ''), 'err-md5-file-not-found', ' ' + (babyFileRef.name || ''));
+          showUpdateWarnAlert('err-md5-format', 'err-md5-key-alert');
+          postDownStatus(3);
+          hideBtnSpinner();
+          return false;
+        }
+        if (hasPu && !puExpected) {
+          showFileError('md5-file-input-error', t['err-md5-file-not-found'] + ' ' + (parentFileRef.name || ''), 'err-md5-file-not-found', ' ' + (parentFileRef.name || ''));
+          showUpdateWarnAlert('err-md5-format', 'err-md5-key-alert');
+          postDownStatus(3);
+          hideBtnSpinner();
+          return false;
+        }
+        console.log('[MD5校验] 开始校验, 期待 BU:', buExpected, 'PU:', puExpected);
+        var allOk = true;
+        var puMd5, buMd5;
+        try {
+          if (hasBu) {
+            console.log('[MD5校验] 正在计算 Baby Unit 固件 MD5...');
+            var lastBuPct = -1;
+            buMd5 = (await calculateMD5(babyFileRef, function (pct) {
+              var step = Math.floor(pct / 10) * 10;
+              if (step > lastBuPct) { lastBuPct = step; console.log('[MD5校验] Baby Unit 进度:', step + '%'); }
+            })).toLowerCase();
+            console.log('[MD5校验] Baby Unit MD5 完成:', buMd5);
+          }
+          if (hasPu) {
+            console.log('[MD5校验] 正在计算 Parent Unit 固件 MD5...');
+            var lastPuPct = -1;
+            puMd5 = (await calculateMD5(parentFileRef, function (pct) {
+              var step = Math.floor(pct / 10) * 10;
+              if (step > lastPuPct) { lastPuPct = step; console.log('[MD5校验] Parent Unit 进度:', step + '%'); }
+            })).toLowerCase();
+            console.log('[MD5校验] Parent Unit MD5 完成:', puMd5);
+          }
+        } catch (e) {
+          console.error('[MD5校验] 读取固件文件失败:', e);
+          showFileError('md5-file-input-error', t['err-read-firmware-fail'], 'err-read-firmware-fail');
+          showUpdateWarnAlert('err-read-firmware-fail', 'err-different-model');
+          hideBtnSpinner();
+          checkFilesInProgress = false;
+          return false;
+        }
+        if (hasPu) {
+          if (puMd5 !== puExpected) {
+            console.log('[MD5校验] Parent Unit 校验失败, 期望:', puExpected, '实际:', puMd5);
+            showFileError('parent-file-input-error', t['err-md5-mismatch-pu'], 'err-md5-mismatch-pu');
+            allOk = false;
+          } else {
+            console.log('[MD5校验] Parent Unit 校验通过');
+          }
+        }
+        if (hasBu) {
+          if (buMd5 !== buExpected) {
+            console.log('[MD5校验] Baby Unit 校验失败, 期望:', buExpected, '实际:', buMd5);
+            showFileError('baby-file-input-error', t['err-md5-mismatch-bu'], 'err-md5-mismatch-bu');
+            allOk = false;
+          } else {
+            console.log('[MD5校验] Baby Unit 校验通过');
+          }
+        }
+        if (!allOk) {
+          console.log('[MD5校验] 校验未通过');
+          showUpdateWarnAlert('err-md5-mismatch-pu', 'err-md5-key-alert');
+          postDownStatus(3);
+          hideBtnSpinner();
+          return false;
+        }
+        console.log('[MD5校验] 全部校验通过');
+        buMd5Cache = hasBu ? buMd5 : null;
+        puMd5Cache = hasPu ? puMd5 : null;
+        hideFileErrors();
+        if (hasBu) postDownStatus(2);
+        if (hasPu) postDownStatus(5);
+        var floatEl = document.querySelector('#update-container .update-content-float');
+        if (floatEl) floatEl.style.display = 'flex';
+        if (btn) { btn.style.backgroundColor = '#999'; btn.style.cursor = 'not-allowed'; }
+        hideBtnSpinner(true);
+        return true;
+      } finally {
+        checkFilesInProgress = false;
+        if (btn && btn.querySelector('[data-btn-spinner]')) hideBtnSpinner(false);
+      }
+    }
+
+    function hideFileErrors() {
+      ['baby-file-input-error', 'parent-file-input-error', 'md5-file-input-error'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) {
+          el.classList.add('hidden');
+          el.textContent = '';
+          el.removeAttribute('data-i18n-err-key');
+          el.removeAttribute('data-i18n-err-extra');
+        }
+      });
+      var t = translations[currentLanguage] || translations['en-US'];
+      applyFileErrorTexts(t);
+    }
+
+    /** errKey: 翻译键，切换语言时刷新；errExtra：接在译文后的固定后缀（如文件名） */
+    function showFileError(id, msg, errKey, errExtra) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      if (errKey) {
+        el.setAttribute('data-i18n-err-key', errKey);
+        if (errExtra != null && String(errExtra) !== '') el.setAttribute('data-i18n-err-extra', String(errExtra));
+        else el.removeAttribute('data-i18n-err-extra');
+      } else {
+        el.removeAttribute('data-i18n-err-key');
+        el.removeAttribute('data-i18n-err-extra');
+      }
+    }
+
+    var lastUpdateWarnTitleKey = null;
+    var lastUpdateWarnContentKey = null;
+    var lastUpdateWarnVersion = null;
+    var lastUpdateWarnReplacements = null;
+
+    function applyUpdateWarnPlaceholders(str, versionForReplace, replacements) {
+      var s = String(str == null ? '' : str);
+      if (versionForReplace != null) {
+        var v = String(versionForReplace);
+        s = s.replace(/\{version\}/g, v).replace(/\{versie\}/g, v).replace(/\{versão\}/g, v);
+      }
+      if (replacements) {
+        if (replacements.bu_model != null) s = s.replace(/\{bu_model\}/g, replacements.bu_model);
+        if (replacements.pu_model != null) s = s.replace(/\{pu_model\}/g, replacements.pu_model);
+      }
+      return s;
+    }
+
+    function showUpdateWarnAlert(titleKey, contentKey, versionForReplace, replacements) {
+      var t = translations[currentLanguage];
+      var title = (titleKey && t[titleKey]) ? t[titleKey] : titleKey || '';
+      var content = (contentKey && t[contentKey]) ? t[contentKey] : contentKey || '';
+      if (replacements) {
+        lastUpdateWarnReplacements = replacements;
+      } else {
+        lastUpdateWarnReplacements = null;
+      }
+      lastUpdateWarnVersion = versionForReplace;
+      title = applyUpdateWarnPlaceholders(title, versionForReplace, replacements);
+      content = applyUpdateWarnPlaceholders(content, versionForReplace, replacements);
+      if (titleKey && contentKey && titleKey === contentKey) {
+        title = '';
+      }
+      var alertEl = document.getElementById('update-warn-alert');
+      var titleEl = document.getElementById('update-warn-credentials-title');
+      var contentEl = document.getElementById('update-warn-credentials-content');
+      if (alertEl && titleEl && contentEl) {
+        lastUpdateWarnTitleKey = titleKey;
+        lastUpdateWarnContentKey = contentKey;
+        titleEl.textContent = title;
+        titleEl.style.display = title ? '' : 'none';
+        contentEl.textContent = content;
+        alertEl.style.display = 'flex';
+        alertEl.setAttribute('data-check-error', '1');
+      }
+    }
+
+    function hideUpdateWarnAlert() {
+      var alertEl = document.getElementById('update-warn-alert');
+      if (alertEl) {
+        alertEl.style.display = 'none';
+        alertEl.removeAttribute('data-check-error');
+        lastUpdateWarnTitleKey = null;
+        lastUpdateWarnContentKey = null;
+        lastUpdateWarnVersion = null;
+        lastUpdateWarnReplacements = null;
+      }
+    }
+
+    function refreshUpdateWarnIfCheckError() {
+      if (!lastUpdateWarnTitleKey || !lastUpdateWarnContentKey) return;
+      var t = translations[currentLanguage];
+      var title = t[lastUpdateWarnTitleKey] || lastUpdateWarnTitleKey;
+      var content = t[lastUpdateWarnContentKey] || lastUpdateWarnContentKey;
+      title = applyUpdateWarnPlaceholders(title, lastUpdateWarnVersion, lastUpdateWarnReplacements);
+      content = applyUpdateWarnPlaceholders(content, lastUpdateWarnVersion, lastUpdateWarnReplacements);
+      if (lastUpdateWarnTitleKey === lastUpdateWarnContentKey) title = '';
+      var alertEl = document.getElementById('update-warn-alert');
+      if (alertEl && alertEl.getAttribute('data-check-error') === '1') {
+        var titleEl = document.getElementById('update-warn-credentials-title');
+        var contentEl = document.getElementById('update-warn-credentials-content');
+        if (titleEl) {
+          titleEl.textContent = title;
+          titleEl.style.display = title ? '' : 'none';
+        }
+        if (contentEl) contentEl.textContent = content;
+      }
+    }
+
+    // 开始升级（可单独升级 BU 或 PU，或两者；顺序：先 BU 后 PU）
+    function startUpdate() {
+      if (isUpdating) return;
+
+      if (!babyFile && !parentFile) {
+        alert(translations[currentLanguage]['alert-select-files']);
+        return;
+      }
+
+      isUpdating = true;
+      document.getElementById('update-btn').style.backgroundColor = '#999';
+      document.getElementById('update-btn').style.cursor = 'not-allowed';
+
+      // 切换到 progress 模块
+      var updateContainer = document.getElementById('update-container');
+      var progressContainer = document.getElementById('progress-container');
+      if (updateContainer) updateContainer.style.display = 'none';
+      if (progressContainer) progressContainer.style.display = 'flex';
+
+      // 初始状态：隐藏 progress-info 和 success，显示 warn
+      var progressInfo = document.querySelector('#progress-container .progress-info');
+      var progressSuccess = document.getElementById('progress-success');
+      var progressWarn = document.getElementById('progress-warn-alert');
+      if (progressInfo) progressInfo.style.display = 'none';
+      if (progressSuccess) progressSuccess.style.display = 'none';
+      if (progressWarn) progressWarn.style.display = 'flex';
+
+      lastUpgradeErrorStatus = null;
+      updateProgress(0);
+      var t = translations[currentLanguage];
+      var ps = document.getElementById('progress-status');
+      if (babyFile) {
+        currentProgressStatusKey = 'progress-status-updating-bu';
+        if (ps) ps.textContent = t['progress-status-updating-bu'];
+      } else {
+        currentProgressStatusKey = 'progress-status-updating-pu';
+        if (ps) ps.textContent = t['progress-status-updating-pu'];
+      }
+      performOTAUpdate();
+    }
+
+    // OTA_UP_STATUS 枚举值（与后端一致）
+    var OTA_UP_STATUS_PU_UPGRADE_SUCCESS = 4;
+    var OTA_UP_STATUS_BU_UPGRADE_SUCCESS = 1;
+    var OTA_UP_STATUS_BU_UPGRADE_FAIL = 2;
+    var OTA_UP_STATUS_PU_UPGRADE_FAIL = 5;
+    var OTA_UP_STATUS_PU_CANCEL = 6;
+    var OTA_UP_STATUS_ERROR = 7;
+
+    function getErrorMsgByStatus(status) {
+      var t = translations[currentLanguage];
+      if (status === OTA_UP_STATUS_PU_UPGRADE_FAIL) return t['err-pu-upgrade-fail'];
+      if (status === OTA_UP_STATUS_BU_UPGRADE_FAIL) return t['err-bu-upgrade-fail'];
+      if (status === OTA_UP_STATUS_PU_CANCEL) return t['err-upgrade-cancel'];
+      if (status === OTA_UP_STATUS_ERROR) return t['err-upgrade-internal'];
+      if (status === -1) return t['err-upgrade-timeout'];
+      return t['err-upgrade-internal'];
+    }
+
+    function fetchUpStatus() {
+      return fetch('/api/up_status').then(function (r) { return r.json(); });
+    }
+
+    // 通过 callback 获取 BU 或 PU 的升级进度 (0-100)
+    function fetchOtaProgress(device) {
+      return fetch('/api/ota/progress?device=' + (device || 'bu'))
+        .then(function (r) { return r.json(); })
+        .then(function (data) { return data.success ? (data.progress | 0) : null; })
+        .catch(function () { return null; });
+    }
+
+    // 每2s轮询状态，直到达到目标或失败；device 用于获取进度并映射到 progressMin-progressMax
+    async function pollUntilStatus(targetStatus, progressMin, progressMax, statusMsg, device) {
+      var ps = document.getElementById('progress-status');
+      var startTime = Date.now();
+      var maxWait = 300000; // 5分钟超时
+      var step = 0;
+      while (true) {
+        var data = await fetchUpStatus();
+        var status = data.success ? (data.status | 0) : -999;
+        if (status === targetStatus) return { ok: true };
+        if (status === OTA_UP_STATUS_BU_UPGRADE_FAIL || status === OTA_UP_STATUS_PU_UPGRADE_FAIL || status === OTA_UP_STATUS_PU_CANCEL || status === OTA_UP_STATUS_ERROR) {
+          return { ok: false, status: status };
+        }
+        if (Date.now() - startTime > maxWait) return { ok: false, status: -1 };
+        step++;
+        var pct;
+        var deviceProgress = device ? await fetchOtaProgress(device) : null;
+        if (deviceProgress != null && deviceProgress >= 0 && deviceProgress <= 100) {
+          pct = progressMin + (progressMax - progressMin) * (deviceProgress / 100);
+        } else {
+          pct = Math.min(progressMin + (progressMax - progressMin) * (step * 2 / 60), progressMax);
+        }
+        updateProgress(pct);
+        if (ps && statusMsg) ps.textContent = statusMsg;
+        await new Promise(function (r) { setTimeout(r, 2000); });
+      }
+    }
+
+    // 执行OTA升级：先 BU 后 PU；单文件时进度 0-50% 上传、50-100% 轮询；双文件时 BU 0-25%/25-50%，PU 50-75%/75-100%
+    async function performOTAUpdate() {
+      var ps = document.getElementById('progress-status');
+      var t = translations[currentLanguage];
+      var hasBu = !!babyFile;
+      var hasPu = !!parentFile;
+      var singleFile = hasBu !== hasPu;
+      var uploadRange = singleFile ? [0, 50] : [0, 25];
+      var pollRange = singleFile ? [50, 100] : [25, 50];
+      try {
+        // 1. 上传 BU（若有）
+        if (hasBu) {
+          currentProgressStatusKey = 'progress-status-updating-bu';
+          if (ps) ps.textContent = t['progress-status-updating-bu'];
+          await uploadFile(babyFile, 'bu', uploadRange[0], uploadRange[1], buMd5Cache);
+
+          currentProgressStatusKey = 'progress-status-bu-wait';
+          var buWaitMsg = t['progress-status-bu-wait'];
+          if (ps) ps.textContent = buWaitMsg;
+          var buResult = await pollUntilStatus(OTA_UP_STATUS_BU_UPGRADE_SUCCESS, pollRange[0], pollRange[1], buWaitMsg, 'bu');
+          if (!buResult.ok) {
+            showUpgradeError(getErrorMsgByStatus(buResult.status), buResult.status);
+            return;
+          }
+          if (singleFile) {
+            updateProgress(100);
+            showUpgradeSuccess();
+            return;
+          }
+          updateProgress(50);
+        }
+
+        // 2. 上传 PU（若有）
+        if (hasPu) {
+          var puUploadMin = hasBu ? 50 : 0;
+          var puUploadMax = hasBu ? 75 : 50;
+          var puPollMin = hasBu ? 75 : 50;
+          var puPollMax = hasBu ? 100 : 100;
+          currentProgressStatusKey = 'progress-status-updating-pu';
+          if (ps) ps.textContent = t['progress-status-updating-pu'];
+          await uploadFile(parentFile, 'pu', puUploadMin, puUploadMax, puMd5Cache);
+
+          currentProgressStatusKey = 'progress-status-pu-wait';
+          if (ps) ps.textContent = t['progress-status-pu-wait'];
+          var puResult = await pollUntilStatus(OTA_UP_STATUS_PU_UPGRADE_SUCCESS, puPollMin, puPollMax, t['progress-status-pu-wait'], 'pu');
+          if (!puResult.ok) {
+            showUpgradeError(getErrorMsgByStatus(puResult.status), puResult.status);
+            return;
+          }
+          updateProgress(100);
+        }
+
+        showUpgradeSuccess();
+      } catch (error) {
+        console.error('OTA update failed:', error);
+        var errStatus = error && error.status;
+        if (errStatus === OTA_UP_STATUS_BU_UPGRADE_FAIL || errStatus === OTA_UP_STATUS_PU_UPGRADE_FAIL ||
+          errStatus === OTA_UP_STATUS_PU_CANCEL || errStatus === OTA_UP_STATUS_ERROR) {
+          showUpgradeError(getErrorMsgByStatus(errStatus), errStatus);
+        } else {
+          showUpgradeError(t['err-upgrade-internal'] + ' ' + (error.message || ''), OTA_UP_STATUS_ERROR);
+        }
+      }
+    }
+
+    var lastUpgradeErrorStatus = null;
+
+    function showUpgradeError(msg, errorStatus) {
+      lastUpgradeErrorStatus = errorStatus != null ? errorStatus : null;
+      var progressInfo = document.querySelector('#progress-container .progress-info');
+      var progressSuccess = document.getElementById('progress-success');
+      var progressWarn = document.getElementById('progress-warn-alert');
+      var progressBar = document.querySelector('.progress-jdt-bar');
+      var progressBarInner = document.getElementById('progress-bar-inner');
+      if (progressWarn) progressWarn.style.display = 'none';
+      if (progressInfo) progressInfo.style.display = 'none';
+      if (progressBar) progressBar.style.backgroundColor = '#d1d1d1';
+      if (progressBarInner) progressBarInner.style.backgroundColor = '#d1d1d1';
+      if (progressSuccess) {
+        progressSuccess.style.display = 'flex';
+        progressSuccess.style.backgroundColor = '#FFF5F6';
+        progressSuccess.style.border = '2px solid #ff000074';
+        progressSuccess.querySelector('.success-left').textContent = '❌';
+        progressSuccess.querySelector('.success-content').textContent = msg;
+        progressSuccess.querySelector('.success-content').style.color = '#19181bb3';
+      }
+      currentProgressStatusKey = 'progress-status-failed';
+      var ps = document.getElementById('progress-status');
+      var failedTxt = translations[currentLanguage]['progress-status-failed'];
+      if (ps) { ps.textContent = failedTxt; ps.style.color = ''; }
+      if (restartCountdownInterval) { clearInterval(restartCountdownInterval); restartCountdownInterval = null; }
+      restartCountdownSec = null;
+      isUpdating = false;
+    }
+
+    function showUpgradeSuccess() {
+      postDownStatus(8); // OTA_DOWN_STATE_COMPLETE 升级完成，通过 HTTP 下发
+      var progressInfo = document.querySelector('#progress-container .progress-info');
+      var progressSuccess = document.getElementById('progress-success');
+      var progressWarn = document.getElementById('progress-warn-alert');
+      var hasBu = !!babyFile;
+      var hasPu = !!parentFile;
+      if (progressWarn) progressWarn.style.display = 'none';
+      if (progressInfo) {
+        var puOld = document.querySelector('.progress-info-left-old-pu-content');
+        var buOld = document.querySelector('.progress-info-left-old-bu-content');
+        var puNew = document.querySelector('.progress-info-right-new-pu-content');
+        var buNew = document.querySelector('.progress-info-right-new-bu-content');
+        var puRows = document.querySelectorAll('.progress-info-row-pu');
+        var buRows = document.querySelectorAll('.progress-info-row-bu');
+        puRows.forEach(function (el) { el.style.display = hasPu ? '' : 'none'; });
+        buRows.forEach(function (el) { el.style.display = hasBu ? '' : 'none'; });
+        var t = translations[currentLanguage];
+        var puLabel = t['pu-firmware-label'] || 'Parent Unit: ';
+        var buLabel = t['bu-firmware-label'] || 'Baby Unit: ';
+        if (puOld) puOld.textContent = joinFirmwareLabel(puLabel, lastPuVersionStr);
+        if (buOld) buOld.textContent = joinFirmwareLabel(buLabel, lastBuVersionStr);
+        var puVer = parentFile ? parseFirmwareVersion(parentFile.name) : null;
+        var buVer = babyFile ? parseFirmwareVersion(babyFile.name) : null;
+        if (puNew) puNew.textContent = joinFirmwareLabel(puLabel, puVer ? puVer.version : null);
+        if (buNew) buNew.textContent = joinFirmwareLabel(buLabel, buVer ? buVer.version : null);
+        progressInfo.style.display = 'flex';
+      }
+      var successTxt = translations[currentLanguage]['progress-status-success'];
+      if (progressSuccess) {
+        progressSuccess.style.display = 'flex';
+        progressSuccess.style.backgroundColor = '';
+        progressSuccess.style.border = '';
+        progressSuccess.querySelector('.success-left').textContent = '✅';
+        progressSuccess.querySelector('.success-content').style.color = '';
+        if (restartCountdownInterval) clearInterval(restartCountdownInterval);
+        restartCountdownSec = 10;
+        var t = translations[currentLanguage];
+        progressSuccess.querySelector('.success-content').textContent = (t['success-restart-msg'] || '').replace(/\{0\}/g, restartCountdownSec);
+        restartCountdownInterval = setInterval(function () {
+          restartCountdownSec--;
+          var el = document.getElementById('success-restart-msg');
+          if (el) el.textContent = (translations[currentLanguage]['success-restart-msg'] || '').replace(/\{0\}/g, Math.max(0, restartCountdownSec));
+          if (restartCountdownSec <= 0) {
+            clearInterval(restartCountdownInterval);
+            restartCountdownInterval = null;
+          }
+        }, 1000);
+      }
+      currentProgressStatusKey = 'progress-status-success';
+      var ps = document.getElementById('progress-status');
+      if (ps) { ps.textContent = successTxt; ps.style.color = ''; }
+      isUpdating = false;
+    }
+
+    // 上传文件，progressRange: [minPct, maxPct] 表示整体进度区间；上传过程中若检测到升级失败则停止并抛出 {status}
+    // 上传阶段仅用上传进度；/api/ota/progress 仅在固件上传完成后的轮询阶段请求
+    // md5: 可选，该校验通过的固件 MD5 值，上传时携带供服务端 callback 使用
+    async function uploadFile(file, deviceType, progressMin, progressMax, md5) {
+      progressMin = progressMin != null ? progressMin : 0;
+      progressMax = progressMax != null ? progressMax : 100;
+      var chunkSize = 64 * 1024;
+      var totalChunks = Math.ceil(file.size / chunkSize);
+
+      for (var i = 0; i < totalChunks; i++) {
+        var data = await fetchUpStatus();
+        var upStatus = data.success ? (data.status | 0) : -999;
+        var isBu = deviceType === 'bu' || deviceType === 'baby';
+        var failForCurrent = (isBu && upStatus === OTA_UP_STATUS_BU_UPGRADE_FAIL) ||
+          (!isBu && upStatus === OTA_UP_STATUS_PU_UPGRADE_FAIL) ||
+          upStatus === OTA_UP_STATUS_PU_CANCEL || upStatus === OTA_UP_STATUS_ERROR;
+        if (failForCurrent) {
+          var err = new Error('Upgrade failed during upload');
+          err.status = upStatus;
+          throw err;
+        }
+
+        var start = i * chunkSize;
+        var end = Math.min(start + chunkSize, file.size);
+        var chunk = file.slice(start, end);
+
+        var formData = new FormData();
+        formData.append('file', chunk, file.name);
+        formData.append('device', deviceType);
+        formData.append('pkt_total', totalChunks.toString());
+        formData.append('pkt_cnt', (i + 1).toString());
+        formData.append('file_size', file.size.toString());
+        formData.append('end', (i === totalChunks - 1) ? '1' : '0');
+        if (md5 != null && md5 !== '') formData.append('md5', md5);
+        var authKey = localStorage.getItem('authkey');
+        var response = await fetch('/api/ota/upload', {
+          method: 'POST',
+          headers: {
+            'Authorization': "Bearer " + authKey
+          },
+          body: formData
+        });
+
+        if (!response.ok) {
+          var errorData = await response.json();
+          throw new Error(errorData.message || 'Upload failed');
+        }
+
+        var uploadPct = (i + 1) / totalChunks * 100;
+        // progress 仅在固件上传完成后的轮询阶段请求，上传过程中不请求
+        var pct = progressMin + (progressMax - progressMin) * (uploadPct / 100);
+        updateProgress(pct);
+
+        // 短暂延迟以显示进度
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // 最后一包更新版本 
+        if (i === totalChunks - 1) {
+          fetchVersionInfo();
+        }
+      }
+    }
+
+    // 重置升级状态
+    function resetUpdateState() {
+      isUpdating = false;
+      updateProgress(0);
+      var progressBar = document.querySelector('.progress-jdt-bar');
+      var progressBarInner = document.getElementById('progress-bar-inner');
+      if (progressBar) progressBar.style.backgroundColor = '';
+      if (progressBarInner) progressBarInner.style.backgroundColor = '';
+      var btn = document.getElementById('update-btn');
+      if (btn) btn.style.backgroundColor = '#74387a';
+      if (btn) btn.style.cursor = 'pointer';
+      currentProgressStatusKey = 'progress-status-ready';
+      var progressStatus = document.getElementById('progress-status');
+      if (progressStatus) {
+        progressStatus.textContent = translations[currentLanguage]['progress-status-ready'];
+        progressStatus.style.color = '';
+      }
+      var progressSuccess = document.getElementById('progress-success');
+      if (progressSuccess) {
+        progressSuccess.style.display = 'none';
+        progressSuccess.style.backgroundColor = '';
+        progressSuccess.style.border = '';
+        progressSuccess.querySelector('.success-left').textContent = '✅';
+        progressSuccess.querySelector('.success-content').textContent = translations[currentLanguage]['progress-status-success'];
+        progressSuccess.querySelector('.success-content').style.color = '';
+      }
+      lastUpgradeErrorStatus = null;
+      if (restartCountdownInterval) { clearInterval(restartCountdownInterval); restartCountdownInterval = null; }
+      restartCountdownSec = null;
+      hideFileCheckmarks();
+      if (btn) btn.textContent = translations[currentLanguage]['check-files-btn'];
+      var updateContainer = document.getElementById('update-container');
+      var progressContainer = document.getElementById('progress-container');
+      if (updateContainer) updateContainer.style.display = 'flex';
+      if (progressContainer) progressContainer.style.display = 'none';
+    }
+
+    // 模拟升级流程（保留作为备用）
+    async function simulateUpdate() {
+      let progress = 0;
+      const progressText = document.getElementById('progressText');
+      const progressStatus = document.getElementById('progress-status');
+
+      while (progress <= 100) {
+        updateProgress(progress);
+
+        if (progress === 100) {
+          progressStatus.textContent = translations[currentLanguage]['progress-status-success'];
+          break;
+        }
+
+        progress += 5;
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+    }
+
+    // 升级进度条的函数
+    function updateProgress(percentage) {
+      var bar = document.getElementById('progress-bar-inner');
+      var percentEl = document.getElementById('progress-percent');
+      if (bar) bar.style.width = Math.max(0, Math.min(100, percentage)) + '%';
+      if (percentEl) percentEl.textContent = Math.round(percentage) + '%';
+    }
+  </script>
+</body>
