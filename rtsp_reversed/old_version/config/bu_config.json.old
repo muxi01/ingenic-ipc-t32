@@ -1,0 +1,100 @@
+{
+	"media":	{
+		"audioCap":	{
+			"samplerate":	16000,
+			"volume":	60,
+			"mute":	0,
+			"gain":	24,
+			"proc":	{
+				"enable":	1,
+				"ns":	1,
+				"ns_level":	2,
+				"agc":	1,
+				"agc_volume":	10,
+				"aec":	1
+			}
+		},
+		"audioEnc":	{
+			"codec":	3
+		},
+		"video":	{
+			"isp":	{
+				"brightness":	128,
+				"contrast":	128,
+				"saturation":	128,
+				"sharpness":	128,
+				"flip":	0,
+				"mirror":	0,
+				"anti_flicker":	1
+			},
+			"enc":	{
+				"width":	864,
+				"height":	480,
+				"fps":	20,
+				"codec":	0,
+				"bitrate":	1200,
+				"gop":	20,
+				"rc_mode":	1,
+				"profile":	1
+			}
+		},
+		"rtsp":	{
+			"port":	554,
+			"clientMax":	3,
+			"enable_ssl":	1
+		},
+		"dayNight":	{
+			"mode":	0,
+			"D2N_CountThresh":	3,
+			"D2N_LumaExprThresh":	400,
+			"N2D_CountThresh":	3,
+			"N2D_LumaExprThresh":	1700,
+			"N2D_GbGainThresh":	200
+		}
+	},
+	"ctrl":	{
+		"port":	6000,
+		"enable_ssl":	1
+	},
+	"event":	{
+		"port":	6000,
+		"enable_ssl":	1
+	},
+	"lullaby":	{
+		"file_path":	"/lullaby",
+		"mode":	0,
+		"timer":	0,
+		"volume":	26,
+		"mute":	0,
+		"gain":	23
+	},
+	"talkback":	{
+		"port":	12345,
+		"volume":	60,
+		"mute":	0,
+		"gain":	26,
+		"enable_ssl":	1
+	},
+	"alert":	{
+		"enable_temp_alert":	0,
+		"temp_high_threshold":	22,
+		"temp_low_threshold":	16,
+		"temp_recover_range":	1,
+		"enable_audio_alert":	1,
+		"audio_threshold":	65
+	},
+	"wakeup":	{
+		"port":	5001
+	},
+	"wifi":	{
+		"channel":	1,
+		"hide_ssid":	1,
+		"mode":	0
+	},
+	"qos":	{
+		"enable_wifi_scan":	1,
+		"enable_adjust_bitrate":	1,
+		"enable_qos_log":	0,
+		"version":	1
+	}
+}
