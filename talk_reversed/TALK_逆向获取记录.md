@@ -543,7 +543,7 @@ PC 端向 BU 端上传语音流并播放的完整链路已**实机打通**：
 - [upload_talkback.py](./talk_reverse/upload_talkback.py)：G.711 音频上传，`--codec ulaw/alaw`（默认 `ulaw`）、`--tone`/`--file`、`--fast` 等选项，内置标准 G.711 编码器（静音/满幅校验点已通过：µ-law 0→0xff、+32767→0x80、-32768→0x00；A-law 0→0xd5、+32767→0xaa、-32768→0x2a）。
 
 ### 10.4 实机验证记录
-
+#### 10.4.1 BU端播放音频
 ```
 $ python3 trigger_talkback.py
 response: word0=0x0000 type=11 len=147 crc=0x5422
@@ -557,6 +557,48 @@ done, 75 frames in 0.00s
 - 75 帧 × 640 样本 = 48000 样本 = 3.0s @16kHz，与 `--duration 3` 精确匹配。
 - BU 端可闻 440Hz 提示音；收尾日志为干净释放序列（`close_client_socket` → `bbm_audioRecvThread-` → `nl_audioRecv_release` → `BU_talkback_release` → `PAL_Audio_ReleasePlayback/ReleaseDecoder`）。
 - 全程无 `stream->len 2560 to big` 告警。
+
+#### 10.4.2 设置BU端的音量
+```
+python3 trigger_talkback.py --json '{"enable":1,"codec":0,"samplerate":16000,"frame_len":640}'
+PIXI frame: type=11 len=75 crc=0xfb4a
+connecting to 192.168.172.1:6000 (mTLS) ...
+trigger_talkback.py:65: DeprecationWarning: ssl.TLSVersion.TLSv1 is deprecated
+  ctx.minimum_version = ssl.TLSVersion.TLSv1
+connected, tls version: TLSv1.3, cipher: ('TLS_AES_256_GCM_SHA384', 'TLSv1.3', 256)
+sending PIXI frame ...
+response: word0=0x0000 type=11 len=147 reserved=0x00000000 crc=0x5422
+body: {
+        "enable":       1,
+        "volume":       30,
+        "port": 12345,
+        "codec":        0,
+        "samplerate":   16000,
+        "frame_len":    640,
+        "code": 0,
+        "reason":       ""
+}
+python3 trigger_talkback.py --json '{"enable":1,"codec":0,"samplerate":16000,"frame_len":640,"volume":60}'
+PIXI frame: type=11 len=87 crc=0x78e8
+connecting to 192.168.172.1:6000 (mTLS) ...
+trigger_talkback.py:65: DeprecationWarning: ssl.TLSVersion.TLSv1 is deprecated
+  ctx.minimum_version = ssl.TLSVersion.TLSv1
+connected, tls version: TLSv1.3, cipher: ('TLS_AES_256_GCM_SHA384', 'TLSv1.3', 256)
+sending PIXI frame ...
+response: word0=0x0000 type=11 len=147 reserved=0x00000000 crc=0xc3f8
+body: {
+        "enable":       1,
+        "volume":       60,
+        "port": 12345,
+        "codec":        0,
+        "samplerate":   16000,
+        "frame_len":    640,
+        "code": 0,
+        "reason":       ""
+}
+```
+
+
 
 ### 10.5 运维注意
 
