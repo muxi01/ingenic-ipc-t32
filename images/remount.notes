@@ -1,0 +1,14 @@
+
+
+ mount -t squashfs -o loop,ro /config/rootfs.sqf /tmp/rootfs
+
+
+mount --bind /proc /tmp/rootfs/proc
+mount --bind /sys  /tmp/rootfs/sys
+mount --bind /dev  /tmp/rootfs/dev
+mount --bind /tmp  /tmp/rootfs/tmp
+
+cd /tmp/rootfs
+pivot_root .
+
+
