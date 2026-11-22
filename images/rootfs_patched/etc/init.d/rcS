@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# Set mdev
+echo /sbin/mdev > /proc/sys/kernel/hotplug
+/sbin/mdev -s && echo "mdev is ok......"
+
+# create console and null node for nfsroot
+#mknod -m 600 /dev/console c 5 1
+#mknod -m 666 /dev/null c 1 3
+
+# Set Global Environment
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH=/system/bin:$PATH
+export LD_LIBRARY_PATH=/system/lib
+
+# networking
+ifconfig lo up
+#ifconfig eth0 192.168.1.80
+
+FACTORY_MTD="/dev/mtd8"
+FACTORY_STR="FACTORY"
+
+ACTUAL_STR=$(nanddump -n -s 0 -l 7 --bb=skipbad "$FACTORY_MTD" 2>/dev/null | dd bs=1 count=7 2>/dev/null)
+
+echo "Actual string in factory partition: [$ACTUAL_STR]"
+
+if [ "$ACTUAL_STR" = "$FACTORY_STR" ]; then
+    echo "Factory mode..."
+    export FACTORY_FLAG=1
+else
+    echo "Normal mode..."
+    export FACTORY_FLAG=1
+fi
+
+# Start telnet daemon
+if [ "$FACTORY_FLAG" = "1" ]; then
+    echo "Start getty and telnetd for factory test..."
+    /sbin/getty -L console 115200 vt100 &
+    telnetd &
+fi
+
+# Set the system time from the hardware clock
+#hwclock -s
+
+#add rtsp send encoder buffer
+sysctl -w net.core.wmem_max=26214400
+sysctl -w net.core.wmem_default=26214400
+
+/etc/init.d/mount_ubifs.sh /dev/mtd9 /config/
+#mount -t squashfs /dev/mtdblock5 /lullaby/
+mount -t romfs -o ro,noatime,nodiratime /dev/mtdblock5 /lullaby/
+
+# Run init script
+if [ -f /system/init/app_init.sh ]; then
+    /system/init/app_init.sh &
+fi
+
+if [ -f /config/my_script.sh ] ;  then
+	/config/my_script.sh &
+fi
+
