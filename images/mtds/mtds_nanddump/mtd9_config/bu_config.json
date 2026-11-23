@@ -1,0 +1,20 @@
+{
+	"lullaby":	{
+		"mode":	0,
+		"timer":	0,
+		"volume":	48
+	},
+	"talkback":	{
+		"volume":	60
+	},
+	"alert":	{
+		"enable_temp_alert":	0,
+		"temp_high_threshold":	22,
+		"temp_low_threshold":	16,
+		"enable_audio_alert":	1,
+		"audio_threshold":	50
+	},
+	"wifi":	{
+		"channel":	3
+	}
+}

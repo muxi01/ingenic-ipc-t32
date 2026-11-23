@@ -1,3 +1,5 @@
 /image_raw
-/images/rootfs_new.squashfs
+/images/rootfs/squashfs-root/*
+/images/rootfs/rootfs_patched.sqfs
+/images/download
 
