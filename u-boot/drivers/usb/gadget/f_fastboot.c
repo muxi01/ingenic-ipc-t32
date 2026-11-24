@@ -38,7 +38,7 @@
 #include <asm/arch/cpm.h>
 #include <asm/io.h>
 #include <fastboot.h>
-#define DATA_BUFFER	0x30000000
+#define DATA_BUFFER	0x80400000
 #define BOOT_START_ADDRESS 0x80f00000
 #define RET_LENGTH	64
 
@@ -732,8 +732,8 @@ static int handle_cmd_getvar(struct fastboot_dev *fastboot)
 		return 0;
 	}
 
-	printf("%s:Error, The variant is not recongized\n", __func__);
-	return -1;
+	strcpy(fastboot->ret_buf, "OKAY");
+	return 0;
 }
 
 static void explain_cmd_getvar(struct fastboot_dev *fastboot)
@@ -832,36 +832,67 @@ int nand_flash(unsigned char *pt_name,struct fastboot_dev *fastboot)
 	return 0;
 }
 
+static int sfc_nand_flash(unsigned long offset, struct fastboot_dev *fastboot)
+{
+	char command[128];
+	unsigned long size = fastboot->data_length;
+	void *addr = (void *)fastboot->data_buf;
+
+	memset(command, 0, sizeof(command));
+	sprintf(command, "nand erase %lx %lx", offset, size);
+	printf("command:%s\n", command);
+	if (run_command(command, "0"))
+		return -1;
+
+	memset(command, 0, sizeof(command));
+	sprintf(command, "nand write %p %lx %lx", addr, offset, size);
+	printf("command:%s\n", command);
+	if (run_command(command, "0"))
+		return -1;
+
+	printf("sfc nand flash OK!\n");
+	return 0;
+}
+
+static int sfc_nand_erase(unsigned long offset, unsigned long size)
+{
+	char command[128];
+
+	memset(command, 0, sizeof(command));
+	sprintf(command, "nand erase %lx %lx", offset, size);
+	printf("command:%s\n", command);
+	if (run_command(command, "0"))
+		return -1;
+
+	printf("sfc nand erase OK!\n");
+	return 0;
+}
+
 static int handle_cmd_flash(struct fastboot_dev *fastboot)
 {
 	int i;
-	printf("please add the flash cmd explain roution\n");
 	u32 blk,cnt;
-	unsigned char *pname;
-	memset(pname, 0 , 128);
+
 	for(i = 0; i < PARTITION_NUM ; i ++){
-		if(!strcmp(partition_info[i].pname + 2 , boot_buf + 6)){
-			strcpy(pname,partition_info[i].pname);
+		if(!strcmp(partition_info[i].pname, boot_buf + 6)){
 			blk = partition_info[i].offset / MMC_BYTE_PER_BLOCK;
 			cnt = partition_info[i].size / MMC_BYTE_PER_BLOCK;
 			goto do_flash;
-			break;
 		}
 	}
-	if(i == PARTITION_NUM){
-		printf("There is not a partition named : %s\n",boot_buf + 6);
-		return -1;
-	}
+	printf("There is not a partition named : %s\n",boot_buf + 6);
+	return -1;
 
 do_flash:
 #ifdef CONFIG_SPL_MMC_SUPPORT
 	if(!mmc_flash(blk,cnt,fastboot))
 		return 0;
-#else
-#ifdef CONFIG_JZ_NAND_MGR
-	if(!nand_flash(pname,fastboot))
+#elif defined(CONFIG_MTD_SFCNAND)
+	if(!sfc_nand_flash(partition_info[i].offset,fastboot))
 		return 0;
-#endif
+#elif defined(CONFIG_JZ_NAND_MGR)
+	if(!nand_flash(partition_info[i].pname,fastboot))
+		return 0;
 #endif
 	return -1;
 }
@@ -900,34 +931,29 @@ static int fastboot_nand_erase(unsigned char *pname,struct fastboot_dev *fastboo
 
 static int handle_cmd_erase(struct fastboot_dev *fastboot)
 {
-	printf("please add the erase cmd explain roution\n");
 	u32 blk,cnt;
 	int i;
-	unsigned char *pname;
-	memset(pname, 0 , 128);
+
 	for(i = 0; i < PARTITION_NUM ; i ++){
-		if(!strcmp(partition_info[i].pname + 2 , boot_buf + 6)){
-			strcpy(pname,partition_info[i].pname);
+		if(!strcmp(partition_info[i].pname, boot_buf + 6)){
 			blk = partition_info[i].offset / MMC_BYTE_PER_BLOCK;
 			cnt = partition_info[i].size / MMC_BYTE_PER_BLOCK;
 			goto do_erase;
-			break;
 		}
 	}
-	if(i == PARTITION_NUM){
-		printf("There is not a partition named : %s\n",boot_buf + 6);
-		return -1;
-	}
+	printf("There is not a partition named : %s\n",boot_buf + 6);
+	return -1;
 
 do_erase:
 #ifdef CONFIG_SPL_MMC_SUPPORT
 	if(!fastboot_mmc_erase(blk , cnt ,fastboot))
 		return 0;
-#else
-#ifdef CONFIG_JZ_NAND_MGR
-	if(!fastboot_nand_erase(pname,fastboot))
+#elif defined(CONFIG_MTD_SFCNAND)
+	if(!sfc_nand_erase(partition_info[i].offset, partition_info[i].size))
 		return 0;
-#endif
+#elif defined(CONFIG_JZ_NAND_MGR)
+	if(!fastboot_nand_erase(partition_info[i].pname,fastboot))
+		return 0;
 #endif
 	return -1;
 }
@@ -1059,6 +1085,9 @@ static void handle_fastboot_cmd_complete(struct usb_ep *ep,
 		struct usb_request *req)
 {
 	struct fastboot_dev *fastboot = req->context;
+
+	if (req->actual < req->length)
+		((char *)req->buf)[req->actual] = '\0';
 
 	printf("The received command is:<%s>\n",(char *)req->buf);
 
@@ -1228,4 +1257,3 @@ over1:
 	free(fastboot);
 	fastboot = NULL;
 }
-

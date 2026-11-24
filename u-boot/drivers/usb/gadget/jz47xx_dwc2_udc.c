@@ -829,7 +829,7 @@ static void udc_fetch_data_packet(struct dwc2_ep *dep, int flush_fifo)
 	struct dwc2_request *request = next_request(&dep->urb_list);
 	int dwords = 0;
 	int epnum = ep_num(dep);
-	int i,dat;
+	int i,dat,cnt;
 	int rxsts_pop = udc_read_reg(GRXSTS_READ);
 	int fifo_count = (rxsts_pop&GRXSTSP_BYTE_CNT_MASK) >> GRXSTSP_BYTE_CNT_BIT;
 
@@ -846,15 +846,25 @@ static void udc_fetch_data_packet(struct dwc2_ep *dep, int flush_fifo)
 	for (i = 0; i < dwords; i++) {
 		dat = udc_read_reg(EP_FIFO(epnum));
 		//printf("%x,",dat);
+		cnt = 4;
+		if (i == dwords - 1) {
+			cnt = fifo_count % 4;
+			if (cnt == 0)
+				cnt = 4;
+		}
 		if (!flush_fifo || request) {
 			if (request->xfersize > 0) {
-				*((u8 *)(request->req.buf + request->req.actual + 0)) = dat & 0xff;
-				*((u8 *)(request->req.buf + request->req.actual + 1)) = (dat >> 8) & 0xff;
-				*((u8 *)(request->req.buf + request->req.actual + 2)) = (dat >> 16) & 0xff;
-				*((u8 *)(request->req.buf + request->req.actual + 3)) = (dat >> 24) & 0xff;
-				if (request->xfersize >= 4) {
-					request->xfersize -= 4;
-					request->req.actual += 4;
+				if (cnt >= 1)
+					*((u8 *)(request->req.buf + request->req.actual + 0)) = dat & 0xff;
+				if (cnt >= 2)
+					*((u8 *)(request->req.buf + request->req.actual + 1)) = (dat >> 8) & 0xff;
+				if (cnt >= 3)
+					*((u8 *)(request->req.buf + request->req.actual + 2)) = (dat >> 16) & 0xff;
+				if (cnt >= 4)
+					*((u8 *)(request->req.buf + request->req.actual + 3)) = (dat >> 24) & 0xff;
+				if (request->xfersize >= cnt) {
+					request->xfersize -= cnt;
+					request->req.actual += cnt;
 				} else {
 					request->req.actual += request->xfersize;
 					request->xfersize = 0;

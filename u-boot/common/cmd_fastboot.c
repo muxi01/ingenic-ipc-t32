@@ -26,17 +26,16 @@
 #include <fastboot.h>
 
 __attribute__ ((weak)) struct partition_info partition_info[16] = {
-	[0] = {.pname = "ndxboot",.offset = 0*1024*1024,.size = 3*1024*1024},
-	[1] = {.pname = "ndboot",.offset = 3*1024*1024,.size = 8*1024*1024},
-	[2] = {.pname = "ndrecovery",.offset = 11*1024*1024,.size = 8*1024*1024},
-	[3] = {.pname = "ndmisc",.offset = 19*1024*1024,.size = 4*1024*1024},
-	[4] = {.pname = "ndbattery",.offset = 23*1024*1024,.size = 1*1024*1024},
-	[5] = {.pname = "ndcache",.offset = 24*1024*1024,.size = 30*1024*1024},
-	[6] = {.pname = "nddevice_id",.offset = 54*1024*1024,.size = 2*1024*1024},
-	[7] = {.pname = "ndsystem",.offset = 56*1024*1024,.size = 512*1024*1024},
-	[8] = {.pname = "nddata",.offset = 568*1024*1024,.size = 1024*1024*1024},
-	[9] = {.pname = "ndstorage1",.offset = 1592*1024*1024,.size = 1024*1024*1024},
-	[10] = {.pname = "ndcmdline",.offset = 2616*1024*1024,.size = 3*1024*1024},
+	[0] = {.pname = "uboot",   .offset = 0x0,       .size = 0x200000},
+	[1] = {.pname = "kernel_a",.offset = 0x200000,  .size = 0x500000},
+	[2] = {.pname = "kernel_b",.offset = 0x700000,  .size = 0x500000},
+	[3] = {.pname = "root_a",  .offset = 0xc00000,  .size = 0x1400000},
+	[4] = {.pname = "root_b",  .offset = 0x2000000, .size = 0x1400000},
+	[5] = {.pname = "lullaby", .offset = 0x3400000, .size = 0x2000000},
+	[6] = {.pname = "info",    .offset = 0x5400000, .size = 0x100000},
+	[7] = {.pname = "flag",    .offset = 0x5500000, .size = 0x80000},
+	[8] = {.pname = "flag1",   .offset = 0x5580000, .size = 0x80000},
+	[9] = {.pname = "config",  .offset = 0x5600000, .size = 0x8000000},
 };
 
 static int do_fastboot(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])

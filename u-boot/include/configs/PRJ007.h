@@ -491,7 +491,7 @@
 #endif /* CONFIG_SFC_NOR */
 
 #ifdef CONFIG_SFC_NAND
-	#define CONFIG_BOOTCOMMAND "nand read 0x80600000 0x100000 0x300000;bootm 0x80600000"
+	#define CONFIG_BOOTCOMMAND "fastboot"
 #endif /* CONFIG_SFC_NAND */
 
 
@@ -727,7 +727,7 @@
 #endif
 
 /* USB */
-/*#define CONFIG_CMD_FASTBOOT*/
+#define CONFIG_CMD_FASTBOOT
 #define CONFIG_USB_GADGET
 #define CONFIG_USB_GADGET_DUALSPEED
 #define CONFIG_USB_JZ_DWC2_UDC_V1_1
