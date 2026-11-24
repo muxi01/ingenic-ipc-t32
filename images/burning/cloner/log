@@ -1,0 +1,45 @@
+./cloner 
+cong thread= 0x7fd062d10640 
+socket interaction test 0 
+socket listen ret=1
+"v2.5.43" 
+
+"09:40" cloner (int)message: "0:0:0:0:0;" 
+cloner connected!!! 
+core connected!!! 
+"09:49" cloner (int)message: "0:0:0:0:0;" 
+"09:49" core (init)message: "0:0:0:0:0" 
+start burner 
+bind <bus 1, device 67, port 1, SOLT 0>
+Device add: 0
+"t32_all_sfc_nand_linux-2026-11-24.log" 
+Device0 add
+"09:49" core (int)message: "0:0:0:4:0;" 
+&&&&&&&&&&&burn_security_key: 0
+"09:49" cloner (init)message: "0:0:0:4:0" 
+"09:49" core (int)message: "0:0:-1:6:10;" 
+ddr creater version: 1 
+"09:49" cloner (init)message: "0:0:-1:6:10" 
+"09:49" core (int)message: "0:0:-1:6:20;" 
+(0)run_stage1_firmware:253 data=500092c8 len=00003d00 offset=80001800 sec_en=0
+"09:49" cloner (init)message: "0:0:-1:6:20" 
+"09:49" core (int)message: "0:0:-1:6:40;" 
+"09:49" cloner (init)message: "0:0:-1:6:40" 
+"09:50" core (int)message: "0:0:-1:6:50;" 
+"09:50" cloner (init)message: "0:0:-1:6:50" 
+(0)run_stage2_firmware:332 data=614a9028 len=00064728 offset=80100000 sec_en=0
+"09:51" core (int)message: "0:0:-1:6:60;" 
+"09:51" cloner (init)message: "0:0:-1:6:60" 
+"09:51" core (int)message: "0:0:-1:6:70;" 
+"09:51" cloner (init)message: "0:0:-1:6:70" 
+"09:51" core (int)message: "0:0:-1:6:75;" 
+"09:51" cloner (init)message: "0:0:-1:6:75" 
+"09:51" core (int)message: "0:0:-1:6:80;" 
+"09:51" core (string)message: "0:0:-1:12:;" 
+"09:51" cloner (init)message: "0:0:-1:6:80" 
+"09:51" cloner (init)message: "0:0:-1:12:" 
+"09:51" core (int)message: "0:0:-1:6:90;" 
+&&&&&&&&&&&&&&bootrom_security_en: 0
+"09:51" core (string)message: "0:0:-1:7:ERASING;" 
+"09:51" cloner (init)message: "0:0:-1:6:90" 
+"09:51" cloner (init)message: "0:0:-1:7:ERASING" 

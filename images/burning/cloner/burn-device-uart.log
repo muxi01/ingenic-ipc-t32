@@ -1,0 +1,66 @@
+U-Boot SPL 2013.07 (Oct 29 2024 - 16:26:11)
+[DEBUG] CLK stop
+ddr(#0xb000002c) :0x4800000f
+[DEBUG] PLL init
+freq:800000000
+freq:800000000
+apll_freq = 800000000 
+mpll_freq = 800000000 
+vpll_freq = 384000000
+
+ddr: 0xb000002c: value=0x8800000f j = 2
+msc: 0xb0000068: value=0x4030c01d j = 1
+sfc: 0xb0000058: value=0x00000100 j = 0
+sdram init start
+ddr id is :0x00009999
+type is : DDR2 ddr(0xa0000003) :0xa0000003
+DDR clk rate 400000000
+DDR soft training ...
+sdram init Finished
+mem data:
+80163ffc:   00000000  ffffffff  00000000  ffffffff
+8016400c:   00000000  ffffffff  00000000  ffffffff
+8016401c:   00000000  ffffffff  00000000  ffffffff
+8016402c:   00000000  ffffffff  00000000  ffffffff
+
+
+U-Boot 2013.07 (Oct 29 2024 - 16:26:11)
+
+Ingenic SoC Burner
+DRAM:  64 MiB
+Top of RAM usable for U-Boot at: 84000000
+Reserving 597k for U-Boot at: 83f68000
+Reserving 16416k for malloc() at: 82f40000
+Reserving 32 Bytes for Board Info at: 82f3ffe0
+Reserving 128k for boot params() at: 83f48000
+Reserving 124 Bytes for Global Data at: 82f3ff64
+Stack Pointer at: 82f3ff48
+Now running in RAM - U-Boot at: 83f68000
+ebase at 0x80000000
+NAND:  0 MiB
+sfc(0x20000107) :0x20000107
+Enter 'CDT' mode.
+create CDT index: 0 ~ 6,  index number:7.
+MMC:   MSC: 0, MSC: 1
+Using default environment
+
+In:    serial
+Out:   serial
+Err:   serial
+USB_udc_probe
+jz_dwc2_udc_v1.1
+Hit any key to stop autoboot:  0 
+##usb_gadget_register_driver 83fc92bc
+burner# sfc(0x2000010f) :0x2000010f
+Enter 'CDT' mode.
+create CDT index: 0 ~ 4,  index number:5.
+id_manufactory = 0, id_device1 cd id_device2 71
+id_manufactory = cd, id_device1 71 id_device2 71
+Found nand: id_manufactory: 0xcd id_device: 0x0071
+use nand common get feature interface!
+create CDT index: 5 ~ 22,  index number:18.
+flash size 0x8000000, part size 0x8000000
+
+NAND erase.chip: device 0 whole chip
+Erasing at 0x7fe0000 -- 100% complete.
+OK
