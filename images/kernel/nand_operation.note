@@ -1,0 +1,5 @@
+flash_eraseall /dev/mtd2
+
+nandwrite -p /dev/mtd2 kernel_new.img
+
+nanddump -bb skipbad -f mtd2_dump.img /dev/mtd2
