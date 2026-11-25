@@ -1,0 +1,202 @@
+Starting kernel ...
+
+[    0.000000] Linux version 5.10.247-cip68 (zhengcs@linkview-server-12) (mips-linux-gnu-gcc (Ingenic r3.3.7.mxu2.cve2-gcc540 2025.07-04) 5.4.0, GNU ld (Ingenic r3.3.7.mxu2.cve2-gcc540 2025.07-04) 2.25.51) #66 PREEMPT Fri May 22 03:57:20 UTC 2026
+[    0.000000] CPU0 RESET ERROR PC:0200053C
+[    0.000000] printk: bootconsole [early0] enabled
+[    0.000000] CPU0 revision is: 00d00100 (Ingenic XBurst)
+[    0.000000] FPU revision is: 00b70000
+[    0.000000] random: crng init done
+[    0.000000] MIPS: machine is ingenic,EC10269V10
+[    0.000000] User-defined physical RAM map overwrite
+[    0.000000] cma: Reserved 8 MiB at 0x00800000
+[    0.000000] Primary instruction cache 32kB, VIVT, 8-way, linesize 32 bytes.
+[    0.000000] Primary data cache 32kB, 8-way, VIPT, no aliases, linesize 32 bytes
+[    0.000000] pls check processor_id[0x00d00100],sc_jz not support!
+[    0.000000] =======found ...... ingenic sc cache ops ...!, found: 1
+[    0.000000] 
+[    0.000000] Unified secondary cache 128kB 8-way, linesize 32 bytes.
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000000000000-0x00000000030fffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x00000000030fffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x00000000030fffff]
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 12446
+[    0.000000] Kernel command line: console=ttyS1,115200n8 mem=49M@0x0 rmem=15M@0x3100000 init=/linuxrc rootfstype=squashfs root=/dev/mtdblock4 rw mtdparts=sfc0_nand:2M(uboot),5M(kernel_a),5M(kernel_b),20M(root_a),20M(root_b),32M(lullaby),1M(info),512K(flag),512K(flag1),-(config)
+[    0.000000] Dentry cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 4096 (order: 2, 16384 bytes, linear)
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] Memory: 33668K/50176K available (5479K kernel code, 259K rwdata, 1648K rodata, 220K init, 128K bss, 8316K reserved, 8192K cma-reserved, 0K highmem)
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[    0.000000]  Trampoline variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] NR_IRQS: 210
+[    0.000000] ingenic-intc register IRQ domain OK, name(:core-intc@0x10001000)
+[    0.000000] PRJ007 Clock Power Management Unit init!
+[    0.000000] === enter timer_probe  ===
+[    0.000000] Previous Boot Time is 41950653 us
+[    0.000000] clocksource: ingenic_clocksource: mask: 0xffffffffffffffff max_cycles: 0x1623fa770, max_idle_ns: 1763180808952 ns
+[    0.000009] sched_clock: 64 bits at 1500kHz, resolution 666ns, wraps every 4398046510951ns
+[    0.008825] Console: colour dummy device 80x25
+[    0.013294] Calibrating delay loop... 898.66 BogoMIPS (lpj=4493312)
+[    0.104755] pid_max: default: 32768 minimum: 301
+[    0.109593] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.116947] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.126493] rcu: Hierarchical SRCU implementation.
+[    0.131872] devtmpfs: initialized
+[    0.140799] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.151239] futex hash table entries: 256 (order: 0, 3072 bytes, linear)
+[    0.158356] pinctrl core: initialized pinctrl subsystem
+[    0.164541] NET: Registered protocol family 16
+[    0.191442] ingenic pinctrl 10010000.pinctrl: 3 gpio chip add success, pins 96
+[    0.200344] ingenic pinctrl 10010000.pinctrl: ingenic pinctrl probe success
+[    0.244760] dmmu_init 806 PTRS_PER_PTE = 1024
+[    0.323642] ingenic-dma 13420000.dma: INGENIC SoC DMA initialized
+[    0.339747] inno phy probe success
+[    0.351103] clocksource: Switched to clocksource ingenic_clocksource
+[    0.399109] NET: Registered protocol family 2
+[    0.405033] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.413893] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.422761] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.430489] TCP bind hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.437723] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.444341] UDP hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.450919] UDP-Lite hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.458247] NET: Registered protocol family 1
+[    0.464900] vinit
+[    0.468636] Initialise system trusted keyrings
+[    0.474075] workingset: timestamp_bits=30 max_order=14 bucket_order=0
+[    0.485124] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.491387] romfs: ROMFS MTD (C) 2007 Red Hat, Inc.
+[    0.703455] Key type asymmetric registered
+[    0.707545] Asymmetric key parser 'x509' registered
+[    0.712823] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+[    0.720269] io scheduler mq-deadline registered
+[    0.725214] io scheduler kyber registered
+[    0.729565] ingenic,PRJ008-pwm 13450000.pwm: PWM clk:50000000
+[    0.735448] PWM3 period_ns:max=1310700,min=41
+[    0.742094] 10031000.serial: ttyS1 at MMIO 0x10031000 (irq = 58, base_baud = 6250000) is a uart1
+[    0.752409] printk: console [ttyS1] enabled
+[    0.752409] printk: console [ttyS1] enabled
+[    0.760891] printk: bootconsole [early0] disabled
+[    0.760891] printk: bootconsole [early0] disabled
+[    0.773396] radix0 probe success
+[    0.779153] helix0 success
+[    0.783511] i2d_probe, success!
+[    0.815887] brd: module loaded
+[    0.834351] loop: module loaded
+[    0.839725] zram: Added device: zram0
+[    0.845840] TSensor enable auto tsRefi_func
+[    0.854041] ingenic-tcu 10002000.tcu: Ingenic TCU driver register completed ret = 0
+[    0.892451] ingenic SADC driver registeres over!
+[    0.899277] ingenic sadc aux probe success
+[    0.904645] ingenic sadc aux probe success
+[    0.911253] ingenic-sfc 13440000.sfc0: Found Supported nand device, id = 0xcd71,name = F35SQA001G
+[    0.920420] use nand common get feature interface!
+[    0.926056] ingenic-sfc 13440000.sfc0: Scanning device for bad blocks
+[    1.017577] ingenic-sfc 13440000.sfc0: Bad block scan completed, found 0 bad blocks
+[    1.025607] ingenic-sfc 13440000.sfc0: NOTICE: this flash haven`t param, magic_num:3040506
+[    1.034154] ingenic-sfc 13440000.sfc0: read partition from flash failed!
+[    1.041067] ingenic-sfc 13440000.sfc0: read mtdparts!
+[    1.046324] 10 cmdlinepart partitions found on MTD device sfc0_nand
+[    1.052804] Creating 10 MTD partitions on "sfc0_nand":
+[    1.058109] 0x000000000000-0x000000200000 : "uboot"
+[    1.072939] 0x000000200000-0x000000700000 : "kernel_a"
+[    1.092884] 0x000000700000-0x000000c00000 : "kernel_b"
+[    1.112937] 0x000000c00000-0x000002000000 : "root_a"
+[    1.132879] 0x000002000000-0x000003400000 : "root_b"
+[    1.152988] 0x000003400000-0x000005400000 : "lullaby"
+[    1.172845] 0x000005400000-0x000005500000 : "info"
+[    1.192967] 0x000005500000-0x000005580000 : "flag"
+[    1.212900] 0x000005580000-0x000005600000 : "flag1"
+[    1.232997] 0x000005600000-0x000008000000 : "config"
+[    1.253421] ingenic-sfc 13440000.sfc0: SPI NAND MTD LOAD OK
+[    1.259196] Found root partition: mtdblock4
+[    4.116685] RSA Mod N verify failed
+[    4.120297] verify_spl error. 
+[    4.123483] ingenic-sfc 13440000.sfc0: SPI NAND rootfs verify failed!
+[    4.130132] ingenic-sfc 13440000.sfc0: BBT resources cleaned up
+[    4.136347] ingenic-sfc: probe of 13440000.sfc0 failed with error -1
+[    4.146061] dwc2 13500000.otg: Configuration mismatch. dr_mode forced to device
+[    4.154869] Now is set Ingenic USB dwc2 Param!
+[    4.159515] dwc2 13500000.otg: EPs: 9, dedicated fifos, 3576 entries in SPRAM
+[    4.168765] ingenic-i2c 10050000.i2c: i2c0 clk is 100000.
+[    4.175416] ingenic-i2c 10050000.i2c: register i2c0 success.
+[    4.185497] sdhci: Secure Digital Host Controller Interface driver
+[    4.194419] sdhci: Copyright(c) Pierre Ossman
+[    4.198933] sdhci-pltfm: SDHCI platform and OF driver helper
+[    4.205805] mmc gpio ingenic,rst-gpios num:-16 en-level: 0
+[    4.211937] mmc gpio ingenic,wp-gpios num:-16 en-level: 0
+[    4.217531] mmc gpio ingenic,pwr-gpios num:-16 en-level: 0
+[    4.223503] mmc gpio ingenic,cd-gpios num:-16 en-level: 0
+[    4.310769] mmc1: SDHCI controller on ingenic-sdhci [13070000.mmc1] using ADMA
+[    4.320705] NET: Registered protocol family 17
+[    4.326840] lib80211: common routines for IEEE802.11 drivers
+[    4.334230] Loading compiled-in X.509 certificates
+[    4.351011] soc_vpu probe success,version:1.0.0-03203fd46d
+[    4.352123] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    4.392681] cfg80211: Problem loading in-kernel X.509 certificate (-2)
+[    4.412213] cfg80211: Problem loading in-kernel X.509 certificate (-2)
+[    4.418974] clk: Disabling unused clocks
+[    4.431842] blk_update_request: I/O error, dev mtdblock4, sector 0 op 0x0:(READ) flags 0x800 phys_seg 1 prio class 0
+[    4.442883] SQUASHFS error: Failed to read block 0x0: -5
+[    4.448367] unable to read squashfs_super_block
+[    4.460083] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[    4.469110] VFS: Cannot open root device "mtdblock4" or unknown-block(31,4): error -5
+[    4.477273] cfg80211: failed to load regulatory.db
+[    4.482383] Please append a correct "root=" boot option; here are the available partitions:
+[    4.491277] 0100            4096 ram0 
+[    4.491287]  (driver?)
+[    4.497638] 0101            4096 ram1 
+[    4.497643]  (driver?)
+[    4.504025] 0102            4096 ram2 
+[    4.504031]  (driver?)
+[    4.510423] 0103            4096 ram3 
+[    4.510429]  (driver?)
+[    4.516794] 0104            4096 ram4 
+[    4.516800]  (driver?)
+[    4.523226] 0105            4096 ram5 
+[    4.523233]  (driver?)
+[    4.529607] 0106            4096 ram6 
+[    4.529613]  (driver?)
+[    4.536027] 0107            4096 ram7 
+[    4.536032]  (driver?)
+[    4.542433] 0108            4096 ram8 
+[    4.542438]  (driver?)
+[    4.548812] 0109            4096 ram9 
+[    4.548817]  (driver?)
+[    4.555231] 010a            4096 ram10 
+[    4.555237]  (driver?)
+[    4.561718] 010b            4096 ram11 
+[    4.561724]  (driver?)
+[    4.568184] 010c            4096 ram12 
+[    4.568189]  (driver?)
+[    4.574743] 010d            4096 ram13 
+[    4.574751]  (driver?)
+[    4.581301] 010e            4096 ram14 
+[    4.581307]  (driver?)
+[    4.587729] 010f            4096 ram15 
+[    4.587734]  (driver?)
+[    4.594169] 1f00            2048 mtdblock0 
+[    4.594175]  (driver?)
+[    4.600919] 1f01            5120 mtdblock1 
+[    4.600924]  (driver?)
+[    4.611107] 1f02            5120 mtdblock2 
+[    4.611112]  (driver?)
+[    4.617854] 1f03           20480 mtdblock3 
+[    4.617859]  (driver?)
+[    4.641101] 1f04           20480 mtdblock4 
+[    4.641107]  (driver?)
+[    4.647849] 1f05           32768 mtdblock5 
+[    4.647854]  (driver?)
+[    4.671110] 1f06            1024 mtdblock6 
+[    4.671116]  (driver?)
+[    4.677859] 1f07             512 mtdblock7 
+[    4.677863]  (driver?)
+[    4.691103] 1f08             512 mtdblock8 
+[    4.691109]  (driver?)
+[    4.697849] 1f09           43008 mtdblock9 
+[    4.697854]  (driver?)
+[    4.711912] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(31,4)
