@@ -68,8 +68,8 @@
 #define APLL_1200M
 #define DDR_650M
 #else
-#define APLL_900M
-#define DDR_600M
+#define APLL_804M
+#define DDR_400M
 #endif
 
 #elif defined(CONFIG_PRJ007A)
@@ -353,7 +353,10 @@
 #elif defined(CONFIG_PRJ007XQ) || defined(CONFIG_PRJ007ZX)
 #define CONFIG_DDR3_W632GU6NG
 #define CONFIG_DDR_TYPE_DDR3
-#elif defined(CONFIG_PRJ007LQ) || defined(CONFIG_PRJ007ZL) || defined(CONFIG_PRJ007VL)
+#elif defined(CONFIG_PRJ007LQ)
+#define CONFIG_DDR2_M14D5121632A
+#define CONFIG_DDR_TYPE_DDR2
+#elif defined(CONFIG_PRJ007ZL) || defined(CONFIG_PRJ007VL)
 #define CONFIG_DDR2_W9751V6NG
 #define CONFIG_DDR_TYPE_DDR2
 #elif defined(CONFIG_PRJ007A)
@@ -430,6 +433,17 @@
 #define BOOTARGS_COMMON "console=ttyS1,115200n8 mem=106M@0x0 rmem=22M@0x6a00000"
 #endif
 
+/*
+ * IPC/T32 default environment variables, see images/notes/env.info.
+ */
+#define ENV_BOOTARGS "console=ttyS1,115200n8 mem=49M@0x0 rmem=15M@0x3100000 init=/linuxrc rootfstype=squashfs root=/dev/mtdblock3 rw mtdparts=sfc0_nand:2M(uboot),5M(kernel_a),5M(kernel_b),20M(root_a),20M(root_b),32M(lullaby),1M(info),512K(flag),512K(flag1),-(config)"
+#define ENV_BOOTARGS_B "console=ttyS1,115200n8 mem=49M@0x0 rmem=15M@0x3100000 init=/linuxrc rootfstype=squashfs root=/dev/mtdblock4 rw mtdparts=sfc0_nand:2M(uboot),5M(kernel_a),5M(kernel_b),20M(root_a),20M(root_b),32M(lullaby),1M(info),512K(flag),512K(flag1),-(config)"
+#define ENV_BOOTCMD "nand read 0x80600000 0x200000 0x500000;bootm 0x80600000"
+#define ENV_BOOTCMD_B "nand read 0x80600000 0x700000 0x500000;bootm 0x80600000"
+#define CONFIG_EXTRA_ENV_SETTINGS \
+	"bootargs_b=" ENV_BOOTARGS_B "\0" \
+	"bootcmd_b=" ENV_BOOTCMD_B "\0"
+
 #ifdef CONFIG_FAST_BOOT
 #ifdef CONFIG_SPL_MMC_SUPPORT
 	#define CONFIG_BOOTARGS BOOTARGS_COMMON " init=/linuxrc root=/dev/mmcblk0p2 rw rootdelay=1"
@@ -440,7 +454,7 @@
 	#define CONFIG_BOOTARGS BOOTARGS_COMMON " init=/linuxrc rootfstype=squashfs root=/dev/mtdblock2 rw mtdparts=sfc0_nor:256k(boot),2560k(kernel),2048k(root),-(appfs) lpj=11968512 quiet"
 #endif
 #elif defined(CONFIG_SFC_NAND)
-	#define CONFIG_BOOTARGS BOOTARGS_COMMON " init=/linuxrc ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs rw mtdparts=sfc0_nand:1M(uboot),3M(kernel),20M(root),-(appfs) lpj=11968512 quiet"
+	#define CONFIG_BOOTARGS ENV_BOOTARGS
 #endif
 #else
 #ifdef CONFIG_SPL_MMC_SUPPORT
@@ -452,7 +466,7 @@
 	#define CONFIG_BOOTARGS BOOTARGS_COMMON " init=/linuxrc rootfstype=squashfs root=/dev/mtdblock2 rw mtdparts=sfc0_nor:256k(boot),2560k(kernel),2048k(root),-(appfs)"
 #endif
 #elif defined(CONFIG_SFC_NAND)
-	#define CONFIG_BOOTARGS BOOTARGS_COMMON " init=/linuxrc ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs rw mtdparts=sfc0_nand:1M(uboot),3M(kernel),20M(root),-(appfs)"
+	#define CONFIG_BOOTARGS ENV_BOOTARGS
 #endif
 #endif
 
@@ -460,7 +474,7 @@
  * Boot command definitions.
  */
 #define CONFIG_CMD_WATCHDOG
-#define CONFIG_BOOTDELAY 1
+#define CONFIG_BOOTDELAY 3
 
 #ifdef CONFIG_SPL_MMC_SUPPORT
     #define CONFIG_BOOTCOMMAND "mmc read 0x80600000 0x1800 0x3000; bootm 0x80600000"
@@ -491,7 +505,7 @@
 #endif /* CONFIG_SFC_NOR */
 
 #ifdef CONFIG_SFC_NAND
-	#define CONFIG_BOOTCOMMAND "fastboot"
+	#define CONFIG_BOOTCOMMAND ENV_BOOTCMD
 #endif /* CONFIG_SFC_NAND */
 
 
