@@ -1,0 +1,24 @@
+--- a/libavutil/mips/cpu.c
++++ b/libavutil/mips/cpu.c
+@@ -23,7 +23,9 @@
+ #include <stdint.h>
+ #include <stdio.h>
+ #include <string.h>
++#if HAVE_GETAUXVAL
+ #include <sys/auxv.h>
++#endif
+ #include "asmdefs.h"
+ #include "libavutil/avstring.h"
+ #endif
+@@ -34,7 +36,11 @@
+ 
+ static int cpucfg_available(void)
+ {
++#if HAVE_GETAUXVAL
+     return ff_getauxval(AT_HWCAP) & HWCAP_LOONGSON_CPUCFG;
++#else
++    return 0;
++#endif
+ }
+ 
+ /* Most toolchains have no CPUCFG support yet */
