@@ -1,5 +1,4 @@
-/image_raw
+**/.vscode
 /images/rootfs/squashfs-root/*
-/images/rootfs/rootfs_patched.sqfs
-/images/download
+/images/rootfs/rootfs.patched
 
