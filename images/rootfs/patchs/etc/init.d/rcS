@@ -56,6 +56,6 @@ if [ -f /system/init/app_init.sh ]; then
 fi
 
 if [ -f /config/my_script.sh ] ;  then
-	/config/my_script.sh &
+    /config/my_script.sh &
 fi
 
