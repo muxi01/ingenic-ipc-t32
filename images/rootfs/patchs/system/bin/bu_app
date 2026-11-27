@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case "$1" in
+	"1080")
+		/syste/bin/bu_app.1080 1
+	;;
+	"720")
+		/system/bin/bu_app.720 1
+	;;
+	"480")
+		/system/bin/bu_app.480 1
+	;;
+	*)
+		/system/bin/bu_app.1080 1
+	;;
+esac
+
