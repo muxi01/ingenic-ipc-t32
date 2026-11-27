@@ -2,11 +2,14 @@
 
 
 [ -e squashfs-root ] && rm -rf squashfs-root
+[ -e rootfs.patched ] && rm -rf rootfs.patched 
 
 unsquashfs ../mtds/mtds_nanddump/mtd3_rootfs.dump
 
 if [ $? == 0 ] ; then 
-	cp -rf ./patchs/* ./squashfs-root/
+	rm -f ./squashfs-root/sbin/ifconfig 
+
+	cp -rfp ./patchs/* ./squashfs-root/
 	mksquashfs ./squashfs-root rootfs.patched -comp lzo -b 131072 -noappend -processors 4
 	
 	file ../mtds/mtds_nanddump/mtd3_rootfs.dump

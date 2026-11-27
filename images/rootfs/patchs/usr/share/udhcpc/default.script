@@ -1,0 +1,41 @@
+#!/bin/sh
+
+#usage: udhcpc -i wlan0 -s /patch/to/default.script
+RESOLV_CONF="/tmp/resolv.conf"
+
+case "$1" in
+    deconfig)
+        ifconfig "$interface" 0.0.0.0
+        ;;
+
+    bound|renew)
+        ifconfig "$interface" "$ip" netmask "$subnet" broadcast "${broadcast:-+}" up
+
+        while route del default dev "$interface" 2>/dev/null; do :; done
+
+        if [ -n "$router" ]; then
+            for r in $router; do
+                route add default gw "$r" dev "$interface"
+            done
+        fi
+
+        if [ -n "$domain" ]; then
+            echo "search $domain" > "$RESOLV_CONF"
+        else
+            : > "$RESOLV_CONF"
+        fi
+        if [ -n "$dns" ]; then
+            for d in $dns; do
+                echo "nameserver $d" >> "$RESOLV_CONF"
+            done
+        fi
+        ;;
+
+    *)
+        echo "udhcpc script: unknown action '$1'" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
+
