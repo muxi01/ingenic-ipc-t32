@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ "$USER_SPACE" = "" ] ; then
-    exit 0
-else
-    /bin/busybox ifconfig $1 $2 $3 $4 $5
-fi
