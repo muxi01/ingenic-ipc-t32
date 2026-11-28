@@ -7,7 +7,7 @@
 unsquashfs ../mtds/mtds_nanddump/mtd3_rootfs.dump
 
 if [ $? == 0 ] ; then 
-
+	rm -f squashfs-root/usr/sbin/udhcpd 
 	cp -rfp ./patchs/* ./squashfs-root/
 	mksquashfs ./squashfs-root rootfs.patched -comp lzo -b 131072 -noappend -processors 4
 	
