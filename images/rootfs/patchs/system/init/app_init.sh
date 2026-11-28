@@ -56,8 +56,9 @@ if [ "$FACTORY_FLAG" = "1" ]; then
 fi
 
 if [ -e "/config/wpa_supplicant.conf" ]; then	
-#wpa_supplicant -Dnl80211 -ip2p0 -c /config/wpa_supplicant.conf &
-    wpa_supplicant -Dnl80211 -iwlan0 -c /config/wpa_supplicant.conf &
+# wpa_supplicant -Dnl80211 -ip2p0 -c /config/wpa_supplicant.conf &
+# wpa_supplicant -Dnl80211 -iwlan0 -c/config/wpa_supplicant.conf &
+    /system/init/wifi.sh &
 fi
 
 if [ -e "/config/hostapd.conf" ]; then	
